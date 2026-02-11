@@ -2,13 +2,18 @@ import axios from "axios";
 import type { MoonDay } from "@/type/type";
 
 export interface MoonDayListResp {
-    days: MoonDay[];
+    moonDay: MoonDay[];
     total: number;
 }
 
 axios.defaults.baseURL = "https://mooncalendar-6y3u.onrender.com/";
 
 export const getListDays = async () => {
-    const res = await axios.get<MoonDayListResp>('/days');
-    return res.data;
+    const resAll = await axios.get<MoonDayListResp>('/days');
+    return resAll.data;
+};
+
+export const getSingleMoonday = async (id: string) => {
+    const resSingle = await axios.get<MoonDay>(`/days/${id}`);
+    return resSingle.data;
 }

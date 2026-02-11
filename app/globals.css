@@ -1,3 +1,7 @@
 :root {
   --background: #ffffff;
 }
+
+ul {
+  list-style: none;
+}
