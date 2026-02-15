@@ -7,10 +7,11 @@ interface Props {
 }
 
 const MoonDaysList = ({ days }: Props) => {
+  const sortedDays = [...days].sort((a, b) => a.dayNumber - b.dayNumber);
   return (
     <ul className={css.daysList}>
-      {days.map((days) => (
-        <MoonDayItem key={days._id} item={days} />
+      {sortedDays.map((day) => (
+        <MoonDayItem key={day._id} item={day} />
       ))}
     </ul>
   );

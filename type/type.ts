@@ -1,4 +1,10 @@
-
+export interface MoonDayData { 
+    date: string; // ISO‑дата 
+    moonDay: number; // номер місячного дня 
+    phase: number; // числове значення фази (0–1) 
+    phaseName: string; // назва фази ("спадний серп") 
+    details: MoonDay; 
+}
 
 export interface MoonDay {
     _id: string;

@@ -1,16 +1,21 @@
 // app/days/page.tsx
-import { getListDays } from "@/lib/api";
+import { getListDays, getTodayMoonday } from "@/lib/api";
 import MoonDaysList from "../components/MoonDaysList/MoonDaysList";
 import css from "./days.module.css";
+import TodayMoonday from "../components/TodayMoonday/TodayMoonday";
 
 const Days = async () => {
-  const response = await getListDays();
+  const responseList = await getListDays();
+  const responseToday = await getTodayMoonday();
 
   return (
     <section>
       <h1 className={css.titleMonthPage}>MoonMonth</h1>
-      {response?.moonDay?.length > 0 && (
-        <MoonDaysList days={response.moonDay} />
+      {responseList?.moonDay?.length > 0 && (
+        <MoonDaysList days={responseList.moonDay} />
+      )}
+      {responseList?.moonDay?.length > 0 && (
+        <TodayMoonday today={responseToday} />
       )}
     </section>
   );
