@@ -6,7 +6,7 @@
   justify-content: flex-start;
   gap: 24px;
   padding: 12px;
-  border-block-end: 1px solid #ccc;
+  /* border-block-end: 1px solid #ccc; */
 }
 
 .navigation {

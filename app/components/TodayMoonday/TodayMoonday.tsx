@@ -1,13 +1,22 @@
-import { getSingleMoonday } from "@/lib/api";
-import { MoonDay, MoonDayData } from "@/type/type";
+"use client";
+import { MoonDayData } from "@/type/type";
+import css from "./TodayMoonday.module.css";
+import { useMoonStore } from "@/store/calendarStore";
+import { useEffect } from "react";
 
-interface Props {
-  today: MoonDayData;
-}
+// interface Props {
+//   today: MoonDayData;
+// }
 
-const TodayMoonday = ({ today }: Props) => {
+const TodayMoonday = () => {
+  const { today, fetchToday } = useMoonStore();
+
+  useEffect(() => {
+    fetchToday();
+  }, []);
+
+  if (!today) return <p>Завантаження...</p>;
   const resDay = today.details;
-
   const aspectTitles: Record<string, string> = {
     newActivities: "Нові справи",
     decisionMaking: "Приняття рішень",
@@ -21,7 +30,7 @@ const TodayMoonday = ({ today }: Props) => {
     creativity: "Творчість",
     learningExams: "Навчання, іспити",
     communication: "Комунікація",
-    confrontation: "Протистояння",
+    confrontation: "Конфлікти",
     bossCommunication: "Спілкування з начальством",
     jobChange: "Зміна місця роботи",
     travel: "Подорожі, ділові поїздки",
@@ -78,73 +87,38 @@ const TodayMoonday = ({ today }: Props) => {
   );
 
   return (
-    <div>
-      <h2>
-        Сьогодні:{" "}
-        {new Date(today.date).toLocaleDateString("uk-UA", {
-          weekday: "long",
-          day: "numeric",
-          month: "long",
-          year: "numeric",
-        })}
-      </h2>
-      <h3>{today.moonDay} Місячний день</h3>
-      <h4>{resDay.phase}</h4>
-      <p>{resDay.phaseDescription}</p>
-
-      <h3>Загальне значення</h3>
-      <p>{resDay.generalMeaning}</p>
-
+    <div className={css.containerToday}>
       <div>
-        <h3>Якості</h3>
-        <ul>
-          {resDay.qualities.map((q) => (
-            <li key={q}>{q}</li>
-          ))}
-        </ul>
+        <h2>
+          Сьогодні:{" "}
+          {new Date(today.date).toLocaleDateString("uk-UA", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          })}
+        </h2>
+        <h3>{today.moonDay} Місячний день</h3>
+
+        <div>
+          <h3>Розширене значення</h3>
+          <p>{resDay.extendedMeaning}</p>
+        </div>
+      </div>
+
+      <div className={css.listMoondayOne}>
+        <div>
+          <h3>Медитації</h3>
+          <ul>
+            {resDay.meditations.map((m) => (
+              <li key={m}>{m}</li>
+            ))}
+          </ul>
+        </div>
       </div>
 
       <div>
-        <h3>Попередження</h3>
-        <ul>
-          {resDay.warnings.map((w) => (
-            <li key={w}>{w}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <h3>Символи</h3>
-        <ul>
-          {resDay.symbols.map((s) => (
-            <li key={s}>{s}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <h3>Камені</h3>
-        <ul>
-          {resDay.stones.map((s) => (
-            <li key={s}>{s}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <h3>Медитації</h3>
-        <ul>
-          {resDay.meditations.map((m) => (
-            <li key={m}>{m}</li>
-          ))}
-        </ul>
-      </div>
-
-      <div>
-        <h3>Сон</h3>
-        <p>
-          <strong>{resDay.dreams.title}</strong>
-        </p>
+        <h3>{resDay.dreams.title}</h3>
         <p>{resDay.dreams.meaning}</p>
         <p>
           Оцінка: {resDay.dreams.rating.value}/{resDay.dreams.rating.scale} —{" "}
@@ -152,65 +126,68 @@ const TodayMoonday = ({ today }: Props) => {
         </p>
       </div>
 
-      <div>
+      <div className={css.containerAspekt}>
         <h3>Для розвитку</h3>
-        {Object.entries(groupedAspects).map(([groupName, items]) => (
-          <div key={groupName}>
-            <h3>{groupName}</h3>
+        <div className={css.containerListAspect}>
+          {Object.entries(groupedAspects).map(([groupName, items]) => (
+            <div className={css.containerGroupedAspects} key={groupName}>
+              <h4 className={css.titleGroupedAspects}>{groupName}</h4>
 
-            {items.map(({ key, aspect }) => (
-              <div key={key}>
-                <h4>{aspectTitles[key] ?? key}</h4>
-                <p>{aspect.text}</p>
-                <p>
-                  Оцінка: {aspect.rating.value}/{aspect.rating.scale} —{" "}
-                  {aspect.rating.meaning}
-                </p>
-              </div>
-            ))}
-          </div>
-        ))}
+              {items.map(({ key, aspect }) => (
+                <div className={css.containerAspect} key={key}>
+                  <h5 className={css.titleAspect}>
+                    {aspectTitles[key] ?? key}
+                  </h5>
+                  <p className={css.textAspect}>{aspect.text}</p>
+                  <p className={css.levelAspect}>
+                    Оцінка: {aspect.rating.value}/{aspect.rating.scale} —{" "}
+                    {aspect.rating.meaning}
+                  </p>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
       </div>
 
       <div>
-        <h3>Народжені цього дня</h3>
-        <p>
-          <strong>{resDay.birthOnThisDay.title}</strong>
-        </p>
+        <h3>{resDay.birthOnThisDay.title}</h3>
         <p>{resDay.birthOnThisDay.description}</p>
       </div>
 
-      <div>
+      <div className={css.containerHealth}>
         <h3>Здоровʼя</h3>
 
-        <div>
-          <h4>Загальне</h4>
-          <p>{resDay.health.general.text}</p>
-          <p>
-            Оцінка: {resDay.health.general.rating.value}/
-            {resDay.health.general.rating.scale} —{" "}
-            {resDay.health.general.rating.meaning}
-          </p>
-        </div>
+        <div className={css.listHealth}>
+          <div>
+            <h4>Загальне</h4>
+            <p>{resDay.health.general.text}</p>
+            <p>
+              Оцінка: {resDay.health.general.rating.value}/
+              {resDay.health.general.rating.scale} —{" "}
+              {resDay.health.general.rating.meaning}
+            </p>
+          </div>
 
-        <div>
-          <h4>Вразлива частина тіла</h4>
-          <p>{resDay.health.vulnerableBodyPart.text}</p>
-          <p>
-            Оцінка: {resDay.health.vulnerableBodyPart.rating.value}/
-            {resDay.health.vulnerableBodyPart.rating.scale} —{" "}
-            {resDay.health.vulnerableBodyPart.rating.meaning}
-          </p>
-        </div>
+          <div>
+            <h4>Вразлива частина тіла</h4>
+            <p>{resDay.health.vulnerableBodyPart.text}</p>
+            <p>
+              Оцінка: {resDay.health.vulnerableBodyPart.rating.value}/
+              {resDay.health.vulnerableBodyPart.rating.scale} —{" "}
+              {resDay.health.vulnerableBodyPart.rating.meaning}
+            </p>
+          </div>
 
-        <div>
-          <h4>Медикаменти</h4>
-          <p>{resDay.health.medications.text}</p>
-          <p>
-            Оцінка: {resDay.health.medications.rating.value}/
-            {resDay.health.medications.rating.scale} —{" "}
-            {resDay.health.medications.rating.meaning}
-          </p>
+          <div>
+            <h4>Медикаменти</h4>
+            <p>{resDay.health.medications.text}</p>
+            <p>
+              Оцінка: {resDay.health.medications.rating.value}/
+              {resDay.health.medications.rating.scale} —{" "}
+              {resDay.health.medications.rating.meaning}
+            </p>
+          </div>
         </div>
       </div>
 
@@ -222,32 +199,6 @@ const TodayMoonday = ({ today }: Props) => {
           Оцінка: {resDay.haircut.rating.value}/{resDay.haircut.rating.scale} —{" "}
           {resDay.haircut.rating.meaning}
         </p>
-      </div>
-
-      <div>
-        <h3>Знаки</h3>
-        <div>
-          <h4>Сприятливі</h4>
-          <ul>
-            {resDay.signs.good.map((g) => (
-              <li key={g}>{g}</li>
-            ))}
-          </ul>
-        </div>
-
-        <div>
-          <h4>Несприятливі</h4>
-          <ul>
-            {resDay.signs.bad.map((b) => (
-              <li key={b}>{b}</li>
-            ))}
-          </ul>
-        </div>
-      </div>
-
-      <div>
-        <h3>Розширене значення</h3>
-        <p>{resDay.extendedMeaning}</p>
       </div>
     </div>
   );

@@ -1,10 +1,11 @@
-import { getSingleMoonday } from "@/lib/api";
+import { getListDays, getSingleMoonday } from "@/lib/api";
 import {
   dehydrate,
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
 import MoondayDetailsClient from "./MoondayDetails.client";
+import MoonDaysList from "@/app/components/MoonDaysList/MoonDaysList";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -20,9 +21,12 @@ const MoonDayDetails = async ({ params }: Props) => {
   });
 
   return (
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <MoondayDetailsClient />
-    </HydrationBoundary>
+    <>
+      <MoonDaysList />
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <MoondayDetailsClient />
+      </HydrationBoundary>
+    </>
   );
 };
 

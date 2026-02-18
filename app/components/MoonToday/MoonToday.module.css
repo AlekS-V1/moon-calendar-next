@@ -1,0 +1,28 @@
+.containerToday {
+    display: flex;
+    flex-direction: column;
+}
+.listMoondayOne {
+    display: flex;
+    flex-direction: row;
+}
+
+.containerAspekt {
+    display: flex;
+    flex-direction: column;
+}
+
+.containerListAspect {
+    display: flex;
+    flex-direction: row;
+}
+
+.containerHealth {
+    display: flex;
+    flex-direction: column;
+}
+
+.listHealth {
+    display: flex;
+    flex-direction: row;
+}

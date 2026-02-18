@@ -1,24 +1,35 @@
 "use client";
 
 import { getSingleMoonday } from "@/lib/api";
+import { useMoonStore } from "@/store/calendarStore";
 import { useQuery } from "@tanstack/react-query";
 import { useParams } from "next/navigation";
+import { useEffect } from "react";
 
 const MoondayDetailsClient = () => {
   const { id } = useParams<{ id: string }>();
 
-  const {
-    data: resDay,
-    isLoading,
-    error,
-  } = useQuery({
-    queryKey: ["day", id],
-    queryFn: () => getSingleMoonday(id),
-    refetchOnMount: false,
-  });
+  // const {
+  //   data: resDay,
+  //   isLoading,
+  //   error,
+  // } = useQuery({
+  //   queryKey: ["day", id],
+  //   queryFn: () => getSingleMoonday(id),
+  //   refetchOnMount: false,
+  // });
+  const { getDayById, fetchDays } = useMoonStore();
+  useEffect(() => {
+    fetchDays();
+  }, []);
 
-  if (isLoading) return <p>Завантаження...</p>;
-  if (error || !resDay) return <p>Якась помилка...</p>;
+  if (!id || typeof id !== "string") {
+    return <p>Невірний ID</p>;
+  }
+  const resDay = getDayById(id);
+
+  if (!resDay) return <p>Завантаження...</p>;
+  // if (error || !resDay) return <p>Якась помилка...</p>;
 
   const aspectTitles: Record<string, string> = {
     newActivities: "Нові справи",

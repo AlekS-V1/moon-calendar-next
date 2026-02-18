@@ -5,18 +5,14 @@ import css from "./days.module.css";
 import TodayMoonday from "../components/TodayMoonday/TodayMoonday";
 
 const Days = async () => {
-  const responseList = await getListDays();
-  const responseToday = await getTodayMoonday();
+  // const responseList = await getListDays();
+  // const responseToday = await getTodayMoonday();
 
   return (
     <section>
-      <h1 className={css.titleMonthPage}>MoonMonth</h1>
-      {responseList?.moonDay?.length > 0 && (
-        <MoonDaysList days={responseList.moonDay} />
-      )}
-      {responseList?.moonDay?.length > 0 && (
-        <TodayMoonday today={responseToday} />
-      )}
+      <h5 className={css.titleMonthPage}>Дні місяця:</h5>
+      <MoonDaysList />
+      <TodayMoonday />
     </section>
   );
 };

@@ -6,27 +6,32 @@ import css from "./Header.module.css";
 const Header = () => {
   return (
     <header className={css.header}>
-      <h2>Moon Calendar</h2>
+      <h2>Твій місячний календар</h2>
       <nav>
         <ul className={css.navigation}>
           <li>
             <Link href="/" aria-label="Home">
-              Home
+              Головна
             </Link>
           </li>
           <li>
             <Link href="/days" aria-label="Moon days">
-              Moon days
+              Календар
+            </Link>
+          </li>
+          <li>
+            <Link href="/luckyday" aria-label="Lucky Moonday">
+              Щасливий день
             </Link>
           </li>
           <li>
             <Link href="/profile" aria-label="Profile">
-              Profile
+              Мій Профіль
             </Link>
           </li>
           <li>
             <Link href="/about" aria-label="About">
-              About
+              Про нас
             </Link>
           </li>
         </ul>
