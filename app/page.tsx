@@ -8,10 +8,7 @@ export default function Home() {
     <div className={css.page}>
       <main className={css.main}>
         <section>
-          <div className={css.moondayList}>
-            <h5> Дні місяця:</h5>
-            <MoonDaysList />
-          </div>
+          <MoonDaysList />
           <MoonToday />
         </section>
       </main>

@@ -1,3 +1,6 @@
+.moondayList {
+    display: flex;
+}
 .daysList {
     display: flex;
 }

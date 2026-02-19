@@ -87,13 +87,17 @@ const SearchLuckyDay = () => {
       <ul>
         {searchResults.map((item) => (
           <li key={item.details._id} className={css.listItem}>
-            <strong>Місячний день:</strong> {item.moonDay}
+            <strong>{item.moonDay}-й місячний день</strong>
             <br />
-            <strong>Дата:</strong> {item.date}
+            {new Date(item.date).toLocaleDateString("uk-UA", {
+              weekday: "long",
+              day: "numeric",
+              month: "long",
+              year: "numeric",
+            })}
             <br />
             {selectedKey && (
               <>
-                <strong>Опис:</strong>{" "}
                 {aspectMap[selectedKey]?.getDescription(item) || "Немає даних"}
                 <br />
               </>

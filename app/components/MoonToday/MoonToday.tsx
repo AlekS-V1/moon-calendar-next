@@ -10,76 +10,14 @@ const MoonToday = () => {
     fetchToday();
   }, []);
 
-  if (!today) return <p>Завантаження...</p>;
+  if (!today)
+    return (
+      <video autoPlay loop muted playsInline poster="/image/FonLoader.jpg">
+        <source src="/image/homeLoader480.webm" type="video/webm" />{" "}
+        {/*  840x480 */}
+      </video>
+    );
   const resDay = today.details;
-  const aspectTitles: Record<string, string> = {
-    newActivities: "Нові справи",
-    decisionMaking: "Приняття рішень",
-    business: "Бізнес",
-    money: "Гроші",
-    realEstate: "Нерухомість",
-    trade: "Торгівля",
-    legalMatters: "Судові справи",
-    science: "Наука",
-    art: "Мистецтво",
-    creativity: "Творчість",
-    learningExams: "Навчання, іспити",
-    communication: "Комунікація",
-    confrontation: "Конфлікти",
-    bossCommunication: "Спілкування з начальством",
-    jobChange: "Зміна місця роботи",
-    travel: "Подорожі, ділові поїздки",
-    movement: "Пасивна активність",
-    rest: "Відпочинок",
-    physicalActivity: "Фізична активність",
-    housework: "Домашнє завдання",
-    marriage: "Шлюб",
-    intimacy: "Сімейна близькість",
-    conception: "Зачаття",
-  };
-
-  const aspectGroups: Record<string, string> = {
-    // Важливе
-    business: "Важливе",
-    jobChange: "Важливе",
-    decisionMaking: "Важливе",
-    legalMatters: "Важливе",
-    trade: "Важливе",
-    housework: "Важливе",
-    realEstate: "Важливе",
-    money: "Важливе",
-    newActivities: "Важливе",
-    learningExams: "Важливе",
-
-    // Соціальне
-    communication: "Соціальне",
-    confrontation: "Соціальне",
-    travel: "Соціальне",
-    bossCommunication: "Соціальне",
-
-    // Особисте
-    science: "Особисте",
-    art: "Особисте",
-    creativity: "Особисте",
-    rest: "Особисте",
-    movement: "Особисте",
-    physicalActivity: "Особисте",
-    marriage: "Особисте",
-    intimacy: "Особисте",
-    conception: "Особисте",
-  };
-
-  const groupedAspects = Object.entries(resDay.lifeAspects).reduce(
-    (acc, [key, aspect]) => {
-      const group = aspectGroups[key] ?? "Інше";
-
-      if (!acc[group]) acc[group] = [];
-      acc[group].push({ key, aspect });
-
-      return acc;
-    },
-    {} as Record<string, { key: string; aspect: any }[]>,
-  );
 
   return (
     <div className={css.containerToday}>
