@@ -2,6 +2,8 @@
 import css from "./MoonToday.module.css";
 import { useMoonStore } from "@/store/calendarStore";
 import { useEffect } from "react";
+// import MoonLoader from "../MoonLoader/MoonLoader";
+import { moonImages160 } from "@/lib/moonPhase30";
 
 const MoonToday = () => {
   const { today, fetchToday } = useMoonStore();
@@ -18,26 +20,41 @@ const MoonToday = () => {
       </video>
     );
   const resDay = today.details;
+  const img = moonImages160[today.moonDay];
 
   return (
     <div className={css.containerToday}>
       <div>
-        <h2>
-          Сьогодні:{" "}
-          {new Date(today.date).toLocaleDateString("uk-UA", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })}
-        </h2>
-        <h3>{today.moonDay} Місячний день</h3>
-        <h4>
-          {resDay.phase} {"("}
-          {today.phaseName}
-          {")"}
-        </h4>
-        <p>{resDay.phaseDescription}</p>
+        <div className={css.homeHeader}>
+          <div>
+            <h1>Під світлом Місяця</h1>
+            <h3>
+              Сьогодні:{" "}
+              {new Date(today.date).toLocaleDateString("uk-UA", {
+                weekday: "long",
+                day: "numeric",
+                month: "long",
+                year: "numeric",
+              })}
+            </h3>
+            <h4>{today.moonDay} Місячний день</h4>
+            <p>
+              {resDay.phase} {"("}
+              {today.phaseName}
+              {")"}
+            </p>
+            <p>{resDay.phaseDescription}</p>
+          </div>
+
+          <div className={css.imageMoonPhase}>
+            <img
+              src={img}
+              alt={`Moon phase day ${today.moonDay}`}
+              width={160}
+              height={160}
+            />
+          </div>
+        </div>
 
         <h3>Загальне значення</h3>
         <p>{resDay.generalMeaning}</p>

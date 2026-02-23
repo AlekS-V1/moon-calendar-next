@@ -83,44 +83,7 @@ export const useMoonStore = create<StoreState>((set, get) => ({
             isSearching: false
         });
     },
-    // search5Days: async (key: string) => {   
-    //     const values = [
-    //         "Сприятливо",
-    //         "Дуже сприятливо",
-    //         "Сильні",
-    //         "Дуже сильні"
-    //     ];
-
-    //     set({ 
-    //         isSearching: true, 
-    //         searchResults: [], 
-    //         activeValue: null 
-    //     });
-
-    //     let finalResults: MoonDayData[] = [];
-    //     let matchedValue: string | null = null;
-
-    //     for (const value of values) {
-    //         const res = await searchMoonDays( value, key);
-
-    //         if (res.length > 0) {
-    //             finalResults = res;
-    //             matchedValue = value;
-    //             break;
-    //         }
-    //     }
-
-    //     if (finalResults.length > 0) {
-    //         finalResults.sort((a, b) => a.moonDay - b.moonDay);
-    //     }
-
-    //     set({
-    //         searchResults: finalResults,
-    //         activeValue: matchedValue,
-    //         isSearching: false
-    //     });
-    // },
-
+    
     resetSearch: () => {
         set({
             searchResults: [],

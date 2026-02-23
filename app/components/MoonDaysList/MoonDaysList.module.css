@@ -1,5 +1,7 @@
 .moondayList {
     display: flex;
+    background-color: rgb(7, 1, 22);
+    color: beige;
 }
 .daysList {
     display: flex;

@@ -1,4 +1,70 @@
 .dayStyle {    
     padding: 4px;
-    font-size: 18px;
+    font-size: 16px;
 }
+
+
+.moonIcon {
+  width: 28px;
+  height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border-radius: 49%;
+  font-weight: bold;
+  color: rgb(253, 246, 216);
+  text-shadow: 0 0 4px black;
+  cursor: pointer;
+}
+/* Hover — легкий 3D‑нахил без сильного розмиття */
+.activeDay {
+  transform: scale(1.08);
+  box-shadow: 
+    0 0 10px rgba(255, 255, 255, 0.7), 
+    inset 0 0 5px 1px rgba(255, 255, 255, 0.3);
+  
+} 
+
+.moonIcon:hover {
+
+  transform: scale(1.12);
+  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8),
+    inset 0 0 4px 1px rgba(255, 255, 255, 0.2);;
+
+  /* transform:
+    perspective(600px)
+    rotateY(8deg)
+    rotateX(4deg)
+    scale(1.06);
+  opacity: 0.97;
+  filter:
+    drop-shadow(0 0 6px rgba(255, 255, 255, 0.25))
+    drop-shadow(0 0 2px rgba(255, 255, 255, 0.15)); */
+}
+
+/* М’яка інерція при поверненні */
+.moonIcon:active, 
+.moonIcon:not(:hover) {
+  transition:
+    transform 0.75s cubic-bezier(.16, .84, .44, 1),
+    opacity 0.55s ease,
+    /* filter 0.75s ease; */
+}
+
+/* Active — легке стискання */
+/* .moonIcon:active {
+  transform:
+    perspective(600px)
+    rotateY(4deg)
+    rotateX(2deg)
+    scale(0.97);
+  opacity: 0.9;
+  filter:
+    drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
+} */

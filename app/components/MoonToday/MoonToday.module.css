@@ -1,6 +1,16 @@
 .containerToday {
     display: flex;
     flex-direction: column;
+    background-color: black;
+    color: azure;
+}
+
+.homeHeader {
+    display: flex;
+}
+
+.imageMoonPhase {
+    padding: 60px;
 }
 .listMoondayOne {
     display: flex;
