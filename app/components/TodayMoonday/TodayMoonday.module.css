@@ -7,10 +7,34 @@
     flex-direction: row;
 }
 
+.sectionAspekt {
+  display: flex;
+  flex-direction: column;
+}
+
+.containerAspekt {
+    display: flex;
+    flex-direction: row;
+}
+
+
 .accordionGroup {
+display: flex;
+flex-direction: column;
   border-bottom: 1px solid #ddd;
   padding: 8px 0;
 }
+
+/* .button {
+  padding: 10px 16px;
+  margin: 6px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  cursor: pointer;
+  background: #f1f2f6;
+  color: #2f3542;
+  transition: 0.2s;
+} */
 
 .accordionHeader {
   width: 100%;
@@ -24,6 +48,51 @@
   cursor: pointer;
 }
 
+.checkboxItem {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 6px 0;
+}
+
+.checkboxItem input[type="checkbox"] {
+  display: none;
+}
+
+/* Кнопка-чипс */
+.checkboxItem span {
+  padding: 8px 14px;
+  border-radius: 8px;
+  background: #f2f2f2;
+  border: 1px solid #dcdcdc;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 15px;
+  user-select: none;
+}
+
+/* Hover */
+.checkboxItem span:hover {
+  background: #e8e8e8;
+}
+
+/* Активний стан */
+.checkboxItem input[type="checkbox"]:checked + span {
+  background: #4a6cf7;
+  color: white;
+  border-color: #4a6cf7;
+  box-shadow: 0 0 0 2px rgba(74, 108, 247, 0.25);
+}
+
+/* Адаптивність */
+@media (max-width: 480px) {
+  .checkboxItem span {
+    padding: 6px 10px;
+    font-size: 14px;
+  }
+}
+
+
 .accordionContent {
   padding: 10px 0 10px 12px;
   display: flex;
@@ -31,15 +100,15 @@
   gap: 12px;
 }
 
-
-.containerAspekt {
+.selectedAspects {
     display: flex;
     flex-direction: column;
 }
 
+
 .containerListAspect {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
 }
 
 .containerHealth {

@@ -1,12 +1,8 @@
 "use client";
 
+import { useEffect, useMemo, useState } from "react";
 import css from "./TodayMoonday.module.css";
 import { useMoonStore } from "@/store/calendarStore";
-import { useEffect, useState } from "react";
-
-// interface Props {
-//   today: MoonDayData;
-// }
 
 const TodayMoonday = () => {
   const {
@@ -18,17 +14,11 @@ const TodayMoonday = () => {
     clearAllAspects,
   } = useMoonStore();
 
+  const [openGroups, setOpenGroups] = useState<string[]>([]);
+
   useEffect(() => {
     fetchToday();
-  }, []);
-
-  if (!today) return <p>Завантаження...</p>;
-
-  // useEffect(() => {
-  //   if (!today) return;
-  // }
-
-  const resDay = today.details;
+  }, [fetchToday]);
 
   const aspectTitles: Record<string, string> = {
     newActivities: "Нові справи",
@@ -50,14 +40,13 @@ const TodayMoonday = () => {
     movement: "Пасивна активність",
     rest: "Відпочинок",
     physicalActivity: "Фізична активність",
-    housework: "Домашнє завдання",
+    housework: "Домашні справи",
     marriage: "Шлюб",
     intimacy: "Сімейна близькість",
     conception: "Зачаття",
   };
 
   const aspectGroups: Record<string, string> = {
-    // Важливе
     business: "Важливе",
     jobChange: "Важливе",
     decisionMaking: "Важливе",
@@ -69,13 +58,11 @@ const TodayMoonday = () => {
     newActivities: "Важливе",
     learningExams: "Важливе",
 
-    // Соціальне
     communication: "Соціальне",
     confrontation: "Соціальне",
     travel: "Соціальне",
     bossCommunication: "Соціальне",
 
-    // Особисте
     science: "Особисте",
     art: "Особисте",
     creativity: "Особисте",
@@ -87,21 +74,35 @@ const TodayMoonday = () => {
     conception: "Особисте",
   };
 
-  const groupedAspects = Object.entries(resDay.lifeAspects).reduce(
-    (acc, [key, aspect]) => {
-      const group = aspectGroups[key] ?? "Інше";
+  const groupedAspects = useMemo(() => {
+    if (!today) return {} as Record<string, { key: string; aspect: any }[]>;
 
-      if (!acc[group]) acc[group] = [];
-      acc[group].push({ key, aspect });
+    const resDay = today.details;
 
-      return acc;
-    },
-    {} as Record<string, { key: string; aspect: any }[]>,
-  );
+    return Object.entries(resDay.lifeAspects).reduce(
+      (acc, [key, aspect]) => {
+        const group = aspectGroups[key] ?? "Інше";
+        if (!acc[group]) acc[group] = [];
+        acc[group].push({ key, aspect });
+        return acc;
+      },
+      {} as Record<string, { key: string; aspect: any }[]>,
+    );
+  }, [today]);
 
-  // Акордеони
+  useEffect(() => {
+    if (!today) return;
 
-  const [openGroups, setOpenGroups] = useState<string[]>([]);
+    const groupsToOpen = Object.entries(groupedAspects)
+      .filter(([_, items]) =>
+        items.some(({ key }) => selectedAspectIds.includes(key)),
+      )
+      .map(([groupName]) => groupName);
+
+    if (groupsToOpen.length === 0) return;
+
+    setOpenGroups((prev) => Array.from(new Set([...prev, ...groupsToOpen])));
+  }, [selectedAspectIds, groupedAspects, today]);
 
   const toggleGroup = (groupName: string) => {
     setOpenGroups((prev) =>
@@ -111,36 +112,11 @@ const TodayMoonday = () => {
     );
   };
 
-  // Автоматичне відкриття груп, де є вибрані аспекти
-
-  useEffect(() => {
-    const groupsToOpen = Object.entries(groupedAspects)
-      .filter(([_, items]) =>
-        items.some(({ key }) => selectedAspectIds.includes(key)),
-      )
-      .map(([groupName]) => groupName);
-    setOpenGroups((prev) => Array.from(new Set([...prev, ...groupsToOpen])));
-  }, [selectedAspectIds]);
-
-  // КНОПКА ПОКАЗАТИ ВСЕ / ПРИБРАТИ ВСЕ
-
   const showRemoveAll = selectedAspectIds.length >= 2;
 
-  //   const selected = useMoonStore((state) => state.selectedAspectIds);
-  //   const toggle = useMoonStore((state) => state.toggleAspect);
-  //   const aspect = useMoonStore((state) => state.filteredAspects);
+  if (!today) return <p>Завантаження...</p>;
 
-  //   const groupsToOpen = Object.entries(groupedAspects)
-  //     .filter(([groupName, items]) =>
-  //       items.some(({ key }) => selected.includes(key)),
-  //     )
-  //     .map(([groupName]) => groupName);
-
-  //   setOpenGroups((prev) => {
-  //     const merged = new Set([...prev, ...groupsToOpen]);
-  //     return Array.from(merged);
-  //   });
-  // }, [selected, today]);
+  const resDay = today.details;
 
   return (
     <div className={css.containerToday}>
@@ -182,134 +158,82 @@ const TodayMoonday = () => {
         </p>
       </div>
 
-      {/* <div>
-        {today?.details.lifeAspects.map((a) => (
-          <label key={a.id} className={css.checkboxItem}>
-            <input
-              type="checkbox"
-              checked={selected.includes(a.id)}
-              onChange={() => toggle(a.id)}
-            />
-            {a.section}
-          </label>
-        ))}
-      </div>
-      <div>
-        {aspect.map((a) => (
-          <div key={a.id} className={css.aspectCard}>
-            <h3>{a.section}</h3>
-            <p>{a.description}</p>
-            <p>
-              Оцінка: {a.rating}/{a.ratingMax} - {a.verdict}
-            </p>
-          </div>
-        ))}
-      </div> */}
-
-      <div className={css.containerAspekt}>
+      <div className={css.sectionAspekt}>
         <h3>Для розвитку</h3>
 
-        {/* КНОПКА ФІЛЬТРАЦІЇ */}
-        <div className={css.filterButtons}>
-          <button onClick={showRemoveAll ? clearAllAspects : selectAllAspects}>
-            {showRemoveAll ? "Прибрати все" : "Показати все"}
-          </button>
-        </div>
-
-        {/* АКОРДЕОНИ З ЧЕКБОКСАМИ */}
-
-        <div className={css.containerListAspect}>
-          {Object.entries(groupedAspects).map(([groupName, items]) => {
-            const isOpen = openGroups.includes(groupName);
-
-            return (
-              <div className={css.accordionGroup} key={groupName}>
-                {/* Заголовок акордеону */}
-                <button
-                  className={css.accordionHeader}
-                  onClick={() => toggleGroup(groupName)}
-                >
-                  <span>{groupName}</span>
-                  <span>{isOpen ? "▲" : "▼"}</span>
-                </button>
-
-                {/* Контент акордеону */}
-                {isOpen && (
-                  <div className={css.accordionContent}>
-                    {items.map(({ key, aspect }) => (
-                      <label className={css.checkboxItem} key={key}>
-                        <input
-                          type="checkbox"
-                          checked={selectedAspectIds.includes(key)}
-                          onChange={() => toggleAspect(key)}
-                        />
-                        <span className={css.titleAspect}>
-                          {aspectTitles[key] ?? key}
-                        </span>
-                      </label>
-
-                      // <div className={css.containerAspect} key={key}>
-                      //   <h5 className={css.titleAspect}>
-                      //     {aspectTitles[key] ?? key}
-                      //   </h5>
-                      //   <p className={css.textAspect}>{aspect.text}</p>
-                      //   <p className={css.levelAspect}>
-                      //     Оцінка: {aspect.rating.value}/{aspect.rating.scale} —{" "}
-                      //     {aspect.rating.meaning}
-                      //   </p>
-                      // </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            );
-          })}
-        </div>
-
-        {/* <div className={css.containerListAspect}>
-          {Object.entries(groupedAspects).map(([groupName, items]) => (
-            <div className={css.containerGroupedAspects} key={groupName}>
-              <h4 className={css.titleGroupedAspects}>{groupName}</h4>
-
-              {items.map(({ key, aspect }) => (
-                <div className={css.containerAspect} key={key}>
-                  <h5 className={css.titleAspect}>
-                    {aspectTitles[key] ?? key}
-                  </h5>
-                  <p className={css.textAspect}>{aspect.text}</p>
-                  <p className={css.levelAspect}>
-                    Оцінка: {aspect.rating.value}/{aspect.rating.scale} —{" "}
-                    {aspect.rating.meaning}
-                  </p>
-                </div>
-              ))}
+        <div className={css.containerAspect}>
+          <div className={css.containerFilters}>
+            <div className={css.filterButtons}>
+              <button
+                onClick={showRemoveAll ? clearAllAspects : selectAllAspects}
+              >
+                {showRemoveAll ? "Прибрати все" : "Показати все"}
+              </button>
             </div>
-          ))}
-        </div> */}
+
+            <div className={css.containerListAspect}>
+              {Object.entries(groupedAspects).map(([groupName, items]) => {
+                const isOpen = openGroups.includes(groupName);
+
+                return (
+                  <div className={css.accordionGroup} key={groupName}>
+                    <button
+                      className={css.accordionHeader}
+                      onClick={() => toggleGroup(groupName)}
+                    >
+                      <span>{groupName}</span>
+                      <span>{isOpen ? "▲" : "▼"}</span>
+                    </button>
+
+                    {isOpen && (
+                      <div className={css.accordionContent}>
+                        {items.map(({ key, aspect }) => (
+                          <label className={css.checkboxItem} key={key}>
+                            <input
+                              type="checkbox"
+                              checked={selectedAspectIds.includes(key)}
+                              onChange={() => toggleAspect(key)}
+                            />
+                            <span className={css.titleAspect}>
+                              {aspectTitles[key] ?? key}
+                            </span>
+                          </label>
+                        ))}
+                      </div>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+          <ul className={css.selectedAspects}>
+            {selectedAspectIds.length === 0 ? (
+              <p>Нічого не вибрано</p>
+            ) : (
+              selectedAspectIds.map((key) => {
+                const aspect = resDay.lifeAspects[key];
+                if (!aspect) return null;
+
+                return (
+                  <li className={css.containerAspect} key={key}>
+                    <h5 className={css.titleAspect}>
+                      {aspectTitles[key] ?? key}
+                    </h5>
+                    <p className={css.textAspect}>{aspect.text}</p>
+                    <p className={css.levelAspect}>
+                      Оцінка: {aspect.rating.value}/{aspect.rating.scale} —{" "}
+                      {aspect.rating.meaning}
+                    </p>
+                  </li>
+                );
+              })
+            )}
+          </ul>
+        </div>
       </div>
 
-      {/* ВІДОБРАЖЕННЯ ВИБРАНИХ АСПЕКТІВ */}
-      <div className={css.selectedAspects}>
-        {selectedAspectIds.length === 0 ? (
-          <p>Нічого не вибрано</p>
-        ) : (
-          selectedAspectIds.map((key) => {
-            const aspect = resDay.lifeAspects[key];
-            return (
-              <div className={css.containerAspect} key={key}>
-                <h5 className={css.titleAspect}>{aspectTitles[key] ?? key}</h5>
-                <p className={css.textAspect}>{aspect.text}</p>
-                <p className={css.levelAspect}>
-                  Оцінка: {aspect.rating.value}/{aspect.rating.scale} —{" "}
-                  {aspect.rating.meaning}
-                </p>
-              </div>
-            );
-          })
-        )}
-      </div>
-
-      <div>
+      <div className={css.containerBirth}>
         <h3>{resDay.birthOnThisDay.title}</h3>
         <p>{resDay.birthOnThisDay.description}</p>
       </div>
