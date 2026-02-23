@@ -7,6 +7,31 @@
     flex-direction: row;
 }
 
+.accordionGroup {
+  border-bottom: 1px solid #ddd;
+  padding: 8px 0;
+}
+
+.accordionHeader {
+  width: 100%;
+  background: none;
+  border: none;
+  padding: 10px 0;
+  font-size: 18px;
+  font-weight: 600;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.accordionContent {
+  padding: 10px 0 10px 12px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+
 .containerAspekt {
     display: flex;
     flex-direction: column;

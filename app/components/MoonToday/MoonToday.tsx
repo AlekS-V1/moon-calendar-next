@@ -46,8 +46,9 @@ const MoonToday = () => {
             <p>{resDay.phaseDescription}</p>
           </div>
 
-          <div className={css.imageMoonPhase}>
+          <div className={css.contImageMoonPhase}>
             <img
+              className={css.imageMoonPhase}
               src={img}
               alt={`Moon phase day ${today.moonDay}`}
               width={160}

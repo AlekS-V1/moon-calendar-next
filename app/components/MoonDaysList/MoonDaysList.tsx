@@ -15,7 +15,6 @@ const MoonDaysList = () => {
   if (!days.length)
     return (
       <div>
-        {/* <img src="./image/sleepServer48.png" alt="sleep server" /> */}
         <MoonLoader />
       </div>
     );
