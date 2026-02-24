@@ -86,7 +86,7 @@ const SearchLuckyDay = () => {
 
       <ul>
         {searchResults.map((item) => (
-          <li key={item.details._id} className={css.listItem}>
+          <li key={item.date} className={css.listItem}>
             <strong>{item.moonDay}-й місячний день</strong>
             <br />
             {new Date(item.date).toLocaleDateString("uk-UA", {

@@ -3,6 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import css from "./TodayMoonday.module.css";
 import { useMoonStore } from "@/store/calendarStore";
+import { aspectGroups, aspectTitles } from "@/lib/aspect";
 
 const TodayMoonday = () => {
   const {
@@ -19,60 +20,6 @@ const TodayMoonday = () => {
   useEffect(() => {
     fetchToday();
   }, [fetchToday]);
-
-  const aspectTitles: Record<string, string> = {
-    newActivities: "Нові справи",
-    decisionMaking: "Приняття рішень",
-    business: "Бізнес",
-    money: "Гроші",
-    realEstate: "Нерухомість",
-    trade: "Торгівля",
-    legalMatters: "Судові справи",
-    science: "Наука",
-    art: "Мистецтво",
-    creativity: "Творчість",
-    learningExams: "Навчання, іспити",
-    communication: "Комунікація",
-    confrontation: "Конфлікти",
-    bossCommunication: "Спілкування з начальством",
-    jobChange: "Зміна місця роботи",
-    travel: "Подорожі, ділові поїздки",
-    movement: "Пасивна активність",
-    rest: "Відпочинок",
-    physicalActivity: "Фізична активність",
-    housework: "Домашні справи",
-    marriage: "Шлюб",
-    intimacy: "Сімейна близькість",
-    conception: "Зачаття",
-  };
-
-  const aspectGroups: Record<string, string> = {
-    business: "Важливе",
-    jobChange: "Важливе",
-    decisionMaking: "Важливе",
-    legalMatters: "Важливе",
-    trade: "Важливе",
-    housework: "Важливе",
-    realEstate: "Важливе",
-    money: "Важливе",
-    newActivities: "Важливе",
-    learningExams: "Важливе",
-
-    communication: "Соціальне",
-    confrontation: "Соціальне",
-    travel: "Соціальне",
-    bossCommunication: "Соціальне",
-
-    science: "Особисте",
-    art: "Особисте",
-    creativity: "Особисте",
-    rest: "Особисте",
-    movement: "Особисте",
-    physicalActivity: "Особисте",
-    marriage: "Особисте",
-    intimacy: "Особисте",
-    conception: "Особисте",
-  };
 
   const groupedAspects = useMemo(() => {
     if (!today) return {} as Record<string, { key: string; aspect: any }[]>;
