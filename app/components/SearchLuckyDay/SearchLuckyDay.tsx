@@ -41,14 +41,22 @@ const SearchLuckyDay = () => {
       <div className={css.ratingButtons}>
         <button
           className={selectedRating === "positive" ? css.buttonActive : ""}
-          onClick={() => setSelectedRating("positive")}
+          onClick={() => {
+            setSelectedRating("positive");
+            setSelectedKey("");
+            resetSearch();
+          }}
         >
           Сприятливо
         </button>
 
         <button
           className={selectedRating === "veryPositive" ? css.buttonActive : ""}
-          onClick={() => setSelectedRating("veryPositive")}
+          onClick={() => {
+            setSelectedRating("veryPositive");
+            setSelectedKey("");
+            resetSearch();
+          }}
         >
           Дуже сприятливо
         </button>
