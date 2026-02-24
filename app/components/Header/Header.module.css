@@ -6,13 +6,24 @@
   justify-content: flex-start;
   gap: 24px;
   padding: 12px;
+  /* background-color: #001027; */
+  color: azure;
   /* border-block-end: 1px solid #ccc; */
 }
 
-.navigation {
+.menuHeader {
   display: flex;
   align-items: center;
   justify-content: flex-start;
   gap: 12px;
   list-style-type: none;
+}
+
+.itemMenu {
+  font-size: 18px;
+  padding-left: 30px;
+}
+.linkMenu {
+text-decoration: none;
+color: azure;
 }

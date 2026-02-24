@@ -1,15 +1,15 @@
 // ratingGroups.ts
 export const ratingGroups = {
-  veryPositive: [
-    "Дуже сприятливо",   
-    "Дуже сильні"
+  veryPositive: ["Дуже сприятливо", "Дуже рекомендується", "Дуже сильні"],
+  positive: ["Сприятливо", "Допустимо", "Сильні"],
+  neutral: ["Нейтрально", "Допустимо"],
+  negative: [
+    "Небезпечно",
+    "Катигорично не рекомендується",
+    "Несприятливо",
+    "Дуже несприятливо",
+    "Небажано",
   ],
-  positive: [
-    "Сприятливо",    
-    "Сильні"
-  ],
-  neutral: ["Нейтрально"],
-  negative: ["Несприятливо", "Дуже несприятливо"]
 } as const;
 
 export type RatingGroup = keyof typeof ratingGroups;

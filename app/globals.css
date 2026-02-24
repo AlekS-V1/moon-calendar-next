@@ -1,7 +1,12 @@
 :root {
-  --background: #ffffff;
+  --background: #001027;
 }
 
+body {
+  background-color: #001027;
+  font-family: var(--font-rubik), sans-serif;
+  color: azure;
+}
 ul {
   list-style: none;
   margin: 0;

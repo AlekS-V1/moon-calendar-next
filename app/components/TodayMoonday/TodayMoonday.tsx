@@ -216,15 +216,17 @@ const TodayMoonday = () => {
                 if (!aspect) return null;
 
                 return (
-                  <li className={css.containerAspect} key={key}>
-                    <h5 className={css.titleAspect}>
-                      {aspectTitles[key] ?? key}
-                    </h5>
-                    <p className={css.textAspect}>{aspect.text}</p>
-                    <p className={css.levelAspect}>
-                      Оцінка: {aspect.rating.value}/{aspect.rating.scale} —{" "}
-                      {aspect.rating.meaning}
-                    </p>
+                  <li className={css.containerItemAspect} key={key}>
+                    <div className={css.itemAspect}>
+                      <h5 className={css.titleAspect}>
+                        {aspectTitles[key] ?? key}
+                      </h5>
+                      <p className={css.textAspect}>{aspect.text}</p>
+                      <p className={css.levelAspect}>
+                        Оцінка: {aspect.rating.value}/{aspect.rating.scale} —{" "}
+                        {aspect.rating.meaning}
+                      </p>
+                    </div>
                   </li>
                 );
               })

@@ -1,7 +1,7 @@
 .containerToday {
     display: flex;
     flex-direction: column;
-    background-color: rgb(0, 16, 39);
+    background-color: #001027;
     color: azure;
 }
 

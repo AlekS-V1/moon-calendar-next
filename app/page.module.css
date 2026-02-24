@@ -1,6 +1,7 @@
 .main {
   display: flex;
   padding: 0 60px;
+  background-color: #001027;
 }
 
 .moondayList {

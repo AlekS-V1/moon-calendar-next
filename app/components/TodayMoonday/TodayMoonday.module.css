@@ -1,6 +1,7 @@
 .containerToday {
     display: flex;
     flex-direction: column;
+    color: azure;
 }
 .listMoondayOne {
     display: flex;
@@ -12,12 +13,16 @@
   flex-direction: column;
 }
 
-.containerAspekt {
+.containerAspect {
     display: flex;
     flex-direction: row;
 }
 
-
+.containerFilters {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
 .accordionGroup {
 display: flex;
 flex-direction: column;
@@ -85,12 +90,12 @@ flex-direction: column;
 }
 
 /* Адаптивність */
-@media (max-width: 480px) {
+/* @media (max-width: 480px) {
   .checkboxItem span {
     padding: 6px 10px;
     font-size: 14px;
   }
-}
+} */
 
 
 .accordionContent {
@@ -102,13 +107,19 @@ flex-direction: column;
 
 .selectedAspects {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
+    flex-wrap: wrap;
 }
 
 
-.containerListAspect {
+.containerItemAspect {
     display: flex;
     flex-direction: column;
+}
+
+.itemAspect {
+  display: flex;
+  flex-direction: column;
 }
 
 .containerHealth {

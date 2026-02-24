@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  font-family: var(--font-geist-mono);
   text-decoration: none;
 
   background-size: cover;

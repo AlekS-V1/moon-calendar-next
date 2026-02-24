@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Rubik } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header/Header";
 import TanStackProvider from "./components/TanStackProvider/TanStackProvider";
@@ -14,6 +14,12 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+const rubik = Rubik({
+  variable: "--font-rubik",
+  subsets: ["cyrillic"],
+  weight: ["400", "700"],
+  display: "swap",
+});
 export const metadata: Metadata = {
   title: "Місячний календар",
   description: "Описи днів за місячним календарем",
@@ -26,7 +32,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="uk">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable}`}
+      >
         <TanStackProvider>
           <Header />
           <main>{children}</main>
