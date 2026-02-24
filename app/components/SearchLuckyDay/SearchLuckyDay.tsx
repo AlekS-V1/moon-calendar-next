@@ -29,23 +29,13 @@ const SearchLuckyDay = () => {
     resetSearch();
   };
 
+  const sortedSearchResults = [...searchResults].sort(
+    (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
+  );
+
   return (
     <div className={css.container}>
       <h4>Пошук сприятливих днів</h4>
-
-      <div className={css.buttons}>
-        {allowedAspects.map((key) => (
-          <button
-            key={key}
-            className={`${css.button} ${
-              selectedKey === key ? css.buttonActive : ""
-            }`}
-            onClick={() => handleSearch(key)}
-          >
-            {aspectLabels[key]}
-          </button>
-        ))}
-      </div>
 
       {/* Кнопки ступенів сприятливості — завжди видимі */}
       <div className={css.ratingButtons}>
@@ -62,6 +52,20 @@ const SearchLuckyDay = () => {
         >
           Дуже сприятливо
         </button>
+      </div>
+
+      <div className={css.buttons}>
+        {allowedAspects.map((key) => (
+          <button
+            key={key}
+            className={`${css.button} ${
+              selectedKey === key ? css.buttonActive : ""
+            }`}
+            onClick={() => handleSearch(key)}
+          >
+            {aspectLabels[key]}
+          </button>
+        ))}
       </div>
 
       {/* Сброс */}
@@ -85,7 +89,7 @@ const SearchLuckyDay = () => {
       )}
 
       <ul>
-        {searchResults.map((item) => (
+        {sortedSearchResults.map((item) => (
           <li key={item.date} className={css.listItem}>
             <strong>{item.moonDay}-й місячний день</strong>
             <br />
