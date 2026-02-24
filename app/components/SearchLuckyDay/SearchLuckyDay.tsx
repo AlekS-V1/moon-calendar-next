@@ -11,6 +11,7 @@ import {
 
 import css from "./SearchLuckyDay.module.css";
 import { RatingGroup } from "@/lib/ratingGroups";
+import { moonImages32 } from "@/lib/moonPhase30";
 
 const SearchLuckyDay = () => {
   const { search5Days, searchResults, isSearching, resetSearch, activeValue } =
@@ -99,6 +100,13 @@ const SearchLuckyDay = () => {
       <ul>
         {sortedSearchResults.map((item) => (
           <li key={item.date} className={css.listItem}>
+            <img
+              className={css.imageMoonPhase}
+              src={moonImages32[item.moonDay]}
+              alt={`Moon phase day ${item.moonDay}`}
+              width={16}
+              height={16}
+            />
             <strong>{item.moonDay}-й місячний день</strong>
             <br />
             {new Date(item.date).toLocaleDateString("uk-UA", {
