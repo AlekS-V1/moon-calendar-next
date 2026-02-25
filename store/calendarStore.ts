@@ -99,12 +99,26 @@ export const useMoonStore = create<StoreState>((set, get) => ({
     let matchedValue: string | null = null;
 
     for (const value of values) {
-      const res = await searchMoonDays(key, value);
+      try {
+        const res = await searchMoonDays(key, value);
 
-      if (res.length > 0) {
-        finalResults = res;
-        matchedValue = value;
-        break;
+        if (res.length > 0) {
+          finalResults = res;
+          matchedValue = value;
+          break;
+        }
+      } catch (error: any) {
+        const status = error.status ?? 500;
+        const message = error.message ?? "Request failed"; // 🔥 ХАК: якщо 429 — передаємо помилку на сервер
+        if (status === 429) {
+          await fetch("/api/throw", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ status, message }),
+          });
+          return; // Далі не виконуємо — Next.js сам покаже error.tsx
+        }
+        console.error("searchMoonDays failed:", error);
       }
     }
 

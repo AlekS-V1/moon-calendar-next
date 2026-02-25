@@ -2,6 +2,7 @@
 
 import type { HttpError } from "@/lib/HttpError";
 import { useRetryTimer } from "@/lib/retryTimer";
+import { useEffect } from "react";
 
 interface Props {
   error: HttpError;
@@ -23,6 +24,14 @@ const Error = ({ error, reset }: Props) => {
   if (error.status === 429 && retryAfter === 0) {
     start(20);
   }
+
+  // 🔥 Автоматичний повтор після завершення таймера
+  useEffect(() => {
+    if (retryAfter === 0 && error.status === 429) {
+      reset(); // Next.js повторить рендер сторінки → повториться запит
+    }
+  }, [retryAfter, error.status, reset]);
+
   return (
     <div>
       <h2>Помилка під час завнтаження</h2>
