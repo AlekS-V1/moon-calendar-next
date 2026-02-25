@@ -52,6 +52,7 @@ const SearchLuckyDay = () => {
         message={error.message}
         onRetry={() => {
           clearError();
+          resetRetry(); // 🔥 Додаємо сюди
           if (selectedKey) {
             search5Days(selectedKey, selectedRating);
           }
