@@ -15,8 +15,12 @@ interface StoreState {
   activeValue: string | null;
 
   error: null | { status: number; message: string };
+  retryCount: number;
+  maxRetries: number;
   setError: (err: StoreState["error"]) => void;
   clearError: () => void;
+  incrementRetry: () => void;
+  resetRetry: () => void;
 
   fetchDays: () => Promise<void>;
   fetchToday: () => Promise<void>;
@@ -45,8 +49,12 @@ export const useMoonStore = create<StoreState>((set, get) => ({
   selectedAspectIds: [],
 
   error: null,
+  retryCount: 0,
+  maxRetries: 3,
   setError: (error) => set({ error }),
   clearError: () => set({ error: null }),
+  incrementRetry: () => set((s) => ({ retryCount: s.retryCount + 1 })),
+  resetRetry: () => set({ retryCount: 0 }),
 
   toggleAspect: (id: string) => {
     const { selectedAspectIds } = get();

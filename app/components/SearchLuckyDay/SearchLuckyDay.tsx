@@ -23,6 +23,7 @@ const SearchLuckyDay = () => {
     activeValue,
     error,
     clearError,
+    resetRetry,
   } = useMoonStore();
 
   const [selectedKey, setSelectedKey] = useState<LuckyKeys | "">("");
@@ -30,6 +31,7 @@ const SearchLuckyDay = () => {
 
   const handleSearch = (key: LuckyKeys) => {
     setSelectedKey(key);
+    resetRetry();
     search5Days(key, selectedRating);
   };
 
