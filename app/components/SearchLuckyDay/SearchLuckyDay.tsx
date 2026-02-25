@@ -20,10 +20,19 @@ const SearchLuckyDay = () => {
   const [selectedKey, setSelectedKey] = useState<LuckyKeys | "">("");
   const [selectedRating, setSelectedRating] = useState<RatingGroup>("positive");
 
-  const handleSearch = (key: LuckyKeys) => {
-    setSelectedKey(key);
-    search5Days(key, selectedRating);
+  const handleSearch = async (key: LuckyKeys) => {
+    try {
+      setSelectedKey(key);
+      await search5Days(key, selectedRating); // ← чекаємо
+    } catch (err) {
+      throw err; // ← передаємо помилку в app/error.tsx
+    }
   };
+
+  // const handleSearch = (key: LuckyKeys) => {
+  //   setSelectedKey(key);
+  //   search5Days(key, selectedRating);
+  // };
 
   const handleReset = () => {
     setSelectedKey("");
