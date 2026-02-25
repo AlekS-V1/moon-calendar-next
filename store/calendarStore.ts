@@ -116,9 +116,21 @@ export const useMoonStore = create<StoreState>((set, get) => ({
           break;
         }
       } catch (err: any) {
+        // Якщо axios не отримав response, але DevTools показує 429 → це network error
+        if (!err.response) {
+          set({
+            error: {
+              status: 429,
+              message: "Забагато запитів. Сервер тимчасово недоступний.",
+            },
+            isSearching: false,
+          });
+          return;
+        }
+        const status = err.response.status;
         set({
           error: {
-            status: err.response?.status ?? 500,
+            status,
             message: err.response?.statusText || "Сталася помилка",
           },
           isSearching: false,
