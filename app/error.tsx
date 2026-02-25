@@ -21,16 +21,16 @@ const Error = ({ error, reset }: Props) => {
   const message =
     (error.status && messages[error.status]) || "Сталася невідома помилка.";
 
-  if (error.status === 429 && retryAfter === 0) {
-    start(20);
-  }
+  // if (error.status === 429 && retryAfter === 0) {
+  //   start(20);
+  // }
 
-  // 🔥 Автоматичний повтор після завершення таймера
-  useEffect(() => {
-    if (retryAfter === 0 && error.status === 429) {
-      reset(); // Next.js повторить рендер сторінки → повториться запит
-    }
-  }, [retryAfter, error.status, reset]);
+  // // 🔥 Автоматичний повтор після завершення таймера
+  // useEffect(() => {
+  //   if (retryAfter === 0 && error.status === 429) {
+  //     reset(); // Next.js повторить рендер сторінки → повториться запит
+  //   }
+  // }, [retryAfter, error.status, reset]);
 
   return (
     <div>

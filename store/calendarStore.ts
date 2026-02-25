@@ -14,6 +14,10 @@ interface StoreState {
   isSearching: boolean;
   activeValue: string | null;
 
+  error: null | { status: number; message: string };
+  setError: (err: StoreState["error"]) => void;
+  clearError: () => void;
+
   fetchDays: () => Promise<void>;
   fetchToday: () => Promise<void>;
   getDayById: (id: string) => MoonDay | undefined;
@@ -39,6 +43,10 @@ export const useMoonStore = create<StoreState>((set, get) => ({
   isSearching: false,
   activeValue: null,
   selectedAspectIds: [],
+
+  error: null,
+  setError: (error) => set({ error }),
+  clearError: () => set({ error: null }),
 
   toggleAspect: (id: string) => {
     const { selectedAspectIds } = get();
@@ -107,18 +115,15 @@ export const useMoonStore = create<StoreState>((set, get) => ({
           matchedValue = value;
           break;
         }
-      } catch (error: any) {
-        const status = error.status ?? 500;
-        const message = error.message ?? "Request failed"; // 🔥 ХАК: якщо 429 — передаємо помилку на сервер
-        if (status === 429) {
-          await fetch("/api/throw", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ status, message }),
-          });
-          return; // Далі не виконуємо — Next.js сам покаже error.tsx
-        }
-        console.error("searchMoonDays failed:", error);
+      } catch (err: any) {
+        set({
+          error: {
+            status: err.response?.status ?? 500,
+            message: err.response?.statusText || "Сталася помилка",
+          },
+          isSearching: false,
+        });
+        return;
       }
     }
 

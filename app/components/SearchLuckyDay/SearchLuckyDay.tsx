@@ -12,27 +12,26 @@ import {
 import css from "./SearchLuckyDay.module.css";
 import { RatingGroup } from "@/lib/ratingGroups";
 import { moonImages32 } from "@/lib/moonPhase30";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
 const SearchLuckyDay = () => {
-  const { search5Days, searchResults, isSearching, resetSearch, activeValue } =
-    useMoonStore();
+  const {
+    search5Days,
+    searchResults,
+    isSearching,
+    resetSearch,
+    activeValue,
+    error,
+    clearError,
+  } = useMoonStore();
 
   const [selectedKey, setSelectedKey] = useState<LuckyKeys | "">("");
   const [selectedRating, setSelectedRating] = useState<RatingGroup>("positive");
 
-  const handleSearch = async (key: LuckyKeys) => {
-    try {
-      setSelectedKey(key);
-      await search5Days(key, selectedRating); // ← чекаємо
-    } catch (err) {
-      throw err; // ← передаємо помилку в app/error.tsx
-    }
+  const handleSearch = (key: LuckyKeys) => {
+    setSelectedKey(key);
+    search5Days(key, selectedRating);
   };
-
-  // const handleSearch = (key: LuckyKeys) => {
-  //   setSelectedKey(key);
-  //   search5Days(key, selectedRating);
-  // };
 
   const handleReset = () => {
     setSelectedKey("");
@@ -42,6 +41,22 @@ const SearchLuckyDay = () => {
   const sortedSearchResults = [...searchResults].sort(
     (a, b) => new Date(a.date).getTime() - new Date(b.date).getTime(),
   );
+
+  // 🔥 Якщо є помилка — показуємо ErrorPage замість UI
+  if (error) {
+    return (
+      <ErrorPage
+        status={error.status}
+        message={error.message}
+        onRetry={() => {
+          clearError();
+          if (selectedKey) {
+            search5Days(selectedKey, selectedRating);
+          }
+        }}
+      />
+    );
+  }
 
   return (
     <div className={css.container}>
