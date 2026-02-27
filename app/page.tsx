@@ -7,7 +7,7 @@ export default function Home() {
   return (
     <div className={css.page}>
       <main className={css.main}>
-        <section>
+        <section className={css.sectionHome}>
           <MoonDaysList />
           <MoonToday />
         </section>

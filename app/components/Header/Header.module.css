@@ -1,11 +1,15 @@
 /* components/Header/Header.module.css */
-
 .header {
+  width: 1200px;
+  margin: 0 auto;
+  
+}
+.containerHeader {
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 24px;
-  padding: 12px;
+  padding: 5px;
   /* background-color: #001027; */
   color: azure;
   /* border-block-end: 1px solid #ccc; */

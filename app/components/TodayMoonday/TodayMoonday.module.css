@@ -1,7 +1,11 @@
 .containerToday {
     display: flex;
     flex-direction: column;
-    color: azure;
+    color: #cfd8ff;
+    text-shadow: 0 0 4px black;
+    width: 1200px;
+  margin: 0 auto;
+    
 }
 .listMoondayOne {
     display: flex;
@@ -21,9 +25,34 @@
 .containerFilters {
   display: flex;
   flex-direction: column;
-  width: 250px;
+  width: 270px;
+  flex-shrink: 0;
 }
-.accordionGroup {
+
+.filterButtons {
+ background: transparent;
+}
+
+.buttonShowAll {
+ background: #4a6cf7;
+ border: transparent;
+ border-radius: 5px;
+ color: #cfd8ff;
+ padding: 8px 14px;
+ margin: 8px 0;
+ font-size: 16px;
+ font-weight: 400;
+}
+
+.buttonShowAll:hover {
+  background: #2751f8;  
+}
+.containerListAspect {
+  list-style: none;  
+    border-right: 2px solid #545454;
+
+}
+.accordionGroupItem {
 display: flex;
 flex-direction: column;
   border-bottom: 1px solid #ddd;
@@ -43,14 +72,71 @@ flex-direction: column;
 
 .accordionHeader {
   width: 100%;
-  background: none;
-  border: none;
-  padding: 10px 0;
+  background: transparent;
+  border-color: #000;
+  border-radius: 5px;
+  padding: 10px 8px;
   font-size: 18px;
-  font-weight: 600;
+  font-weight: 500;
   display: flex;
   justify-content: space-between;
   cursor: pointer;
+  color: #cfd8ff; 
+  box-shadow: inset 0 0 11px 0px #f3b3f5e6;
+  transition: all 0.25s ease;
+}
+
+.accordionHeader.open {
+  color: #4a6cf7; 
+  background: rgba(74, 108, 247, 0.12); 
+  border-radius: 8px; 
+  padding: 12px 10px; 
+  box-shadow: 0 2px 6px rgba(74, 108, 247, 0.25);
+}
+/* 
+.accordionHeader.active {
+  font-size: 20px;
+  font-weight: 600;
+} */
+
+.arrow {
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  border-right: 2px solid currentColor;
+  border-bottom: 2px solid currentColor;
+  transform: rotate(45deg);
+  transition: transform 0.25s ease;
+  opacity: 0.8;
+}
+
+.accordionHeader.open .arrow {
+  transform: rotate(-135deg);
+}
+
+.accordionHeader:hover {
+  /* color: #6f8cff; */
+  font-weight: 600;
+  background: rgba(74, 109, 247, 0.281);
+}
+
+.accordionHeader:active {
+  transform: scale(0.98);
+  opacity: 0.9;
+}
+
+.accordionHeader.active {
+  /* color: #4a6cf7; */
+  font-size: 20px;
+  box-shadow: 0 0 1px 1px wheat;
+}
+
+.accordionContent {
+  padding: 10px 0 10px 12px;
+  display: flex;
+  /* flex-direction: column; */
+  flex-wrap: wrap;
+  gap: 12px;
 }
 
 .checkboxItem {
@@ -60,9 +146,21 @@ flex-direction: column;
   margin: 6px 0;
 }
 
-.checkboxItem input[type="checkbox"] {
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  cursor: pointer;
+}
+
+.checkboxLabel input {
   display: none;
 }
+
+
+/* .checkboxItem input[type="checkbox"] {
+  display: none;
+} */
 
 /* Кнопка-чипс */
 .checkboxItem span {
@@ -72,6 +170,7 @@ flex-direction: column;
   border: 1px solid #dcdcdc;
   cursor: pointer;
   transition: all 0.2s ease;
+  color: #8d8c8c;
   font-size: 15px;
   user-select: none;
 }
@@ -79,6 +178,7 @@ flex-direction: column;
 /* Hover */
 .checkboxItem span:hover {
   background: #e8e8e8;
+  color: #4a6cf7;
 }
 
 /* Активний стан */
@@ -98,30 +198,42 @@ flex-direction: column;
 } */
 
 
-.accordionContent {
-  padding: 10px 0 10px 12px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
+
 
 .selectedAspects {
     display: flex;
-    flex-direction: row;
+    /* flex-direction: row; */
     flex-wrap: wrap;
+    gap: 16px;
+    padding-left: 16px;    
+  align-content: flex-start;
 }
 
 
 .containerItemAspect {
-    display: flex;
-    flex-direction: column;
+    /* display: flex; */
+    /* flex-direction: column; */
+    width: calc((100% - 48px) / 4);
+    min-width: 210px;
+    border-radius: 30px;
+    background-color:rgba(145, 149, 171, 0.169);
+    box-shadow: 1px 3px 8px 4px rgba(238, 239, 247, 0.459);
+
 }
 
 .itemAspect {
   display: flex;
   flex-direction: column;
 }
-
+.titleAspect {
+  border-radius: 3px;
+  background-color: #4a6cf7;
+  padding: 5px 5px 5px 16px;
+}
+.textAspect,
+.levelAspect {
+  padding: 0 16px;
+}
 .containerHealth {
     display: flex;
     flex-direction: column;

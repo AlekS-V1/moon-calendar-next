@@ -3,6 +3,9 @@
     flex-direction: column;
     background-color: #001027;
     color: azure;
+    padding: 0 5px;
+    /* width: 1200px;
+  margin: 0 auto; */
 }
 
 .homeHeader {

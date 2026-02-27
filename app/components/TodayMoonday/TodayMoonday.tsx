@@ -112,51 +112,58 @@ const TodayMoonday = () => {
           <div className={css.containerFilters}>
             <div className={css.filterButtons}>
               <button
+                className={css.buttonShowAll}
                 onClick={showRemoveAll ? clearAllAspects : selectAllAspects}
               >
                 {showRemoveAll ? "Прибрати все" : "Показати все"}
               </button>
             </div>
 
-            <div className={css.containerListAspect}>
+            <ul className={css.containerListAspect}>
               {Object.entries(groupedAspects).map(([groupName, items]) => {
                 const isOpen = openGroups.includes(groupName);
-
+                const hasSelectedInGroup = items.some(({ key }) =>
+                  selectedAspectIds.includes(key),
+                );
                 return (
-                  <div className={css.accordionGroup} key={groupName}>
+                  <li className={css.accordionGroup} key={groupName}>
                     <button
-                      className={css.accordionHeader}
+                      className={`${css.accordionHeader} ${isOpen ? css.open : ""} ${
+                        hasSelectedInGroup ? css.active : ""
+                      }`}
                       onClick={() => toggleGroup(groupName)}
                     >
                       <span>{groupName}</span>
-                      <span>{isOpen ? "▲" : "▼"}</span>
+                      <span className={css.arrow}></span>
                     </button>
 
                     {isOpen && (
-                      <div className={css.accordionContent}>
+                      <ul className={css.accordionContent}>
                         {items.map(({ key, aspect }) => (
-                          <label className={css.checkboxItem} key={key}>
-                            <input
-                              type="checkbox"
-                              checked={selectedAspectIds.includes(key)}
-                              onChange={() => toggleAspect(key)}
-                            />
-                            <span className={css.titleAspect}>
-                              {aspectTitles[key] ?? key}
-                            </span>
-                          </label>
+                          <li className={css.checkboxItem} key={key}>
+                            <label className={css.checkboxLabel}>
+                              <input
+                                type="checkbox"
+                                checked={selectedAspectIds.includes(key)}
+                                onChange={() => toggleAspect(key)}
+                              />
+                              <span className={css.titleAspect}>
+                                {aspectTitles[key] ?? key}
+                              </span>
+                            </label>
+                          </li>
                         ))}
-                      </div>
+                      </ul>
                     )}
-                  </div>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           </div>
 
           <ul className={css.selectedAspects}>
             {selectedAspectIds.length === 0 ? (
-              <p>Нічого не вибрано</p>
+              <p>Зробіть вибір, будь ласка</p>
             ) : (
               selectedAspectIds.map((key) => {
                 const aspect = resDay.lifeAspects[key];
@@ -166,12 +173,12 @@ const TodayMoonday = () => {
                   <li className={css.containerItemAspect} key={key}>
                     <div className={css.itemAspect}>
                       <h5 className={css.titleAspect}>
-                        {aspectTitles[key] ?? key}
+                        {aspectTitles[key] ?? key} — {aspect.rating.value}/
+                        {aspect.rating.scale}
                       </h5>
                       <p className={css.textAspect}>{aspect.text}</p>
                       <p className={css.levelAspect}>
-                        Оцінка: {aspect.rating.value}/{aspect.rating.scale} —{" "}
-                        {aspect.rating.meaning}
+                        Оцінка: {aspect.rating.meaning}
                       </p>
                     </div>
                   </li>
