@@ -1,12 +1,12 @@
 // app/days/page.tsx
 
 import MoonDaysList from "../components/MoonDaysList/MoonDaysList";
-// import css from "./days.module.css";
+import css from "./days.module.css";
 import TodayMoonday from "../components/TodayMoonday/TodayMoonday";
 
 const Days = async () => {
   return (
-    <section>
+    <section className={css.sectionTodayMoonday}>
       <MoonDaysList />
       <TodayMoonday />
     </section>

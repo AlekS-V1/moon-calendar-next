@@ -1,3 +1,8 @@
-.titleMonthPage {
+/* .titleMonthPage {
     color: blue;
+} */
+
+.sectionTodayMoonday {
+    width: 1200px;
+    margin: 0 auto;
 }

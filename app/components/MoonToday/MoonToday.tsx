@@ -24,26 +24,28 @@ const MoonToday = () => {
 
   return (
     <div className={css.containerToday}>
-      <div>
+      <div className={css.moonHeader}>
         <div className={css.homeHeader}>
           <div>
-            <h1>Під світлом Місяця</h1>
-            <h3>
-              Сьогодні:{" "}
+            {/* <h1 className={css.titleHead}>Під світлом Місяця</h1> */}
+            <h2 className={css.underTitleMoonToday}>Сьогодні:</h2>
+            <h2 className={css.underTitleMoonToday}>
               {new Date(today.date).toLocaleDateString("uk-UA", {
                 weekday: "long",
                 day: "numeric",
                 month: "long",
                 year: "numeric",
               })}
-            </h3>
-            <h4>{today.moonDay} Місячний день</h4>
-            <p>
+            </h2>
+            <h4 className={css.underTitleMoonToday}>
+              {today.moonDay} Місячний день
+            </h4>
+            <p className={css.textMoonToday}>
               {resDay.phase} {"("}
               {today.phaseName}
               {")"}
             </p>
-            <p>{resDay.phaseDescription}</p>
+            <p className={css.textMoonToday}>{resDay.phaseDescription}</p>
           </div>
 
           <div className={css.contImageMoonPhase}>
@@ -54,67 +56,81 @@ const MoonToday = () => {
               width={160}
               height={160}
             />
+            <div className={css.effectMoon}></div>
           </div>
         </div>
 
-        <h3>Загальне значення</h3>
-        <p>{resDay.generalMeaning}</p>
+        {/* <h3 className={css.titleBlock}>Загальне значення</h3> */}
+        <p className={css.textMoonToday}>{resDay.extendedMeaning}</p>
       </div>
 
-      <div className={css.listMoondayOne}>
-        <div>
-          <h3>Якості</h3>
+      <div className={css.listBlockSimbol}>
+        <div className={css.itemBlockSimbol}>
+          <h3 className={css.titleBlock}>Якості</h3>
           <ul>
             {resDay.qualities.map((q) => (
-              <li key={q}>{q}</li>
+              <li key={q}>
+                <p className={css.textMoonToday}>{q}</p>
+              </li>
             ))}
           </ul>
         </div>
 
-        <div>
-          <h3>Попередження</h3>
+        <div className={css.itemBlockSimbol}>
+          <h3 className={css.titleBlock}>Попередження</h3>
           <ul>
             {resDay.warnings.map((w) => (
-              <li key={w}>{w}</li>
+              <li key={w}>
+                <p className={css.textMoonToday}>{w}</p>
+              </li>
             ))}
           </ul>
         </div>
 
-        <div>
-          <h3>Символи</h3>
+        <div className={css.itemBlockSimbol}>
+          <h3 className={css.titleBlock}>Символи</h3>
           <ul>
             {resDay.symbols.map((s) => (
-              <li key={s}>{s}</li>
+              <li key={s}>
+                <p className={css.textMoonToday}>{s}</p>
+              </li>
             ))}
           </ul>
         </div>
 
-        <div>
-          <h3>Камені</h3>
+        <div className={css.itemBlockSimbol}>
+          <h3 className={css.titleBlock}>Камені</h3>
           <ul>
             {resDay.stones.map((s) => (
-              <li key={s}>{s}</li>
+              <li key={s}>
+                <p className={css.textMoonToday}>{s}</p>
+              </li>
             ))}
           </ul>
         </div>
       </div>
 
-      <div>
-        <h3>Знаки</h3>
-        <div>
-          <h4>Сприятливі</h4>
+      <h3 className={css.titleBlock}>Знаки</h3>
+
+      <div className={css.blockSign}>
+        <div className={css.itemBlockSign}>
+          <h4 className={css.underTitleMoonToday}>Сприятливі:</h4>
           <ul>
             {resDay.signs.good.map((g) => (
-              <li key={g}>{g}</li>
+              <li key={g}>
+                <p className={css.textMoonToday}>+ {g}</p>
+              </li>
             ))}
           </ul>
         </div>
 
-        <div>
-          <h4>Несприятливі</h4>
+        <div className={css.itemBlockSign}>
+          <h4 className={css.underTitleMoonToday}>Несприятливі:</h4>
           <ul>
             {resDay.signs.bad.map((b) => (
-              <li key={b}>{b}</li>
+              <li key={b}>
+                <p className={css.textMoonToday}>- {b}</p>
+              </li>
             ))}
           </ul>
         </div>

@@ -7,7 +7,7 @@ const Header = () => {
   return (
     <header className={css.header}>
       <div className={css.containerHeader}>
-        <h2>Твій місячний календар</h2>
+        <h2>Під світлом Місяця</h2>
         <nav>
           <ul className={css.menuHeader}>
             <li className={css.itemMenu}>
@@ -21,7 +21,7 @@ const Header = () => {
                 aria-label="Moon days"
                 className={css.linkMenu}
               >
-                Календар
+                Більше
               </Link>
             </li>
             <li className={css.itemMenu}>
@@ -39,12 +39,12 @@ const Header = () => {
                 aria-label="Profile"
                 className={css.linkMenu}
               >
-                Мій Профіль
+                Логін
               </Link>
             </li>
             <li className={css.itemMenu}>
               <Link href="/about" aria-label="About" className={css.linkMenu}>
-                Про нас
+                Для чого
               </Link>
             </li>
           </ul>

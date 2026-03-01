@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono, Rubik } from "next/font/google";
+import { Geist, Raleway, Comfortaa } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header/Header";
 import TanStackProvider from "./components/TanStackProvider/TanStackProvider";
@@ -9,12 +9,12 @@ const geistSans = Geist({
   subsets: ["latin"],
 });
 
-const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+const raleway = Raleway({
+  variable: "--font-raleway",
+  subsets: ["latin", "cyrillic"],
 });
 
-const rubik = Rubik({
+const comfortaa = Comfortaa({
   variable: "--font-rubik",
   subsets: ["cyrillic"],
   weight: ["400", "700"],
@@ -33,7 +33,7 @@ export default function RootLayout({
   return (
     <html lang="uk">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} ${rubik.variable}`}
+        className={`${geistSans.variable} ${raleway.variable} ${comfortaa.variable}`}
       >
         <TanStackProvider>
           <Header />

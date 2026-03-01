@@ -26,7 +26,7 @@ const MoonDaysList = () => {
 
   return (
     <div className={css.moondayList}>
-      <p className={css.textMoodayList}>Дні місяця:</p>
+      {/* <p className={css.textMoodayList}>Дні місяця:</p> */}
       <ul className={css.daysList}>
         {sortedDays.map((day) => (
           <MoonDayItem key={day._id} item={day} />
