@@ -1,116 +1,114 @@
 .containerToday {
-    display: flex;
-    flex-direction: column;
-    background-color: #003c9149;
-    color: azure;
-    padding: 32px 60px;
-    border: darkgray solid 2px;
-    border-radius: 50px;
-    margin-top: 16px;
-    /* width: 1200px;
+  display: flex;
+  flex-direction: column;
+  background-color: #003c9149;
+  color: azure;
+  padding: 32px 60px;
+  border: darkgray solid 2px;
+  border-radius: 50px;
+  margin-top: 16px;
+  /* width: 1200px;
   margin: 0 auto; */
 }
 
 .homeHeader {
-    display: flex;
+  display: flex;
 }
 /* .moonHeader {
     
 } */
 .titleHead {
-    margin-bottom: 32px;
+  margin-bottom: 32px;
 }
 .titleBlock {
-    /* line-height: 120%; */
-    font-weight: 700;
-    letter-spacing: 0.1rem;
-    text-shadow: 0 0 4px black;
-    margin-bottom: 20px;
-    text-align: center;
-    border-bottom: #28436c49 solid 4px;
-    border-radius: 10px;
+  /* line-height: 120%; */
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  text-shadow: 0 0 4px black;
+  margin-bottom: 20px;
+  text-align: center;
+  border-bottom: #28436c49 solid 4px;
+  border-radius: 10px;
 }
 
 .underTitleMoonToday {
-    margin-bottom: 16px;
+  margin-bottom: 16px;
 }
 
 .textMoonToday {
-    margin-bottom: 16px;
-    letter-spacing: 1px;
-    line-height: 140%;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+  line-height: 140%;
 }
 .itemBlockSimbol {
-    max-width: 250px;
-    /* background-color: #003c9149; */
-    box-shadow: 1px 3px 8px 4px rgba(238, 239, 247, 0.459);
-    border-radius: 10px;
-    padding: 8px 30px;
-    margin: 8px 0;
+  max-width: 250px;
+  /* background-color: #003c9149; */
+  box-shadow: 1px 3px 8px 4px rgba(238, 239, 247, 0.459);
+  border-radius: 10px;
+  padding: 8px 30px;
+  margin: 8px 0;
 }
 
 .blockSign {
-    display: flex;
-    gap: 80px;
-    box-shadow: 0 0 20px 2px rgba(238, 239, 247, 0.459);
-    border-radius: 10px;
+  display: flex;
+  justify-content: space-between;
+  box-shadow: 0 0 20px 2px rgba(238, 239, 247, 0.459);
+  border-radius: 10px;
 }
 .itemBlockSign {
-    width: 500px;
-    box-shadow:inset 0px 1px 4px 1px rgba(238, 239, 247, 0.459);
-    border-radius: 10px;
-    padding: 8px 30px;
-    /* margin: 8px 0; */
+  width: 438px;
+  box-shadow: inset 0px 1px 4px 1px rgba(238, 239, 247, 0.459);
+  border-radius: 10px;
+  padding: 8px 30px;
+  /* margin: 8px 0; */
 }
 
 .contImageMoonPhase {
-    padding: 20px;
-    margin: 0 auto;
+  padding: 20px;
+  margin: 0 auto;
 }
 .imageMoonPhase {
-    position: absolute;
-    filter: drop-shadow(0 0 130px #75b4fc);
-    mix-blend-mode: luminosity; 
+  position: absolute;
+  filter: drop-shadow(0 0 130px #75b4fc);
+  mix-blend-mode: luminosity;
 }
 .effectMoon {
-    
-    position: relative;
-    /* top: -161px; */
-    /* left: 2px; */
-    width: 154px;
-    height: 154px;
-    border-radius: 50%;
-    pointer-events: none; /* щоб ефект не блокував кліки */
-    /* background: rgb(6 63 124 / 24%); */ /* приклад ефекту */
-    inset: 3px 0px 0px 2px;
-    background: #132f59; /* або будь-який інший ефект */
-    /* mix-blend-mode: plus-lighter; */
-    mix-blend-mode: lighten;
-
+  position: relative;
+  /* top: -161px; */
+  /* left: 2px; */
+  width: 154px;
+  height: 154px;
+  border-radius: 50%;
+  pointer-events: none; /* щоб ефект не блокував кліки */
+  /* background: rgb(6 63 124 / 24%); */ /* приклад ефекту */
+  inset: 3px 0px 0px 2px;
+  background: #132f59; /* або будь-який інший ефект */
+  /* mix-blend-mode: plus-lighter; */
+  mix-blend-mode: lighten;
 }
 .listBlockSimbol {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    margin-bottom: 16px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  margin-bottom: 16px;
 }
 
 .containerAspekt {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .containerListAspect {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }
 
 .containerHealth {
-    display: flex;
-    flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
 .listHealth {
-    display: flex;
-    flex-direction: row;
+  display: flex;
+  flex-direction: row;
 }

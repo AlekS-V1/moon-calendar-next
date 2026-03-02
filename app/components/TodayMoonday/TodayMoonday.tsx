@@ -67,9 +67,10 @@ const TodayMoonday = () => {
 
   return (
     <div className={css.containerToday}>
+      {/* <div className={css.moonCards}> */}
       <div className={css.moonCards}>
         <h2 className={css.titleTodayMoonday}>
-          За місячним календарем сьогодні:{" "}
+          За календарем в цей{" "}
           {/* {new Date(today.date).toLocaleDateString("uk-UA", {
             weekday: "long",
             day: "numeric",
@@ -78,40 +79,17 @@ const TodayMoonday = () => {
           })}
         </h2> */}
           {/* <h3 className={css.titleTodayMoonday}> */}
-          {today.moonDay} місячний день.
+          {today.moonDay} місячний день вважають що
         </h2>
 
         <div className={css.extendedMeaning}>
-          <h3 className={css.titleTodayMoonday}>Тлумачення дня</h3>
+          {/* <div className={`${css.extendedMeaning} ${css.innerContainer}`}> */}
+          {/* <h3 className={css.titleTodayMoonday}>Тлумачення дня</h3> */}
           <p className={css.textTodayMoonday}>{resDay.generalMeaning}</p>
         </div>
       </div>
 
-      <div className={css.containerLifeAspect}>
-        <div className={css.containerHaircut}>
-          <h3 className={css.titleTodayMoonday}>Стрижка</h3>
-          <div className={css.listHeircut}>
-            <div className={css.moonCalendar}>
-              <h4 className={css.underTitleMoonday}>Місячний календар</h4>
-              <p className={css.textTodayMoonday}>
-                {resDay.haircut.lunarCalendar}
-              </p>
-            </div>
-
-            <div className={css.tibetanCalendar}>
-              <h4 className={css.underTitleMoonday}>Тибетський календар</h4>
-              <p className={css.textTodayMoonday}>
-                {resDay.haircut.tibetanCalendar}
-              </p>
-            </div>
-          </div>
-
-          <p className={css.textTodayMoonday}>
-            Оцінка: {resDay.haircut.rating.value}/{resDay.haircut.rating.scale}{" "}
-            — {resDay.haircut.rating.meaning}
-          </p>
-        </div>
-
+      <div className={`${css.containerLifeAspect} ${css.innerContainer}`}>
         <div className={css.containerBirth}>
           <h3 className={css.titleTodayMoonday}>
             {resDay.birthOnThisDay.title}
@@ -120,9 +98,18 @@ const TodayMoonday = () => {
             {resDay.birthOnThisDay.description}
           </p>
         </div>
-      </div>
 
-      <div className={css.containerLifeAspect}>
+        <div className={css.containerDreams}>
+          <h3 className={css.titleTodayMoonday}>
+            {resDay.dreams.title} — {resDay.dreams.rating.value}/
+            {resDay.dreams.rating.scale}
+          </h3>
+          <p className={css.textTodayMoonday}>{resDay.dreams.meaning}</p>
+          <p className={css.textTodayMoonday}>
+            Оцінка: {resDay.dreams.rating.meaning}
+          </p>
+        </div>
+
         <div className={css.containerMeditations}>
           <h3 className={css.titleTodayMoonday}>Медитації</h3>
           <ul className={css.listTodayMoonday}>
@@ -133,32 +120,64 @@ const TodayMoonday = () => {
             ))}
           </ul>
         </div>
+      </div>
 
-        <div className={css.containerDreams}>
-          <h3 className={css.titleTodayMoonday}>{resDay.dreams.title}</h3>
-          <p className={css.textTodayMoonday}>{resDay.dreams.meaning}</p>
+      <div className={`${css.containerLifeAspect} ${css.innerContainer}`}>
+        <div className={css.containerHaircut}>
+          <h3 className={css.titleTodayMoonday}>
+            Стрижка — {resDay.haircut.rating.value}/
+            {resDay.haircut.rating.scale}
+          </h3>
+          <div className={css.listHeircut}>
+            <div className={css.moonCalendar}>
+              {/* <h4 className={css.underTitleMoonday}>Місячний календар</h4> */}
+              <p className={css.textTodayMoonday}>
+                {resDay.haircut.lunarCalendar}
+              </p>
+            </div>
+
+            {/* <div className={css.tibetanCalendar}>
+              <h4 className={css.underTitleMoonday}>Тибетський календар</h4>
+              <p className={css.textTodayMoonday}>
+                {resDay.haircut.tibetanCalendar}
+              </p>
+            </div> */}
+          </div>
+
           <p className={css.textTodayMoonday}>
-            Оцінка: {resDay.dreams.rating.value}/{resDay.dreams.rating.scale} —{" "}
-            {resDay.dreams.rating.meaning}
+            Оцінка: {resDay.haircut.rating.meaning}
+          </p>
+        </div>
+
+        <div className={css.containerMedication}>
+          <h3 className={css.titleTodayMoonday}>
+            Медикаменти — {resDay.health.medications.rating.value}/
+            {resDay.health.medications.rating.scale}
+          </h3>
+          <p className={css.textTodayMoonday}>
+            {resDay.health.medications.text}
+          </p>
+          <p className={css.textTodayMoonday}>
+            Оцінка: {resDay.health.medications.rating.meaning}
           </p>
         </div>
       </div>
-
       <div className={css.containerHealth}>
-        <h3 className={css.titleTodayMoonday}>Здоровʼя</h3>
+        <h3 className={css.titleTodayMoonday}>
+          Здоровʼє — {resDay.health.general.rating.value}/
+          {resDay.health.general.rating.scale}
+        </h3>
 
-        <div className={css.listHealth}>
-          <div>
+        <div className={`${css.listHealth} ${css.innerContainer}`}>
+          <div className={css.generalHealth}>
             <h4 className={css.underTitleMoonday}>Загальне</h4>
             <p className={css.textTodayMoonday}>{resDay.health.general.text}</p>
             <p className={css.textTodayMoonday}>
-              Оцінка: {resDay.health.general.rating.value}/
-              {resDay.health.general.rating.scale} —{" "}
-              {resDay.health.general.rating.meaning}
+              Оцінка: {resDay.health.general.rating.meaning}
             </p>
           </div>
 
-          <div>
+          <div className={css.vulnerableBodyPartHealth}>
             <h4 className={css.underTitleMoonday}>Вразлива частина тіла</h4>
             <p className={css.textTodayMoonday}>
               {resDay.health.vulnerableBodyPart.text}
@@ -166,18 +185,6 @@ const TodayMoonday = () => {
             {/* <p className={css.textTodayMoonday}>
               {resDay.health.vulnerableBodyPart.rating.meaning}
             </p> */}
-          </div>
-
-          <div>
-            <h4 className={css.underTitleMoonday}>Медикаменти</h4>
-            <p className={css.textTodayMoonday}>
-              {resDay.health.medications.text}
-            </p>
-            <p className={css.textTodayMoonday}>
-              Оцінка: {resDay.health.medications.rating.value}/
-              {resDay.health.medications.rating.scale} —{" "}
-              {resDay.health.medications.rating.meaning}
-            </p>
           </div>
         </div>
       </div>
@@ -188,15 +195,23 @@ const TodayMoonday = () => {
         <div className={css.containerAspect}>
           <div className={css.containerFilters}>
             <div className={css.filterButtons}>
-              <button
+              {/* <button
                 className={css.buttonShowAll}
                 onClick={showRemoveAll ? clearAllAspects : selectAllAspects}
               >
                 {showRemoveAll ? "Прибрати все" : "Показати все"}
-              </button>
+              </button> */}
             </div>
 
             <ul className={css.containerListAspect}>
+              <li className={css.accordionGroup}>
+                <button
+                  className={css.accordionHeader}
+                  onClick={showRemoveAll ? clearAllAspects : selectAllAspects}
+                >
+                  {showRemoveAll ? "Прибрати все" : "Показати все"}
+                </button>
+              </li>
               {Object.entries(groupedAspects).map(([groupName, items]) => {
                 const isOpen = openGroups.includes(groupName);
                 const hasSelectedInGroup = items.some(({ key }) =>

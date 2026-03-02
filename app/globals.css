@@ -4,11 +4,10 @@
 
 body {
   background-color: #001027;
-  font-family: var(--font-rubik), sans-serif;
+  font-family: var(--font-comfortaa), sans-serif;
   color: azure;
   margin: 0;
 }
-
 
 h1,
 h2,
@@ -35,6 +34,3 @@ img {
   max-width: 100%;
   height: auto;
 }
-
-
-

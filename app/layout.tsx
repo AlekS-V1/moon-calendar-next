@@ -15,7 +15,7 @@ const raleway = Raleway({
 });
 
 const comfortaa = Comfortaa({
-  variable: "--font-rubik",
+  variable: "--font-comfortaa",
   subsets: ["cyrillic"],
   weight: ["400", "700"],
   display: "swap",
