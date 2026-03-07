@@ -70,16 +70,17 @@ const TodayMoonday = () => {
       {/* <div className={css.moonCards}> */}
       <div className={css.moonCards}>
         <h2 className={css.titleTodayMoonday}>
-          За календарем в цей{" "}
-          {/* {new Date(today.date).toLocaleDateString("uk-UA", {
+          За місячним календарем в цей день вважають, що
+          {/* {" "}
+          {new Date(today.date).toLocaleDateString("uk-UA", {
             weekday: "long",
             day: "numeric",
             month: "long",
             year: "numeric",
           })}
-        </h2> */}
-          {/* <h3 className={css.titleTodayMoonday}> */}
-          {today.moonDay} місячний день вважають що
+        </h2>
+          <h3 className={css.titleTodayMoonday}>
+          {today.moonDay}   */}
         </h2>
 
         <div className={css.extendedMeaning}>

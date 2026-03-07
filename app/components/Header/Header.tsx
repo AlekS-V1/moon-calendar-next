@@ -33,7 +33,7 @@ const Header = () => {
                 Щасливий день
               </Link>
             </li>
-            <li className={css.itemMenu}>
+            {/* <li className={css.itemMenu}>
               <Link
                 href="/profile"
                 aria-label="Profile"
@@ -41,7 +41,7 @@ const Header = () => {
               >
                 Логін
               </Link>
-            </li>
+            </li> */}
             <li className={css.itemMenu}>
               <Link href="/about" aria-label="About" className={css.linkMenu}>
                 Для чого

@@ -70,7 +70,7 @@ const MoonToday = () => {
           <ul>
             {resDay.qualities.map((q) => (
               <li key={q}>
-                <p className={css.textMoonToday}>{q}</p>
+                <p className={css.textMoonToday}>&#9680; {q}</p>
               </li>
             ))}
           </ul>
@@ -81,7 +81,7 @@ const MoonToday = () => {
           <ul>
             {resDay.warnings.map((w) => (
               <li key={w}>
-                <p className={css.textMoonToday}>{w}</p>
+                <p className={css.textMoonToday}>&#9680; {w}</p>
               </li>
             ))}
           </ul>
@@ -92,7 +92,7 @@ const MoonToday = () => {
           <ul>
             {resDay.symbols.map((s) => (
               <li key={s}>
-                <p className={css.textMoonToday}>{s}</p>
+                <p className={css.textMoonToday}>&#9680; {s}</p>
               </li>
             ))}
           </ul>
@@ -103,7 +103,7 @@ const MoonToday = () => {
           <ul>
             {resDay.stones.map((s) => (
               <li key={s}>
-                <p className={css.textMoonToday}>{s}</p>
+                <p className={css.textMoonToday}>&#9680; {s}</p>
               </li>
             ))}
           </ul>
@@ -118,7 +118,9 @@ const MoonToday = () => {
           <ul>
             {resDay.signs.good.map((g) => (
               <li key={g}>
-                <p className={css.textMoonToday}>+ {g}</p>
+                <p className={`${css.textMoonToday} ${css.alignJustify}`}>
+                  + {g}
+                </p>
               </li>
             ))}
           </ul>
@@ -129,7 +131,9 @@ const MoonToday = () => {
           <ul>
             {resDay.signs.bad.map((b) => (
               <li key={b}>
-                <p className={css.textMoonToday}>- {b}</p>
+                <p className={`${css.textMoonToday} ${css.alignJustify}`}>
+                  - {b}
+                </p>
               </li>
             ))}
           </ul>

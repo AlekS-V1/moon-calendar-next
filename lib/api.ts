@@ -7,7 +7,7 @@ export interface MoonDayListResp {
   total: number;
 }
 
-axios.defaults.baseURL = "https://mooncalendar-6y3u.onrender.com";
+axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
 
 //  глобальний wrapper для fetch перехоплення 429
 export async function fetchWithErrors(url: string, options?: RequestInit) {
