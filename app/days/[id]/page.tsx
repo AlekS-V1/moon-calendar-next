@@ -6,6 +6,7 @@ import {
 } from "@tanstack/react-query";
 import MoondayDetailsClient from "./MoondayDetails.client";
 import MoonDaysList from "@/app/components/MoonDaysList/MoonDaysList";
+import css from "./MoondayDetailsClient.module.css";
 
 interface Props {
   params: Promise<{ id: string }>;
@@ -21,12 +22,12 @@ const MoonDayDetails = async ({ params }: Props) => {
   });
 
   return (
-    <>
+    <section className={css.sectionMoondayDetails}>
       <MoonDaysList />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <MoondayDetailsClient />
       </HydrationBoundary>
-    </>
+    </section>
   );
 };
 

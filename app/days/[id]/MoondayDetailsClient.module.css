@@ -1,4 +1,8 @@
-.containerToday {
+.sectionMoondayDetails {
+  width: 1200px;
+  margin: 0 auto;
+}
+/* .containerToday {
     display: flex;
     flex-direction: column;
 }
@@ -25,4 +29,4 @@
 .listHealth {
     display: flex;
     flex-direction: row;
-}
+} */
