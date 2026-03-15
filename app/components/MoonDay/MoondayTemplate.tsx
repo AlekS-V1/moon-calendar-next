@@ -3,11 +3,11 @@
 import css from "./MoondayTemplate.module.css";
 import { aspectGroups, aspectTitles } from "@/lib/aspect";
 import { moonImages160 } from "@/lib/moonPhase30";
-import { MoonDay, MoonDayData, NormalizedDay } from "@/type/type";
-import { useEffect, useMemo, useState } from "react";
+import { useMemo, useState } from "react";
+import { NormalizedDay } from "@/type/type";
 
 type MoondayTemplateProps = {
-  day: NormalizedDay | null; // потім типізуємо
+  day: NormalizedDay;
   selectedAspectIds: string[];
   toggleAspect: (key: string) => void;
   selectAllAspects: () => void;
@@ -21,10 +21,24 @@ export const MoondayTemplate = ({
   selectAllAspects,
   clearAllAspects,
 }: MoondayTemplateProps) => {
+  // ❗ Беремо дані тільки зі стора
+  // const today = useMoonStore((s) => s.today);
+  // const searchedDay = useMoonStore((s) => s.dayDate);
+  // const selectedAspectIds = useMoonStore((s) => s.selectedAspectIds);
+  // const toggleAspect = useMoonStore((s) => s.toggleAspect);
+  // const selectAllAspects = useMoonStore((s) => s.selectAllAspects);
+  // const clearAllAspects = useMoonStore((s) => s.clearAllAspects);
+  // const showRemoveAll = selectedAspectIds.length >= 2;
+
+  // ❗ Вибираємо, що показувати: знайдений день або сьогоднішній
+  // const day = searchedDay ?? today;
+  const resDay = day.details;
+
   const [openGroups, setOpenGroups] = useState<string[]>([]);
 
-  const resDay = day?.details;
+  // console.log("TEMPLATE RENDER:", { searchedDay, today, finalDay: day });
 
+  // ❗ Групування аспектів
   const groupedAspects = useMemo(() => {
     if (!resDay?.lifeAspects) return {};
 
@@ -39,26 +53,28 @@ export const MoondayTemplate = ({
     );
   }, [resDay]);
 
-  if (!day || !resDay) {
-    return <p>Завантаження...</p>;
-  }
+  // ❗ Ефект для відкриття груп (не залежить від умовного рендера)
+  // useEffect(() => {
+  //   if (!resDay) return;
 
-  const dayNumber = Number(day.moonDay ?? resDay.dayNumber ?? 1);
-  const img =
-    moonImages160[dayNumber as keyof typeof moonImages160] || moonImages160[1];
+  //   const groupsToOpen = Object.entries(groupedAspects)
+  //     .filter(([_, items]) => items.some(({ key }) => false)) // поки без логіки вибору
+  //     .map(([groupName]) => groupName);
 
-  useEffect(() => {
-    const groupsToOpen = Object.entries(groupedAspects)
-      .filter(([_, items]) =>
-        items.some(({ key }) => selectedAspectIds.includes(key)),
-      )
-      .map(([groupName]) => groupName);
+  //   if (groupsToOpen.length > 0) {
+  //     setOpenGroups((prev) => [...new Set([...prev, ...groupsToOpen])]);
+  //   }
+  // }, [groupedAspects, resDay]);
 
-    if (groupsToOpen.length === 0) return;
-
-    setOpenGroups((prev) => Array.from(new Set([...prev, ...groupsToOpen])));
-  }, [selectedAspectIds, groupedAspects]);
-
+  // ❗ Якщо даних немає взагалі
+  // if (!day || !resDay) {
+  //   return (
+  //     <div className={css.containerToday}>
+  //       <MoonSearchByData />
+  //       <p>Оберіть дату для перегляду</p>
+  //     </div>
+  //   );
+  // }
   const toggleGroup = (groupName: string) => {
     setOpenGroups((prev) =>
       prev.includes(groupName)
@@ -69,16 +85,81 @@ export const MoondayTemplate = ({
 
   const showRemoveAll = selectedAspectIds.length >= 2;
 
+  // ❗ Обчислення місячного дня
+  const dayNumber = Number(day.moonDay ?? resDay.dayNumber ?? 1);
+  const img =
+    moonImages160[dayNumber as keyof typeof moonImages160] || moonImages160[1];
+
+  // export const MoondayTemplate = ({
+  //   date,
+  //   day,
+  //   selectedAspectIds,
+  //   toggleAspect,
+  //   selectAllAspects,
+  //   clearAllAspects,
+  // }: MoondayTemplateProps) => {
+  //   const [openGroups, setOpenGroups] = useState<string[]>([]);
+
+  //   console.log("Поточні дані в шаблоні:", date);
+
+  //   const { fetchDayByDate } = useMoonStore();
+  //   console.log("fetchDayByDate:", fetchDayByDate);
+
+  //   const resDay = day?.details;
+
+  //   const groupedAspects = useMemo(() => {
+  //     if (!resDay?.lifeAspects) return {};
+
+  //     return Object.entries(resDay.lifeAspects).reduce(
+  //       (acc, [key, aspect]) => {
+  //         const group = aspectGroups[key] ?? "Інше";
+  //         if (!acc[group]) acc[group] = [];
+  //         acc[group].push({ key, aspect });
+  //         return acc;
+  //       },
+  //       {} as Record<string, { key: string; aspect: any }[]>,
+  //     );
+  //   }, [resDay]);
+
+  //   if (!day || !resDay) {
+  //     return <p>Завантаження...</p>;
+  //   }
+
+  //   const dayNumber = Number(day.moonDay ?? resDay.dayNumber ?? 1);
+  //   const img =
+  //     moonImages160[dayNumber as keyof typeof moonImages160] || moonImages160[1];
+
+  //   useEffect(() => {
+  //     const groupsToOpen = Object.entries(groupedAspects)
+  //       .filter(([_, items]) =>
+  //         items.some(({ key }) => selectedAspectIds.includes(key)),
+  //       )
+  //       .map(([groupName]) => groupName);
+
+  //     if (groupsToOpen.length === 0) return;
+
+  //     setOpenGroups((prev) => Array.from(new Set([...prev, ...groupsToOpen])));
+  //   }, [selectedAspectIds, groupedAspects]);
+
+  //   const toggleGroup = (groupName: string) => {
+  //     setOpenGroups((prev) =>
+  //       prev.includes(groupName)
+  //         ? prev.filter((g) => g !== groupName)
+  //         : [...prev, groupName],
+  //     );
+  //   };
+
+  //   const showRemoveAll = selectedAspectIds.length >= 2;
+  //   console.log("TEMPLATE RENDER", date);
+
+  //   console.log("store B:", useMoonStore.getState());
+
   return (
     <>
       <div className={css.containerToday}>
         <div className={css.moonHeader}>
           <div className={css.homeHeader}>
             <div>
-              {/* <h1 className={css.titleHead}>Під світлом Місяця</h1> */}
-              <h2 className={css.underTitleMoonToday}>
-                {day.date ? "Сьогодні:" : "В цей"}
-              </h2>
               {day.date && (
                 <h2 className={css.underTitleMoonToday}>
                   {new Date(day.date).toLocaleDateString("uk-UA", {
@@ -89,6 +170,9 @@ export const MoondayTemplate = ({
                   })}
                 </h2>
               )}
+              <h2 className={css.underTitleMoonToday}>
+                {/* {day.date ? "Сьогодні:" : "В цей"} */}в цей
+              </h2>
               {day.date ? (
                 <h4 className={css.underTitleMoonToday}>
                   {day.moonDay} Місячний день
@@ -122,7 +206,6 @@ export const MoondayTemplate = ({
             </div>
           </div>
 
-          {/* <h3 className={css.titleBlock}>Загальне значення</h3> */}
           <p className={css.textMoonToday}>{resDay.extendedMeaning}</p>
         </div>
 
@@ -204,25 +287,12 @@ export const MoondayTemplate = ({
       </div>
 
       <div className={css.containerToday}>
-        {/* <div className={css.moonCards}> */}
         <div className={css.moonCards}>
           <h2 className={css.titleTodayMoonday}>
             За місячним календарем в цей день вважають, що
-            {/* {" "}
-          {new Date(today.date).toLocaleDateString("uk-UA", {
-            weekday: "long",
-            day: "numeric",
-            month: "long",
-            year: "numeric",
-          })}
-        </h2>
-          <h3 className={css.titleTodayMoonday}>
-          {today.moonDay}   */}
           </h2>
 
           <div className={css.extendedMeaning}>
-            {/* <div className={`${css.extendedMeaning} ${css.innerContainer}`}> */}
-            {/* <h3 className={css.titleTodayMoonday}>Тлумачення дня</h3> */}
             <p className={css.textTodayMoonday}>{resDay.generalMeaning}</p>
           </div>
         </div>
@@ -235,6 +305,15 @@ export const MoondayTemplate = ({
             <p className={css.textTodayMoonday}>
               {resDay.birthOnThisDay.description}
             </p>
+            {/* <Link
+              href="/searchbydata"
+              aria-label="Moon days by date"
+              className={css.link}
+            >
+              Дізнатися за датою
+            </Link> */}
+            {/* <p>Дізнатися за датою</p>
+            <MoonSearchByData /> */}
           </div>
 
           <div className={css.containerDreams}>
@@ -268,18 +347,10 @@ export const MoondayTemplate = ({
             </h3>
             <div className={css.listHeircut}>
               <div className={css.moonCalendar}>
-                {/* <h4 className={css.underTitleMoonday}>Місячний календар</h4> */}
                 <p className={css.textTodayMoonday}>
                   {resDay.haircut.lunarCalendar}
                 </p>
               </div>
-
-              {/* <div className={css.tibetanCalendar}>
-              <h4 className={css.underTitleMoonday}>Тибетський календар</h4>
-              <p className={css.textTodayMoonday}>
-                {resDay.haircut.tibetanCalendar}
-              </p>
-            </div> */}
             </div>
 
             <p className={css.textTodayMoonday}>
@@ -322,9 +393,6 @@ export const MoondayTemplate = ({
               <p className={css.textTodayMoonday}>
                 {resDay.health.vulnerableBodyPart.text}
               </p>
-              {/* <p className={css.textTodayMoonday}>
-              {resDay.health.vulnerableBodyPart.rating.meaning}
-            </p> */}
             </div>
           </div>
         </div>

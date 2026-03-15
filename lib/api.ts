@@ -55,6 +55,47 @@ interface LuckyDayResponse {
 //   return resSearchDays.data.result;
 // };
 
+interface MoondayData {
+  response: MoonDayData;
+}
+
+export const searchMoondayData = async (
+  date: string,
+): Promise<MoonDayData | null> => {
+  try {
+    const res = await axios.get("/moon-day", {
+      params: { date },
+    });
+
+    console.log("RAW AXIOS RESPONSE:", res);
+    console.log("RAW DATA:", res.data);
+
+    if (!res.data) {
+      console.warn("❌ API returned empty body");
+      return null;
+    }
+
+    // Підтримка різних форматів
+    if (res.data.response) return res.data.response;
+    if (res.data.result) return res.data.result;
+    if (res.data.day) return res.data.day;
+    if (res.data.moonDay) return res.data;
+
+    console.warn("❌ Unknown API format:", res.data);
+    return null;
+  } catch (err: any) {
+    console.error("❌ searchMoondayData ERROR:", err);
+    return null;
+  }
+};
+
+// export const searchMoondayData = async (date: string): Promise<MoonDayData> => {
+//   const res = await axios.get<MoondayData>("/moon-day", {
+//     params: { date },
+//   });
+//   return res.data.response;
+// };
+
 export const searchMoonDays = async (
   key: string,
   value: string,

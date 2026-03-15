@@ -74,73 +74,42 @@ export interface NormalizedDay {
   phase?: number;
   phaseName?: string;
 }
-
 export function normalizeDay(
-  raw: any,
+  raw: MoonDayData | MoonDay | any,
   fallbackDate?: string,
 ): NormalizedDay | null {
   if (!raw) return null;
 
-  const actualMoonDay =
-    raw.moonDay ||
-    raw.details?.dayNumber ||
-    raw.dayNumber ||
-    raw.day?.dayNumber ||
-    1;
+  console.log("NORMALIZE", raw);
 
-  // MoonDayData
-  if ("details" in raw && raw.details?.dayNumber) {
+  // Формат MoonDayData (твій основний випадок)
+  if (raw.details && typeof raw.moonDay === "number") {
     return {
       details: raw.details,
-      date: raw.date,
+      date: raw.date ?? fallbackDate ?? "",
       moonDay: raw.moonDay,
       phase: raw.phase,
       phaseName: raw.phaseName,
     };
   }
 
-  // MoonDay
-  if (raw?.dayNumber) {
+  // Формат MoonDay
+  if (raw.dayNumber) {
     return {
       details: raw,
       date: fallbackDate ?? "",
-      moonDay: actualMoonDay,
+      moonDay: raw.dayNumber,
     };
   }
 
-  // dayById: { day: MoonDay }
-  if (raw?.day?.dayNumber) {
+  // Формат { day: MoonDay }
+  if (raw.day?.dayNumber) {
     return {
       details: raw.day,
       date: fallbackDate ?? "",
-      moonDay: actualMoonDay,
+      moonDay: raw.day.dayNumber,
     };
   }
-
-  // // MoonDayData (today)
-  // if ("details" in raw && typeof raw.details === "object") {
-  //   const data = raw as MoonDayData;
-  //   return {
-  //     details: data.details,
-  //     date: data.date,
-  //     moonDay: data.moonDay,
-  //     phase: data.phase,
-  //     phaseName: data.phaseName,
-  //   };
-  // }
-
-  // // MoonDay (byId)
-  // if ("lifeAspects" in raw && "generalMeaning" in raw) {
-  //   return {
-  //     details: raw as MoonDay,
-  //     date: fallbackDate ?? "",
-  //   };
-  // }
-
-  // Випадок 3: інші формати (наприклад, dayById: { day: MoonDay })
-  //   if (raw.day?.details) {
-  //     return { details: raw.day.details };
-  //   }
 
   console.warn("Unknown day format:", raw);
   return null;
