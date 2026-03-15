@@ -28,6 +28,10 @@ export default function MoondayDetailsClient() {
   const raw = getDayById(id); // MoonDay
   const day = normalizeDay(raw);
 
+  if (!day) {
+    return <p>День не знайдено</p>;
+  }
+
   return (
     <MoondayTemplate
       day={day}
