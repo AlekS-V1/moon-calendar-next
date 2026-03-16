@@ -3,6 +3,7 @@ import { Geist, Raleway, Comfortaa } from "next/font/google";
 import "./globals.css";
 import Header from "./components/Header/Header";
 import TanStackProvider from "./components/TanStackProvider/TanStackProvider";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -45,6 +46,7 @@ export default function RootLayout({
             </p>
           </footer>
         </TanStackProvider>
+        <SpeedInsights />
       </body>
     </html>
   );
