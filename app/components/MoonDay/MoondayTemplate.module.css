@@ -90,6 +90,7 @@
   flex-direction: row;
   justify-content: space-between;
   margin-bottom: 16px;
+  column-gap: 16px;
 }
 /* 
 .containerAspekt {
