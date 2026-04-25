@@ -26,7 +26,7 @@ const MoonToday = () => {
     <div className={css.containerToday}>
       <div className={css.moonHeader}>
         <div className={css.homeHeader}>
-          <div>
+          <div className={css.textHomeHeader}>
             {/* <h1 className={css.titleHead}>Під світлом Місяця</h1> */}
             <h2 className={css.underTitleMoonToday}>Сьогодні:</h2>
             <h2 className={css.underTitleMoonToday}>

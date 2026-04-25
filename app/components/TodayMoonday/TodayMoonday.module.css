@@ -1,9 +1,10 @@
 .containerToday {
+  font-size: 24px;
   display: flex;
   flex-direction: column;
   color: azure;
   text-shadow: 0 0 4px black;
-  padding: 32px 60px;
+  padding: 32px 18px;
   border: solid 2px white;
   margin: 16px 0;
   border-radius: 50px;
@@ -59,7 +60,7 @@
   margin-bottom: 12px;
 }
 .textTodayMoonday {
-  margin-bottom: 16px;
+  margin-bottom: 24px;
   letter-spacing: 1px;
   line-height: 140%;
   text-align: justify;
@@ -75,6 +76,7 @@
 }
 .containerLifeAspect {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   gap: 48px;
 }
@@ -108,8 +110,9 @@
 
 .listHealth {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: space-between;
+  gap: 18px;
 }
 
 .generalHealth {
@@ -131,7 +134,7 @@
 
 .containerAspect {
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
 }
 
 .containerFilters {
@@ -346,4 +349,39 @@
 .textAspect,
 .levelAspect {
   padding: 16px;
+}
+
+@media (min-width: 768px) {
+  .containerLifeAspect {
+    display: flex;
+    flex-direction: row;
+  }
+  .listHealth {
+    display: flex;
+    flex-direction: row;
+  }
+  .containerAspect {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1200px) {
+  .containerToday {
+    padding: 32px 60px;
+  }
+  /* .homeHeader {
+  display: flex;
+  flex-direction: column;
+} */
+
+  .itemBlockSimbol {
+    width: auto;
+  }
+  .listBlockSimbol {
+    display: flex;
+    flex-wrap: nowrap;
+
+    align-items: normal;
+  }
 }
