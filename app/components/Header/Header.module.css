@@ -1,13 +1,13 @@
 /* components/Header/Header.module.css */
 .header {
-  width: 1200px;
+  width: 460px;
   margin: 0 auto;
-  background-image: url('/image/fonHeader120085.webp');
+  background-image: url("/image/fonHeader120085.webp");
   border-radius: 10px;
-  background-size: cov;
+  background-size: cover;
   /* filter:  drop-shadow(0 0 28px #093d71)
     opacity(0.85); */
-  box-shadow: inset 0px -6px 12px 3px #001027;  
+  box-shadow: inset 0px -6px 12px 3px #001027;
 }
 .containerHeader {
   display: flex;
@@ -19,6 +19,10 @@
   /* background-color: #001027; */
   color: azure;
   /* border-block-end: 1px solid #ccc; */
+}
+
+.logo {
+  font-size: 32px;
 }
 
 .menuHeader {
@@ -51,4 +55,90 @@
   background: rgba(255, 255, 255, 0.659);
   border-radius: 8px;
   text-shadow: 0 0 #0141a5;
+}
+
+.desktopNav {
+  display: none;
+}
+/* Мобільне меню (сховане) */
+.mobileNav {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100vh;
+  width: 260px;
+  background: white;
+  padding: 40px 20px;
+  transform: translateX(100%);
+  transition: transform 0.35s ease;
+  z-index: 1000;
+}
+
+/* Показати меню */
+.mobileNav.show {
+  transform: translateX(0);
+}
+
+/* Бургер кнопка */
+.burger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  z-index: 1100;
+}
+
+.burger span {
+  width: 28px;
+  height: 3px;
+  background: black;
+  transition: 0.3s;
+}
+
+/* Анімація бургер → X */
+.burger.open span:nth-child(1) {
+  transform: rotate(45deg) translateY(8px);
+}
+.burger.open span:nth-child(2) {
+  opacity: 0;
+}
+.burger.open span:nth-child(3) {
+  transform: rotate(-45deg) translateY(-8px);
+}
+
+/* Затемнення фону */
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 900;
+}
+
+.overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (min-width: 768px) {
+  .header {
+    width: 768px;
+  }
+}
+
+/* Мобільна версія */
+@media (min-width: 1200px) {
+  .header {
+    width: 1200px;
+  }
+  .burger {
+    display: none;
+  }
+  .desktopNav {
+    display: flex;
+  }
 }

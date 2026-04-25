@@ -1,12 +1,11 @@
-.dayStyle {    
-    padding: 4px;
-    font-size: 16px;
+.dayStyle {
+  padding: 5px;
+  font-size: 22px;
 }
 
-
 .moonIcon {
-  width: 28px;
-  height: 28px;
+  width: 36px;
+  height: 36px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -25,18 +24,17 @@
 /* Hover — легкий 3D‑нахил без сильного розмиття */
 .activeDay {
   transform: scale(1.08);
-  box-shadow: 
-    0 0 10px rgba(255, 255, 255, 0.7), 
+  box-shadow:
+    0 0 10px rgba(255, 255, 255, 0.7),
     inset 0 0 5px 1px rgba(255, 255, 255, 0.3);
-  
-} 
+}
 
 .moonIcon:hover {
-
   transform: scale(1.12);
-  box-shadow: 0 0 8px rgba(255, 255, 255, 0.8),
+  box-shadow:
+    0 0 8px rgba(255, 255, 255, 0.8),
     inset 0 0 4px 1px rgba(255, 255, 255, 0.2);
-    font-size: 18px;
+  font-size: 14px;
 
   /* transform:
     perspective(600px)
@@ -50,12 +48,12 @@
 }
 
 /* М’яка інерція при поверненні */
-.moonIcon:active, 
+.moonIcon:active,
 .moonIcon:not(:hover) {
   transition:
-    transform 0.75s cubic-bezier(.16, .84, .44, 1),
-    opacity 0.55s ease,
-    /* filter 0.75s ease; */
+    transform 0.75s cubic-bezier(0.16, 0.84, 0.44, 1),
+    opacity 0.55s ease;
+  /* filter 0.75s ease; */
 }
 
 /* Active — легке стискання */
@@ -69,3 +67,35 @@
   filter:
     drop-shadow(0 0 8px rgba(255, 255, 255, 0.3));
 } */
+
+@media (min-width: 768px) {
+  .dayStyle {
+    padding: 3px;
+    font-size: 12px;
+  }
+
+  .moonIcon {
+    width: 18px;
+    height: 18px;
+  }
+
+  .moonIcon:hover {
+    font-size: 12px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .dayStyle {
+    padding: 4px;
+    font-size: 16px;
+  }
+
+  .moonIcon {
+    width: 28px;
+    height: 28px;
+  }
+
+  .moonIcon:hover {
+    font-size: 18px;
+  }
+}

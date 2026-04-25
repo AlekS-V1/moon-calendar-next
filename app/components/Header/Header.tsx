@@ -1,14 +1,19 @@
 // components/Header/Header.tsx
+"use client";
 
 import Link from "next/link";
 import css from "./Header.module.css";
+import { useState } from "react";
 
 const Header = () => {
+  const [open, setOpen] = useState(false);
   return (
     <header className={css.header}>
       <div className={css.containerHeader}>
-        <h2>Під світлом Місяця</h2>
-        <nav>
+        <h2 className={css.logo}>Під світлом Місяця</h2>
+
+        {/* Десктоп меню */}
+        <nav className={css.desktopNav}>
           <ul className={css.menuHeader}>
             <li className={css.itemMenu}>
               <Link href="/" aria-label="Home" className={css.linkMenu}>
@@ -45,6 +50,41 @@ const Header = () => {
             <li className={css.itemMenu}>
               <Link href="/about" aria-label="About" className={css.linkMenu}>
                 Для чого
+              </Link>
+            </li>
+          </ul>
+        </nav>
+
+        {/* Бургер */}
+        <button
+          className={`${css.burger} ${open ? css.open : ""}`}
+          onClick={() => setOpen(!open)}
+          aria-label="Menu"
+        >
+          <span />
+          <span />
+          <span />
+        </button>
+
+        {/* Затемнення фону */}
+        <div className={`${css.overlay} ${open ? css.show : ""}`} />
+
+        {/* Мобільне меню */}
+        <nav className={`${css.mobileNav} ${open ? css.show : ""}`}>
+          <ul>
+            <li>
+              <Link href="/" onClick={() => setOpen(false)}>
+                Головна
+              </Link>
+            </li>
+            <li>
+              <Link href="/days" onClick={() => setOpen(false)}>
+                Більше
+              </Link>
+            </li>
+            <li>
+              <Link href="/luckyday" onClick={() => setOpen(false)}>
+                Щасливий день
               </Link>
             </li>
           </ul>

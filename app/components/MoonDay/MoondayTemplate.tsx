@@ -159,7 +159,7 @@ export const MoondayTemplate = ({
       <div className={css.containerToday}>
         <div className={css.moonHeader}>
           <div className={css.homeHeader}>
-            <div>
+            <div className={css.textHomeHeader}>
               {day.date && (
                 <h2 className={css.underTitleMoonToday}>
                   {new Date(day.date).toLocaleDateString("uk-UA", {

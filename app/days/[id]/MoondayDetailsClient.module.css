@@ -1,6 +1,18 @@
 .sectionMoondayDetails {
-  width: 1200px;
+  width: 460px;
   margin: 0 auto;
+}
+
+@media (min-width: 768px) {
+  .sectionMoondayDetails {
+    width: 768px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .sectionMoondayDetails {
+    width: 1200px;
+  }
 }
 /* .containerToday {
     display: flex;
