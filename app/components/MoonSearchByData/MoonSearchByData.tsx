@@ -3,6 +3,7 @@
 import { useMoonStore } from "@/store/calendarStore";
 import { redirect } from "next/navigation";
 import { useState } from "react";
+import css from "./MoonSearchByData.module.css";
 
 export const MoonSearchByData = () => {
   const [inputValue, setInputValue] = useState("");
@@ -22,15 +23,19 @@ export const MoonSearchByData = () => {
   // console.log("store A:", useMoonStore.getState());
 
   return (
-    <div style={{ display: "flex", gap: "10px", marginBottom: "20px" }}>
+    <div className={css.searchContainer}>
       <input
         type="date"
         value={inputValue}
         onChange={(e) => setInputValue(e.target.value)}
-        className="border p-2 rounded"
+        className={css.dateInput}
       />
 
-      <button onClick={handleSearch} disabled={!inputValue}>
+      <button
+        className={css.searchButton}
+        onClick={handleSearch}
+        disabled={!inputValue}
+      >
         Пошук
       </button>
     </div>

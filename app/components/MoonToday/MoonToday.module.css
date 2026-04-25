@@ -50,7 +50,6 @@
 }
 
 .itemBlockSimbol {
-  max-width: 250px;
   width: 100%;
   box-shadow: 1px 3px 8px 4px rgba(238, 239, 247, 0.459);
   border-radius: 10px;
@@ -160,14 +159,20 @@
 
 @media (min-width: 1200px) {
   .containerToday {
+    font-size: 16px;
     padding: 32px 60px;
   }
   /* .homeHeader {
   display: flex;
   flex-direction: column;
-} */
+  } */
+
+  .textMoonToday {
+    font-size: 16px;
+  }
 
   .itemBlockSimbol {
+    max-width: 250px;
     width: auto;
   }
   .listBlockSimbol {

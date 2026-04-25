@@ -1,0 +1,13 @@
+.searchContainer {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 20px;
+}
+
+.dateInput {
+  padding: 5px 10px;
+}
+.searchButton {
+  font-size: 18px;
+  padding: 5px 10px;
+}
