@@ -17,7 +17,7 @@ const Header = () => {
           <ul className={css.menuHeader}>
             <li className={css.itemMenu}>
               <Link href="/" aria-label="Home" className={css.linkMenu}>
-                Головна
+                Сьогодні
               </Link>
             </li>
             <li className={css.itemMenu}>
@@ -61,29 +61,44 @@ const Header = () => {
           onClick={() => setOpen(!open)}
           aria-label="Menu"
         >
-          <span />
-          <span />
-          <span />
+          <span className={css.burgerButton} />
+          <span className={css.burgerButton} />
+          <span className={css.burgerButton} />
         </button>
 
         {/* Затемнення фону */}
-        <div className={`${css.overlay} ${open ? css.show : ""}`} />
+        <div
+          onClick={() => setOpen(false)}
+          className={`${css.overlay} ${open ? css.show : ""}`}
+        />
 
         {/* Мобільне меню */}
         <nav className={`${css.mobileNav} ${open ? css.show : ""}`}>
-          <ul>
-            <li>
-              <Link href="/" onClick={() => setOpen(false)}>
-                Головна
+          <ul className={css.menuHeaderMobile}>
+            <li className={css.itemMenuMobile}>
+              <Link
+                className={css.linkMenu}
+                href="/"
+                onClick={() => setOpen(false)}
+              >
+                Сьогодні
               </Link>
             </li>
-            <li>
-              <Link href="/days" onClick={() => setOpen(false)}>
+            <li className={css.itemMenuMobile}>
+              <Link
+                className={css.linkMenu}
+                href="/days"
+                onClick={() => setOpen(false)}
+              >
                 Більше
               </Link>
             </li>
-            <li>
-              <Link href="/luckyday" onClick={() => setOpen(false)}>
+            <li className={css.itemMenuMobile}>
+              <Link
+                className={css.linkMenu}
+                href="/luckyday"
+                onClick={() => setOpen(false)}
+              >
                 Щасливий день
               </Link>
             </li>
