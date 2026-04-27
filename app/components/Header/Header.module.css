@@ -23,6 +23,8 @@
 
 .logo {
   font-size: 32px;
+  color: azure;
+  text-shadow: 0px 0px 9px black;
 }
 
 .menuHeader {

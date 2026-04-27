@@ -10,7 +10,9 @@ const Header = () => {
   return (
     <header className={css.header}>
       <div className={css.containerHeader}>
-        <h2 className={css.logo}>Під світлом Місяця</h2>
+        <Link href="/" aria-label="Home">
+          <h2 className={css.logo}>Під світлом Місяця</h2>
+        </Link>
 
         {/* Десктоп меню */}
         <nav className={css.desktopNav}>
