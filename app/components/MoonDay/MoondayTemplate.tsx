@@ -259,12 +259,14 @@ export const MoondayTemplate = ({
 
         <div className={css.blockSign}>
           <div className={css.itemBlockSign}>
-            <h4 className={css.underTitleMoonToday}>Сприятливі:</h4>
+            <h4 className={`${css.underTitleMoonToday} ${css.goodSign}`}>
+              Сприятливі:
+            </h4>
             <ul>
               {resDay.signs.good.map((g) => (
                 <li key={g}>
                   <p className={`${css.textMoonToday} ${css.alignJustify}`}>
-                    + {g}
+                    <span className={css.goodSign}>+</span> {g}
                   </p>
                 </li>
               ))}
@@ -272,12 +274,14 @@ export const MoondayTemplate = ({
           </div>
 
           <div className={css.itemBlockSign}>
-            <h4 className={css.underTitleMoonToday}>Несприятливі:</h4>
+            <h4 className={`${css.underTitleMoonToday} ${css.badSign}`}>
+              Несприятливі:
+            </h4>
             <ul>
               {resDay.signs.bad.map((b) => (
                 <li key={b}>
                   <p className={`${css.textMoonToday} ${css.alignJustify}`}>
-                    - {b}
+                    <span className={css.badSign}>-</span> {b}
                   </p>
                 </li>
               ))}
@@ -405,7 +409,7 @@ export const MoondayTemplate = ({
               <div className={css.filterButtons}></div>
 
               <ul className={css.containerListAspect}>
-                <li className={css.accordionGroup}>
+                <li className={css.accordionGroupButtonShow}>
                   <button
                     className={css.accordionHeader}
                     onClick={showRemoveAll ? clearAllAspects : selectAllAspects}

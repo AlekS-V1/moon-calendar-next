@@ -75,6 +75,15 @@
   padding: 8px 12px;
 }
 
+.goodSign {
+  color: #b8f9b8;
+  text-shadow: 0 0 18px #000000;
+}
+.badSign {
+  color: #ffb1b1;
+  text-shadow: 0 0 18px #000000;
+}
+
 .contImageMoonPhase {
   padding: 20px;
   margin: 0 auto;
@@ -109,10 +118,13 @@
   flex-direction: column;
 } */
 
-/* .containerListAspect {
-  display: flex;
-  flex-direction: row;
-} */
+.containerListAspect {
+  margin-bottom: 24px;
+  padding-right: 16px;
+  list-style: none;
+  border-right: 1px solid #dee2fd2e;
+  border-radius: 10px;
+}
 
 /* .containerHealth {
   display: flex;
@@ -278,7 +290,7 @@
   color: #cfd8ff;
   padding: 8px 14px;
   margin: 8px 0;
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 400;
 }
 
@@ -292,8 +304,9 @@
   border-radius: 10px;
 }
 
-/* .accordionGroup {
-} */
+.accordionGroupButtonShow {
+  margin-bottom: 30px;
+}
 
 .accordionGroupItem {
   display: flex;
@@ -309,7 +322,7 @@
   border: none;
   padding: 10px 8px;
   font-family: var(--font-comfortaa);
-  font-size: 16px;
+  font-size: 24px;
   font-weight: 500;
   display: flex;
   justify-content: space-between;
@@ -365,7 +378,7 @@
 }
 
 .accordionHeader.active {
-  font-size: 17px;
+  font-size: 26px;
   font-weight: 700;
   color: #cfd8ff;
   background-color: #1a3259;
@@ -413,7 +426,7 @@
   cursor: pointer;
   transition: all 0.2s ease;
   color: #8d8c8c;
-  font-size: 15px;
+  font-size: 22px;
   font-weight: 700;
   user-select: none;
   text-shadow: 0 0 black;
@@ -469,7 +482,7 @@
   background-color: #4a6cf730;
   border-radius: 16px;
   padding: 12px 0;
-  font-size: 16px;
+  font-size: 24px;
   text-align: center;
 }
 .textAspect,
@@ -555,6 +568,27 @@
   }
   .containerHaircut {
     max-width: 600px;
+  }
+  .buttonShowAll {
+    font-size: 16px;
+  }
+  .accordionHeader {
+    font-size: 16px;
+  }
+  .accordionHeader.active {
+    font-size: 17px;
+  }
+  .checkboxItem span {
+    font-size: 15px;
+  }
+  .containerListAspect {
+    margin-bottom: auto;
+  }
+  .titleAspect {
+    font-size: 16px;
+  }
+  .accordionGroupButtonShow {
+    margin-bottom: auto;
   }
   .selectedAspects {
     font-size: 16px;

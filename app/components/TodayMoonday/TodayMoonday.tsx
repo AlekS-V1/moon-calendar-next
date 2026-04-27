@@ -242,7 +242,7 @@ const TodayMoonday = () => {
             <div className={css.filterButtons}></div>
 
             <ul className={css.containerListAspect}>
-              <li className={css.accordionGroup}>
+              <li className={css.accordionGroupButtonShow}>
                 <button
                   className={css.accordionHeader}
                   onClick={showRemoveAll ? clearAllAspects : selectAllAspects}

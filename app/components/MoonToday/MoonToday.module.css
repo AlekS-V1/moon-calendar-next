@@ -72,6 +72,14 @@
   padding: 8px 12px;
 }
 
+.goodSign {
+  color: #b8f9b8;
+  text-shadow: 0 0 18px #000;
+}
+.badSign {
+  color: #ffb1b1;
+  text-shadow: 0 0 18px #000;
+}
 .contImageMoonPhase {
   padding: 20px;
   margin: 0 auto;

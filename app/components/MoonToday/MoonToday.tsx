@@ -114,12 +114,14 @@ const MoonToday = () => {
 
       <div className={css.blockSign}>
         <div className={css.itemBlockSign}>
-          <h4 className={css.underTitleMoonToday}>Сприятливі:</h4>
+          <h4 className={`${css.underTitleMoonToday} ${css.goodSign}`}>
+            Сприятливі:
+          </h4>
           <ul>
             {resDay.signs.good.map((g) => (
               <li key={g}>
                 <p className={`${css.textMoonToday} ${css.alignJustify}`}>
-                  + {g}
+                  <span className={css.goodSign}>+</span> {g}
                 </p>
               </li>
             ))}
@@ -127,12 +129,14 @@ const MoonToday = () => {
         </div>
 
         <div className={css.itemBlockSign}>
-          <h4 className={css.underTitleMoonToday}>Несприятливі:</h4>
+          <h4 className={`${css.underTitleMoonToday} ${css.badSign}`}>
+            Несприятливі:
+          </h4>
           <ul>
             {resDay.signs.bad.map((b) => (
               <li key={b}>
                 <p className={`${css.textMoonToday} ${css.alignJustify}`}>
-                  - {b}
+                  <span className={css.badSign}>-</span> {b}
                 </p>
               </li>
             ))}
