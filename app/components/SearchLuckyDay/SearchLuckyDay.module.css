@@ -4,7 +4,21 @@
   padding: 0 10px;
   color: azure;
 }
-
+.titleSection {
+  font-size: 28px;
+  margin: 16px 0;
+  text-align: center;
+}
+.containerSearchDays {
+  display: flex;
+  flex-wrap: wrap;
+}
+.containerFilter {
+  display: flex;
+  flex-direction: column;
+  flex-shrink: 1;
+  width: auto;
+}
 .buttons {
   display: flex;
   flex-wrap: wrap;
@@ -13,8 +27,8 @@
 }
 
 .button {
+  font-size: 20px;
   padding: 10px 16px;
-  margin: 6px;
   border-radius: 8px;
   border: 1px solid #ccc;
   cursor: pointer;
@@ -22,27 +36,187 @@
   color: #2f3542;
   transition: 0.2s;
 }
-
-.buttonActive {
-  background: #4b7bec;
-  color: white;
-  font-weight: bold;
+.button:hover {
+  transform: scale(1.04);
+}
+.ratingButtons {
+  margin: 16px 0;
+}
+.buttonPositive {
+  border-top-left-radius: 14px;
+  border-bottom-left-radius: 14px;
+  font-size: 20px;
+  padding: 5px;
+}
+.buttonVeryPositive {
+  border-top-right-radius: 14px;
+  border-bottom-right-radius: 14px;
+  font-size: 20px;
+  padding: 5px;
 }
 
+.buttonPositiveActive {
+  background: #4b7bec;
+  color: white;
+
+  font-weight: bold;
+}
+.buttonPositiveDeactive {
+  padding: 5px;
+  background: white;
+  cursor: pointer;
+}
+.buttonPositiveDeactive:hover {
+  transform: scale(1.1);
+}
+/* .containerSerachResult {
+} */
+.headSearchResult {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin-bottom: 24px;
+}
 .resetBtn {
-  margin-top: 10px;
+  font-size: 22px;
+  margin-top: 16px;
   padding: 8px 14px;
   border-radius: 6px;
   border: 1px solid #aaa;
   cursor: pointer;
 }
 
+.resetBtn:hover {
+  transform: scale(1.04);
+}
+
+.selectedAspect {
+  font-size: 28px;
+  margin: 36px 0;
+}
+
 .listItem {
-  margin-bottom: 12px;
+  font-size: 24px;
+  margin-bottom: 18px;
   padding: 10px;
   border-bottom: 1px solid #ddd;
 }
 
+.containerMoon {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px;
+}
+
 .imageMoonPhase {
+  width: 40px;
+  height: 40px;
   padding-right: 12px;
+}
+/* .titleMoonday {
+  margin-bottom: 8px;
+} */
+
+.containerDescription {
+  margin-bottom: 12px;
+}
+
+.textDate {
+  margin-bottom: 16px;
+}
+.activeValueSearch {
+  font-size: 16px;
+}
+.descriptionRaiting {
+  font-size: 17px;
+}
+
+@media (min-width: 768px) {
+  .containerSearchDays {
+    display: flex;
+    justify-content: space-evenly;
+  }
+  .containerFilter {
+    width: 340px;
+    display: flex;
+    flex-shrink: 0;
+  }
+  .headSearchResult {
+    flex-direction: row-reverse;
+    justify-content: space-between;
+  }
+  .containerSearchDays {
+    display: flex;
+    flex-wrap: nowrap;
+    align-items: baseline;
+  }
+  .buttons {
+    display: flex;
+    justify-content: flex-start;
+  }
+  .button {
+    font-size: 18px;
+    width: 100%;
+    max-width: 300px;
+  }
+  .buttonPositiveActive {
+    font-size: 18px;
+  }
+  .resetBtn {
+    font-size: 20px;
+    margin-top: 0;
+  }
+  .containerHeaderSelectedAspect {
+    color: #efeef5;
+    border-width: 2px;
+    border-style: outset;
+    border-color: white;
+    padding: 10px;
+    margin-right: 10px;
+    width: 100%;
+  }
+  .selectedAspect {
+    margin: 0;
+    font-size: 24px;
+    text-align: center;
+  }
+  .listItem {
+    font-size: 22px;
+  }
+  .activeValueSearch {
+    font-size: 14px;
+  }
+  .descriptionRaiting {
+    font-size: 14px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .containerFilter {
+    width: 400px;
+    display: flex;
+    align-items: center;
+  }
+  .buttons {
+    display: flex;
+  }
+  .button {
+    font-size: 16px;
+    max-width: 180px;
+  }
+  .buttonPositiveActive {
+    font-size: 17px;
+  }
+  .buttonPositiveDeactive {
+    font-size: 16px;
+  }
+  .resetBtn {
+    font-size: 18px;
+  }
+  .selectedAspect {
+    font-size: 18px;
+  }
+  .listItem {
+    font-size: 16px;
+  }
 }

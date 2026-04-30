@@ -13,6 +13,7 @@ import css from "./SearchLuckyDay.module.css";
 import { RatingGroup } from "@/lib/ratingGroups";
 import { moonImages32 } from "@/lib/moonPhase30";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import { useRouter } from "next/navigation";
 
 const SearchLuckyDay = () => {
   const {
@@ -28,11 +29,28 @@ const SearchLuckyDay = () => {
 
   const [selectedKey, setSelectedKey] = useState<LuckyKeys | "">("");
   const [selectedRating, setSelectedRating] = useState<RatingGroup>("positive");
-
+  const router = useRouter();
   const handleSearch = (key: LuckyKeys) => {
     setSelectedKey(key);
     resetRetry();
     search5Days(key, selectedRating);
+    setTimeout(() => {
+      const answer = document.getElementById("answerSearch");
+      // const wait = document.getElementById("waitFatch");
+      // const notFound = document.getElementById("notFound");
+      if (answer) {
+        // Оновлюємо URL для зручності користувача (необов'язково)
+        router.push("#answerSearch");
+
+        // Виконуємо прокрутку
+        answer.scrollIntoView({ behavior: "smooth", block: "end" });
+        // } else {
+        //   router.push("#notFound");
+        //   if (notFound) {
+        //     notFound.scrollIntoView({ behavior: "smooth", block: "end" });
+        //   }
+      }
+    }, 850);
   };
 
   const handleReset = () => {
@@ -62,101 +80,143 @@ const SearchLuckyDay = () => {
 
   return (
     <div className={css.container}>
-      <h4>Пошук сприятливих днів</h4>
+      <h2 className={css.titleSection}>
+        ТОП-5 днів: пошук найсприятливіших дат
+      </h2>
 
-      {/* Кнопки ступенів сприятливості — завжди видимі */}
-      <div className={css.ratingButtons}>
-        <button
-          className={selectedRating === "positive" ? css.buttonActive : ""}
-          onClick={() => {
-            setSelectedRating("positive");
-            setSelectedKey("");
-            resetSearch();
-          }}
-        >
-          Сприятливо
-        </button>
+      <div className={css.containerSearchDays}>
+        <div className={css.containerFilter}>
+          {/* Кнопки ступенів сприятливості — завжди видимі */}
+          <div className={css.ratingButtons}>
+            <button
+              className={`${css.buttonPositive} ${
+                selectedRating === "positive"
+                  ? css.buttonPositiveActive
+                  : css.buttonPositiveDeactive
+              }`}
+              onClick={() => {
+                setSelectedRating("positive");
+                setSelectedKey("");
+                resetSearch();
+              }}
+            >
+              Сприятливо
+            </button>
 
-        <button
-          className={selectedRating === "veryPositive" ? css.buttonActive : ""}
-          onClick={() => {
-            setSelectedRating("veryPositive");
-            setSelectedKey("");
-            resetSearch();
-          }}
-        >
-          Дуже сприятливо
-        </button>
-      </div>
+            <button
+              className={`${css.buttonVeryPositive} ${
+                selectedRating === "veryPositive"
+                  ? css.buttonPositiveActive
+                  : css.buttonPositiveDeactive
+              }`}
+              onClick={() => {
+                setSelectedRating("veryPositive");
+                setSelectedKey("");
+                resetSearch();
+              }}
+            >
+              Дуже сприятливо
+            </button>
+          </div>
 
-      <div className={css.buttons}>
-        {allowedAspects.map((key) => (
-          <button
-            key={key}
-            className={`${css.button} ${
-              selectedKey === key ? css.buttonActive : ""
-            }`}
-            onClick={() => handleSearch(key)}
-          >
-            {aspectLabels[key]}
-          </button>
-        ))}
-      </div>
-
-      {/* Сброс */}
-      {searchResults.length > 0 && !isSearching && (
-        <button className={css.resetBtn} onClick={handleReset}>
-          Сброс
-        </button>
-      )}
-      {/* Результати */}
-      <h4>{(selectedKey && aspectLabels[selectedKey]) || "Не вибрано"}</h4>
-
-      {isSearching && (
-        <div>
-          <p>Зачекай хвилинку,сервер працює з затримкою...</p>
-          <br />
-          <img src="./image/sleepServer.png" alt="sleep server" />
+          <div className={css.buttons}>
+            {allowedAspects.map((key) => (
+              <button
+                key={key}
+                className={`${css.button} ${
+                  selectedKey === key ? css.buttonActive : ""
+                }`}
+                onClick={() => handleSearch(key)}
+              >
+                {aspectLabels[key]}
+              </button>
+            ))}
+          </div>
         </div>
-      )}
-      {!isSearching && selectedKey && searchResults.length === 0 && (
-        <div className={css.notFound}>Нічого не знайдено</div>
-      )}
+        <div className={css.containerSerachResult}>
+          <div className={css.headSearchResult}>
+            {/* Сброс */}
+            {searchResults.length > 0 && !isSearching && (
+              <button className={css.resetBtn} onClick={handleReset}>
+                Сброс
+              </button>
+            )}
+            {/* Результати */}
+            <div className={css.containerHeaderSelectedAspect}>
+              <h3 className={css.selectedAspect}>
+                {(selectedKey && aspectLabels[selectedKey]) || "Не вибрано"}
+              </h3>
+            </div>
+          </div>
 
-      <ul>
-        {sortedSearchResults.map((item) => (
-          <li key={item.date} className={css.listItem}>
-            <img
-              className={css.imageMoonPhase}
-              src={moonImages32[item.moonDay]}
-              alt={`Moon phase day ${item.moonDay}`}
-              width={16}
-              height={16}
-            />
-            <strong>{item.moonDay}-й місячний день</strong>
-            <br />
-            {new Date(item.date).toLocaleDateString("uk-UA", {
-              weekday: "long",
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-            <br />
-            {selectedKey && (
-              <>
-                {aspectMap[selectedKey]?.getDescription(item) || "Немає даних"}
-                <br />
-              </>
-            )}
-            {activeValue && (
-              <h4>
-                Знайдено за значенням: <strong>{activeValue}</strong>
-              </h4>
-            )}
-            {/* {selectedKey && aspectMap[selectedKey]?.get(item)} */}
-          </li>
-        ))}
-      </ul>
+          {isSearching && (
+            <div id="waitFatch">
+              <p>Зачекай хвилинку,сервер працює з затримкою...</p>
+              <br />
+              <img src="./image/sleepServer.png" alt="sleep server" />
+            </div>
+          )}
+          {!isSearching && selectedKey && searchResults.length === 0 && (
+            <div id="notFound" className={css.notFound}>
+              Нічого не знайдено
+            </div>
+          )}
+
+          <ul>
+            {sortedSearchResults.map((item) => (
+              <li key={item.date} className={css.listItem}>
+                <div className={css.containerMoon}>
+                  <img
+                    className={css.imageMoonPhase}
+                    src={moonImages32[item.moonDay]}
+                    alt={`Moon phase day ${item.phaseName}`}
+                    // width={20}
+                    // height={20}
+                  />
+                  <h4 className={css.titleMoonday}>
+                    {item.moonDay}-й місячний день
+                  </h4>
+                </div>
+                <div className={css.containerDescription}>
+                  <p className={css.textDate}>
+                    {(() => {
+                      const s = new Date(item.date).toLocaleDateString(
+                        "uk-UA",
+                        {
+                          weekday: "long",
+                          day: "numeric",
+                          month: "long",
+                          year: "numeric",
+                        },
+                      );
+                      return s[0].toUpperCase() + s.slice(1);
+                    })()}
+                  </p>
+                  <p className={css.textDescription}>
+                    {selectedKey && (
+                      <>
+                        {aspectMap[selectedKey]?.getDescription(item) ||
+                          "Немає даних"}
+                        <br />
+                      </>
+                    )}
+                  </p>
+                </div>
+                {activeValue && (
+                  <h4 className={css.activeValueSearch}>
+                    Знайдено за значенням:{" "}
+                    <strong className={css.descriptionRaiting}>
+                      {activeValue}
+                    </strong>
+                  </h4>
+                )}
+                {/* {selectedKey && aspectMap[selectedKey]?.get(item)} */}
+              </li>
+            ))}
+          </ul>
+          <div id="answerSearch"></div>
+        </div>
+      </div>
     </div>
   );
 };
