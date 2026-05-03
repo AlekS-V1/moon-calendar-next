@@ -13,6 +13,7 @@ import {
   type NormalizedDay,
 } from "@/type/type";
 import { create } from "zustand";
+import { persist } from "zustand/middleware";
 
 interface StoreState {
   dayDate: NormalizedDay | null;
@@ -24,6 +25,7 @@ interface StoreState {
   searchResults: MoonDayData[];
   isSearching: boolean;
   activeValue: string | null;
+  selectedKey: LuckyKeys | "";
 
   error: null | { status: number; message: string };
   retryCount: number;
@@ -40,6 +42,7 @@ interface StoreState {
   getDayById: (id: string) => MoonDay | undefined;
 
   search5Days: (key: LuckyKeys, rating: RatingGroup) => Promise<void>;
+  setSelectedKey: (key: LuckyKeys | "") => void;
 
   resetSearch: () => void;
 
@@ -50,238 +53,260 @@ interface StoreState {
   filteredAspects: () => any[];
 }
 
-export const useMoonStore = create<StoreState>((set, get) => ({
-  dayDate: null,
-  days: [],
-  total: 0,
-  today: null,
-  isLoaded: false,
-  cache: {},
+export const useMoonStore = create<StoreState>()(
+  persist(
+    (set, get) => ({
+      dayDate: null,
+      days: [],
+      total: 0,
+      today: null,
+      isLoaded: false,
+      cache: {},
 
-  searchResults: [],
-  isSearching: false,
-  activeValue: null,
-  selectedAspectIds: [],
-
-  error: null,
-  retryCount: 0,
-  maxRetries: 3,
-  setError: (error) => set({ error }),
-  clearError: () => set({ error: null }),
-  incrementRetry: () => set((s) => ({ retryCount: s.retryCount + 1 })),
-  resetRetry: () => set({ retryCount: 0 }),
-
-  toggleAspect: (id: string) => {
-    const { selectedAspectIds } = get();
-    const exists = selectedAspectIds.includes(id);
-    set({
-      selectedAspectIds: exists
-        ? selectedAspectIds.filter((x) => x !== id)
-        : [...selectedAspectIds, id],
-    });
-  },
-
-  selectAllAspects: () => {
-    const { today } = get();
-    if (!today) return;
-    const allKeys = Object.keys(today.details.lifeAspects);
-    set({ selectedAspectIds: allKeys });
-  },
-  clearAllAspects: () => {
-    set({ selectedAspectIds: [] });
-  },
-  filteredAspects: () => {
-    const { today, selectedAspectIds } = get();
-    if (!today) return [];
-
-    if (selectedAspectIds.length === 0) return [];
-
-    return Object.entries(today.details.lifeAspects)
-      .filter(([key]) => selectedAspectIds.includes(key))
-      .map(([key, aspect]) => ({ key, aspect }));
-  },
-
-  fetchDays: async () => {
-    if (get().isLoaded) return;
-
-    const data = await getListDays();
-    set({ days: data.moonDay, total: data.total, isLoaded: true });
-  },
-
-  fetchToday: async () => {
-    if (get().today) return;
-    const data = await getTodayMoonday();
-    set({ today: data });
-  },
-
-  fetchDayByDate: async (date: string) => {
-    console.log("FETCH CALLED", date);
-
-    set({ isSearching: true }); // 🔥 ЛОАДЕР ПОЧАВСЯ
-
-    try {
-      const { cache } = get();
-
-      if (cache[date]) {
-        console.log("FROM CACHE", cache[date]);
-        set({
-          dayDate: cache[date],
-          isLoaded: false,
-          isSearching: false, // 🔥 ЛОАДЕР ЗАВЕРШЕНО
-        });
-        return;
-      }
-
-      set({ isLoaded: true });
-
-      const dayResp = await searchMoondayData(date);
-      console.log("RAW API RESPONSE:", dayResp);
-
-      if (!dayResp) {
-        console.warn("❌ API returned EMPTY or undefined");
-        set({ dayDate: null, isLoaded: false, isSearching: false });
-        return;
-      }
-
-      const normalized = normalizeDay(dayResp, date);
-      console.log("NORMALIZED:", normalized);
-
-      if (!normalized) {
-        console.warn("❌ normalizeDay returned NULL");
-        set({ dayDate: null, isLoaded: false });
-        return;
-      }
-
-      set((state) => ({
-        dayDate: normalized,
-        isLoaded: false,
-        cache: { ...state.cache, [date]: normalized },
-        isSearching: false, // 🔥 ЛОАДЕР ЗАВЕРШЕНО
-      }));
-    } catch (err) {
-      console.error("❌ fetchDayByDate ERROR:", err);
-      set({ dayDate: null, isLoaded: false, isSearching: false });
-    }
-  },
-  // fetchDayByDate: async (date: string) => {
-  //   const { cache } = get();
-
-  //   console.log("FETCH CALLED", date);
-
-  //   // 1. Якщо є в кеші — повертаємо нормалізовані дані
-  //   if (cache[date]) {
-  //     set({
-  //       dayDate: cache[date],
-  //       error: null,
-  //       isLoaded: false,
-  //     });
-  //     return;
-  //   }
-
-  //   // 2. Завантаження
-  //   set({ isLoaded: true, error: null });
-
-  //   const dayResp = await searchMoondayData(date);
-  //   const normalizedDate = normalizeDay(dayResp, date);
-
-  //   // 3. Записуємо нормалізовані дані + кеш
-  //   if (!normalizedDate) {
-  //     set({ dayDate: null, isLoaded: false });
-  //     return;
-  //   }
-
-  //   set((state) => ({
-  //     dayDate: normalizedDate,
-  //     isLoaded: false,
-  //     cache: {
-  //       ...state.cache,
-  //       [date]: normalizedDate,
-  //     },
-  //   }));
-
-  //   console.log("FETCH CALLED", date);
-
-  //   console.log("details:", dayResp.details);
-  //   console.log("dayNumber:", dayResp.details.dayNumber);
-
-  //   // set({ dayDate: normalizedDate, isLoaded: false });
-  //   // if (dayResp) {
-  //   //   set((state) => ({
-  //   //     dayDate: dayResp,
-  //   //     isLoading: false,
-  //   //     // 3. Зберігаємо результат у кеш для майбутніх викликів
-  //   //     cache: { ...state.cache, [date]: dayResp },
-  //   //   }));
-  //   // }
-  // },
-
-  getDayById: (id) => {
-    return get().days.find((d) => d._id === id);
-  },
-  search5Days: async (key: LuckyKeys, rating: RatingGroup) => {
-    const values = ratingGroups[rating];
-
-    set({
-      isSearching: true,
       searchResults: [],
+      isSearching: false,
       activeValue: null,
-    });
+      selectedAspectIds: [],
 
-    let finalResults: MoonDayData[] = [];
-    let matchedValue: string | null = null;
+      error: null,
+      retryCount: 0,
+      maxRetries: 3,
+      selectedKey: "",
+      setSelectedKey: (key) => set({ selectedKey: key }),
+      setError: (error) => set({ error }),
+      clearError: () => set({ error: null }),
+      incrementRetry: () => set((s) => ({ retryCount: s.retryCount + 1 })),
+      resetRetry: () => set({ retryCount: 0 }),
 
-    for (const value of values) {
-      try {
-        const res = await searchMoonDays(key, value);
-
-        if (res.length > 0) {
-          finalResults = res;
-          matchedValue = value;
-          break;
-        }
-      } catch (err: any) {
-        // Якщо axios не отримав response, але DevTools показує 429 → це network error
-        if (!err.response) {
-          set({
-            error: {
-              status: 429,
-              message: "Забагато запитів. Сервер тимчасово недоступний.",
-            },
-            isSearching: false,
-          });
-          return;
-        }
-        const status = err.response.status;
+      toggleAspect: (id: string) => {
+        const { selectedAspectIds } = get();
+        const exists = selectedAspectIds.includes(id);
         set({
-          error: {
-            status,
-            message: err.response?.statusText || "Сталася помилка",
-          },
+          selectedAspectIds: exists
+            ? selectedAspectIds.filter((x) => x !== id)
+            : [...selectedAspectIds, id],
+        });
+      },
+
+      selectAllAspects: () => {
+        const { today } = get();
+        if (!today) return;
+        const allKeys = Object.keys(today.details.lifeAspects);
+        set({ selectedAspectIds: allKeys });
+      },
+      clearAllAspects: () => {
+        set({ selectedAspectIds: [] });
+      },
+      filteredAspects: () => {
+        const { today, selectedAspectIds } = get();
+        if (!today) return [];
+
+        if (selectedAspectIds.length === 0) return [];
+
+        return Object.entries(today.details.lifeAspects)
+          .filter(([key]) => selectedAspectIds.includes(key))
+          .map(([key, aspect]) => ({ key, aspect }));
+      },
+
+      fetchDays: async () => {
+        if (get().isLoaded) return;
+
+        const data = await getListDays();
+        set({ days: data.moonDay, total: data.total, isLoaded: true });
+      },
+
+      fetchToday: async () => {
+        if (get().today) return;
+        const data = await getTodayMoonday();
+        set({ today: data });
+      },
+
+      fetchDayByDate: async (date: string) => {
+        console.log("FETCH CALLED", date);
+
+        set({ isSearching: true }); // 🔥 ЛОАДЕР ПОЧАВСЯ
+
+        try {
+          const { cache } = get();
+
+          if (cache[date]) {
+            console.log("FROM CACHE", cache[date]);
+            set({
+              dayDate: cache[date],
+              isLoaded: false,
+              isSearching: false, // 🔥 ЛОАДЕР ЗАВЕРШЕНО
+            });
+            return;
+          }
+
+          set({ isLoaded: true });
+
+          const dayResp = await searchMoondayData(date);
+          console.log("RAW API RESPONSE:", dayResp);
+
+          if (!dayResp) {
+            console.warn("❌ API returned EMPTY or undefined");
+            set({ dayDate: null, isLoaded: false, isSearching: false });
+            return;
+          }
+
+          const normalized = normalizeDay(dayResp, date);
+          console.log("NORMALIZED:", normalized);
+
+          if (!normalized) {
+            console.warn("❌ normalizeDay returned NULL");
+            set({ dayDate: null, isLoaded: false });
+            return;
+          }
+
+          set((state) => ({
+            dayDate: normalized,
+            isLoaded: false,
+            cache: { ...state.cache, [date]: normalized },
+            isSearching: false, // 🔥 ЛОАДЕР ЗАВЕРШЕНО
+          }));
+        } catch (err) {
+          console.error("❌ fetchDayByDate ERROR:", err);
+          set({ dayDate: null, isLoaded: false, isSearching: false });
+        }
+      },
+      // fetchDayByDate: async (date: string) => {
+      //   const { cache } = get();
+
+      //   console.log("FETCH CALLED", date);
+
+      //   // 1. Якщо є в кеші — повертаємо нормалізовані дані
+      //   if (cache[date]) {
+      //     set({
+      //       dayDate: cache[date],
+      //       error: null,
+      //       isLoaded: false,
+      //     });
+      //     return;
+      //   }
+
+      //   // 2. Завантаження
+      //   set({ isLoaded: true, error: null });
+
+      //   const dayResp = await searchMoondayData(date);
+      //   const normalizedDate = normalizeDay(dayResp, date);
+
+      //   // 3. Записуємо нормалізовані дані + кеш
+      //   if (!normalizedDate) {
+      //     set({ dayDate: null, isLoaded: false });
+      //     return;
+      //   }
+
+      //   set((state) => ({
+      //     dayDate: normalizedDate,
+      //     isLoaded: false,
+      //     cache: {
+      //       ...state.cache,
+      //       [date]: normalizedDate,
+      //     },
+      //   }));
+
+      //   console.log("FETCH CALLED", date);
+
+      //   console.log("details:", dayResp.details);
+      //   console.log("dayNumber:", dayResp.details.dayNumber);
+
+      //   // set({ dayDate: normalizedDate, isLoaded: false });
+      //   // if (dayResp) {
+      //   //   set((state) => ({
+      //   //     dayDate: dayResp,
+      //   //     isLoading: false,
+      //   //     // 3. Зберігаємо результат у кеш для майбутніх викликів
+      //   //     cache: { ...state.cache, [date]: dayResp },
+      //   //   }));
+      //   // }
+      // },
+
+      getDayById: (id) => {
+        return get().days.find((d) => d._id === id);
+      },
+      search5Days: async (key: LuckyKeys, rating: RatingGroup) => {
+        const values = ratingGroups[rating];
+
+        set({
+          isSearching: true,
+          searchResults: [],
+          activeValue: null,
+        });
+
+        let finalResults: MoonDayData[] = [];
+        let matchedValue: string | null = null;
+
+        for (const value of values) {
+          try {
+            const res = await searchMoonDays(key, value);
+
+            if (res.length > 0) {
+              finalResults = res;
+              matchedValue = value;
+              break;
+            }
+          } catch (err: any) {
+            // Якщо axios не отримав response, але DevTools показує 429 → це network error
+            if (!err.response) {
+              set({
+                error: {
+                  status: 429,
+                  message: "Забагато запитів. Сервер тимчасово недоступний.",
+                },
+                isSearching: false,
+              });
+              return;
+            }
+            const status = err.response.status;
+            set({
+              error: {
+                status,
+                message: err.response?.statusText || "Сталася помилка",
+              },
+              isSearching: false,
+            });
+            return;
+          }
+        }
+
+        if (finalResults.length > 0) {
+          finalResults.sort((a, b) => a.moonDay - b.moonDay);
+        }
+
+        set({
+          searchResults: finalResults,
+          activeValue: matchedValue,
           isSearching: false,
         });
-        return;
-      }
-    }
+      },
 
-    if (finalResults.length > 0) {
-      finalResults.sort((a, b) => a.moonDay - b.moonDay);
-    }
+      resetSearch: () => {
+        set({
+          searchResults: [],
+          isSearching: false,
+          activeValue: null,
+        });
+      },
+    }),
+    {
+      name: "moon-store-storage",
 
-    set({
-      searchResults: finalResults,
-      activeValue: matchedValue,
-      isSearching: false,
-    });
-  },
+      // Зберігаємо тільки те, що потрібно
+      partialize: (state) => ({
+        dayDate: state.dayDate,
+        today: state.today,
+        cache: state.cache,
 
-  resetSearch: () => {
-    set({
-      searchResults: [],
-      isSearching: false,
-      activeValue: null,
-    });
-  },
-}));
+        searchResults: state.searchResults,
+        activeValue: state.activeValue,
+        selectedKey: state.selectedKey,
+
+        selectedAspectIds: state.selectedAspectIds,
+      }),
+    },
+  ),
+);
 
 // export const useMoonStore = create<MoonState>((set, get) => ({
 //   day: null,

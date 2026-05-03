@@ -14,6 +14,7 @@ import { RatingGroup } from "@/lib/ratingGroups";
 import { moonImages32 } from "@/lib/moonPhase30";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 const SearchLuckyDay = () => {
   const {
@@ -27,8 +28,10 @@ const SearchLuckyDay = () => {
     resetRetry,
   } = useMoonStore();
 
-  const [selectedKey, setSelectedKey] = useState<LuckyKeys | "">("");
+  // const [selectedKey, setSelectedKey] = useState<LuckyKeys | "">("");
   const [selectedRating, setSelectedRating] = useState<RatingGroup>("positive");
+  const { selectedKey, setSelectedKey } = useMoonStore();
+
   const router = useRouter();
   const handleSearch = (key: LuckyKeys) => {
     setSelectedKey(key);
@@ -77,6 +80,10 @@ const SearchLuckyDay = () => {
       />
     );
   }
+
+  // if (!selectedKey) {
+  //   handleReset;
+  // }
 
   return (
     <div className={css.container}>
@@ -165,51 +172,61 @@ const SearchLuckyDay = () => {
           <ul>
             {sortedSearchResults.map((item) => (
               <li key={item.date} className={css.listItem}>
-                <div className={css.containerMoon}>
-                  <img
-                    className={css.imageMoonPhase}
-                    src={moonImages32[item.moonDay]}
-                    alt={`Moon phase day ${item.phaseName}`}
-                    // width={20}
-                    // height={20}
-                  />
-                  <h4 className={css.titleMoonday}>
-                    {item.moonDay}-й місячний день
-                  </h4>
-                </div>
-                <div className={css.containerDescription}>
-                  <p className={css.textDate}>
-                    {(() => {
-                      const s = new Date(item.date).toLocaleDateString(
-                        "uk-UA",
-                        {
-                          weekday: "long",
-                          day: "numeric",
-                          month: "long",
-                          year: "numeric",
-                        },
-                      );
-                      return s[0].toUpperCase() + s.slice(1);
-                    })()}
-                  </p>
-                  <p className={css.textDescription}>
-                    {selectedKey && (
-                      <>
-                        {aspectMap[selectedKey]?.getDescription(item) ||
-                          "Немає даних"}
-                        <br />
-                      </>
-                    )}
-                  </p>
-                </div>
-                {activeValue && (
-                  <h4 className={css.activeValueSearch}>
-                    Знайдено за значенням:{" "}
-                    <strong className={css.descriptionRaiting}>
-                      {activeValue}
-                    </strong>
-                  </h4>
-                )}
+                <Link
+                  className={css.linkFullMoonday}
+                  href={`/days/${item.details._id}`}
+                >
+                  <div className={css.containerMoon}>
+                    <img
+                      className={css.imageMoonPhase}
+                      src={moonImages32[item.moonDay]}
+                      alt={`Moon phase day ${item.phaseName}`}
+                      // width={20}
+                      // height={20}
+                    />
+                    <h4 className={css.titleMoonday}>
+                      {item.moonDay}-й місячний день
+                    </h4>
+                  </div>
+                  <div className={css.containerDescription}>
+                    <p className={css.textDate}>
+                      {(() => {
+                        const s = new Date(item.date).toLocaleDateString(
+                          "uk-UA",
+                          {
+                            weekday: "long",
+                            day: "numeric",
+                            month: "long",
+                            year: "numeric",
+                          },
+                        );
+                        return s[0].toUpperCase() + s.slice(1);
+                      })()}
+                    </p>
+                    <p className={css.textDescription}>
+                      {selectedKey && (
+                        <>
+                          {aspectMap[selectedKey]?.getDescription(item) ||
+                            "Немає даних"}
+                          <br />
+                        </>
+                      )}
+                    </p>
+                  </div>
+                  {activeValue && (
+                    <h4 className={css.activeValueSearch}>
+                      Знайдено за значенням:{" "}
+                      <strong className={css.descriptionRaiting}>
+                        {activeValue}
+                      </strong>
+                    </h4>
+                  )}
+                  {/* <Link
+                  className={css.linkFullMoonday}
+                  href={`/days/${item.details._id}`}
+                >
+                  Детальніше про цей день */}
+                </Link>
                 {/* {selectedKey && aspectMap[selectedKey]?.get(item)} */}
               </li>
             ))}
