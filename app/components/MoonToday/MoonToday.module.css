@@ -34,11 +34,12 @@
 }
 
 .underTitleMoonToday {
+  font-size: 22px;
   margin-bottom: 16px;
 }
 
 .textMoonToday {
-  font-size: 24px;
+  font-size: 18px;
   margin-bottom: 16px;
   letter-spacing: 1px;
   line-height: 140%;
@@ -70,6 +71,11 @@
   box-shadow: inset 0px 1px 4px 1px rgba(238, 239, 247, 0.459);
   border-radius: 10px;
   padding: 8px 12px;
+}
+
+.underTitleBlockSign {
+  font-size: 17px;
+  margin-bottom: 16px;
 }
 
 .goodSign {

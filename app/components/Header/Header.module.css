@@ -1,6 +1,7 @@
 /* components/Header/Header.module.css */
 .header {
-  width: 460px;
+  width: 100%;
+  max-width: 460px;
   margin: 0 auto;
   background-image: url("/image/fonHeader120085.webp");
   border-radius: 10px;
@@ -22,7 +23,7 @@
 }
 
 .logo {
-  font-size: 32px;
+  font-size: 24px;
   color: azure;
   text-shadow: 0px 0px 9px black;
 }
@@ -136,7 +137,7 @@
 
 @media (min-width: 768px) {
   .header {
-    width: 768px;
+    max-width: 768px;
   }
   .logo {
     font-size: 24px;
@@ -147,11 +148,14 @@
   .desktopNav {
     display: flex;
   }
+  .linkMenu {
+    font-size: 16px;
+  }
 
   /* Десктопна версія */
   @media (min-width: 1200px) {
     .header {
-      width: 1200px;
+      max-width: 1200px;
     }
     .menuHeader {
       display: flex;

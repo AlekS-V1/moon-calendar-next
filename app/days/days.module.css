@@ -3,17 +3,18 @@
 } */
 
 .sectionTodayMoonday {
-  width: 460px;
+  width: 100%;
+  max-width: 460px;
   margin: 0 auto;
 }
 
 @media (min-width: 768px) {
   .sectionTodayMoonday {
-    width: 768px;
+    max-width: 768px;
   }
 }
 @media (min-width: 1200px) {
   .sectionTodayMoonday {
-    width: 1200px;
+    max-width: 1200px;
   }
 }
