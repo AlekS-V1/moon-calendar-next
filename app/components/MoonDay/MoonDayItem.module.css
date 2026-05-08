@@ -82,21 +82,38 @@
   }
 } */
 
-@media (min-width: 768px) {
+@media (min-width: 724px) {
   .dayStyle {
     padding: 3px;
     font-size: 12px;
+    flex-basis: calc(100% / 18);
+  }
+
+  .moonIcon {
+    width: 28px;
+    height: 28px;
+    font-size: 16px;
+  }
+
+  .moonIcon:hover {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 980px) {
+  .dayStyle {
+    padding: 2px;
+    font-size: 16px;
     flex-basis: 0;
   }
 
   .moonIcon {
-    width: 18px;
-    height: 18px;
-    font-size: 12px;
+    width: 26px;
+    height: 26px;
   }
 
   .moonIcon:hover {
-    font-size: 12px;
+    font-size: 18px;
   }
 }
 
@@ -104,6 +121,7 @@
   .dayStyle {
     padding: 4px;
     font-size: 16px;
+    flex-basis: 0;
   }
 
   .moonIcon {

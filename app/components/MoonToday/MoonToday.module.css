@@ -34,7 +34,7 @@
 }
 
 .underTitleMoonToday {
-  font-size: 22px;
+  font-size: 21px;
   margin-bottom: 16px;
 }
 
@@ -135,6 +135,21 @@
   flex-direction: row;
 } */
 
+@media (min-width: 430px) {
+  .containerToday {
+    font-size: 24px;
+  }
+  .underTitleMoonToday {
+    font-size: 26px;
+  }
+  .textMoonToday {
+    font-size: 25px;
+  }
+  .underTitleBlockSign {
+    font-size: 22px;
+  }
+}
+
 @media (min-width: 768px) {
   .containerToday {
     padding: 32px 25px;
@@ -183,6 +198,9 @@
 
   .textMoonToday {
     font-size: 16px;
+  }
+  .underTitleBlockSign {
+    font-size: 14px;
   }
 
   .itemBlockSimbol {

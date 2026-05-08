@@ -294,8 +294,8 @@ export const useMoonStore = create<StoreState>()(
 
       // Зберігаємо тільки те, що потрібно
       partialize: (state) => ({
-        dayDate: state.dayDate,
-        today: state.today,
+        // dayDate: state.dayDate,
+        // today: state.today,
         cache: state.cache,
 
         searchResults: state.searchResults,

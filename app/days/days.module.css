@@ -8,12 +8,17 @@
   margin: 0 auto;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 724px) {
   .sectionTodayMoonday {
-    max-width: 768px;
+    max-width: 979px;
   }
 }
-@media (min-width: 1200px) {
+@media (min-width: 980px) {
+  .sectionTodayMoonday {
+    max-width: 1084px;
+  }
+}
+@media (min-width: 1085px) {
   .sectionTodayMoonday {
     max-width: 1200px;
   }

@@ -140,7 +140,7 @@ const TodayMoonday = () => {
           <p className={css.textTodayMoonday}>
             {resDay.birthOnThisDay.description}
           </p>
-          <p>Дізнатися за датою</p>
+          <p className={css.textSearchDate}>Дізнатися за датою</p>
           <MoonSearchByData />
         </div>
 

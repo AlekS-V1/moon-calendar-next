@@ -35,9 +35,12 @@
   background: #f1f2f6;
   color: #2f3542;
   transition: 0.2s;
+  flex-basis: calc((100% - 8px) / 2);
 }
 .button:hover {
   transform: scale(1.04);
+  background: #4b7bec;
+  color: azure;
 }
 .ratingButtons {
   margin: 16px 0;
@@ -58,7 +61,6 @@
 .buttonPositiveActive {
   background: #4b7bec;
   color: white;
-
   font-weight: bold;
 }
 .buttonPositiveDeactive {
@@ -92,7 +94,7 @@
 
 .selectedAspect {
   font-size: 28px;
-  margin: 36px 0;
+  margin-top: 36px;
 }
 
 .listItem {
@@ -159,6 +161,7 @@
     display: flex;
     flex-wrap: nowrap;
     align-items: baseline;
+    gap: 30px;
   }
   .buttons {
     display: flex;

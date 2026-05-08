@@ -29,7 +29,7 @@ export default function MoondayDetailsClient() {
   const day = normalizeDay(raw);
 
   if (!day) {
-    return <p>День не знайдено</p>;
+    return <p>Пошук дня...</p>;
   }
 
   return (

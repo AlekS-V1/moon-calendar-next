@@ -194,7 +194,7 @@ const SearchLuckyDay = () => {
                         const s = new Date(item.date).toLocaleDateString(
                           "uk-UA",
                           {
-                            weekday: "long",
+                            weekday: "short",
                             day: "numeric",
                             month: "long",
                             year: "numeric",

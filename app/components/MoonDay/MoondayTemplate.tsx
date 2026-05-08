@@ -259,7 +259,7 @@ export const MoondayTemplate = ({
 
         <div className={css.blockSign}>
           <div className={css.itemBlockSign}>
-            <h4 className={`${css.underTitleMoonToday} ${css.goodSign}`}>
+            <h4 className={`${css.underTitleBlockSign} ${css.goodSign}`}>
               Сприятливі:
             </h4>
             <ul>
@@ -274,7 +274,7 @@ export const MoondayTemplate = ({
           </div>
 
           <div className={css.itemBlockSign}>
-            <h4 className={`${css.underTitleMoonToday} ${css.badSign}`}>
+            <h4 className={`${css.underTitleBlockSign} ${css.badSign}`}>
               Несприятливі:
             </h4>
             <ul>

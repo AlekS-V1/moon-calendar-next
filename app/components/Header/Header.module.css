@@ -43,6 +43,9 @@
   font-size: 18px;
   /* padding-left: 30px; */
 }
+.itemMenu:hover {
+  transform: scale(1.12);
+}
 .linkMenu {
   font-size: 18px;
   font-weight: 700;
@@ -53,11 +56,11 @@
 }
 
 .linkMenu:hover {
-  font-size: 18px;
   color: rgb(9, 1, 53);
   background: rgba(255, 255, 255, 0.659);
   border-radius: 8px;
   text-shadow: 0 0 #0141a5;
+  transform: scale(1.12);
 }
 
 .desktopNav {
@@ -134,10 +137,15 @@
   opacity: 1;
   pointer-events: auto;
 }
-
-@media (min-width: 768px) {
+@media (min-width: 430px) {
   .header {
-    max-width: 768px;
+    max-width: 460px;
+  }
+}
+
+@media (min-width: 724px) {
+  .header {
+    max-width: 979px;
   }
   .logo {
     font-size: 24px;
@@ -149,17 +157,42 @@
     display: flex;
   }
   .linkMenu {
-    font-size: 16px;
+    font-size: 15px;
   }
+}
 
-  /* Десктопна версія */
-  @media (min-width: 1200px) {
-    .header {
-      max-width: 1200px;
-    }
-    .menuHeader {
-      display: flex;
-      gap: 80px;
-    }
+@media (min-width: 862px) {
+  .menuHeader {
+    display: flex;
+    gap: 35px;
+    padding: 6px;
+    border-radius: 2px;
+  }
+}
+
+@media (min-width: 980px) {
+  .header {
+    max-width: 1084px;
+  }
+  .linkMenu {
+    font-size: 17px;
+  }
+  .menuHeader {
+    display: flex;
+    gap: 60px;
+  }
+}
+
+/* Десктопна версія */
+@media (min-width: 1085px) {
+  .header {
+    max-width: 1200px;
+  }
+  .menuHeader {
+    display: flex;
+    gap: 80px;
+  }
+  .linkMenu {
+    font-size: 18px;
   }
 }

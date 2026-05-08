@@ -1,17 +1,24 @@
 .sectionMoondayDetails {
-  width: 460px;
+  width: 100%;
+  max-width: 460px;
   margin: 0 auto;
 }
 
-@media (min-width: 768px) {
+@media (min-width: 724px) {
   .sectionMoondayDetails {
-    width: 768px;
+    max-width: 979px;
   }
 }
 
-@media (min-width: 1200px) {
+@media (min-width: 980px) {
   .sectionMoondayDetails {
-    width: 1200px;
+    max-width: 1084px;
+  }
+}
+
+@media (min-width: 1085px) {
+  .sectionMoondayDetails {
+    max-width: 1200px;
   }
 }
 /* .containerToday {
