@@ -373,14 +373,17 @@
   .containerToday {
     font-size: 22px;
   }
+  .titleTodayMoonday {
+    font-size: 22px;
+  }
   .buttonShowAll {
-    font-size: 24px;
+    font-size: 22px;
   }
   .accordionHeader {
-    font-size: 24px;
+    font-size: 22px;
   }
   .accordionHeader.active {
-    font-size: 26px;
+    font-size: 23px;
   }
   .checkboxItem span {
     font-size: 20px;
@@ -389,11 +392,14 @@
     font-size: 23px;
   }
   .textAspect {
-    font-size: 22px;
+    font-size: 20px;
   }
 }
 
 @media (min-width: 768px) {
+  .textTodayMoonday {
+    font-size: 18px;
+  }
   .containerLifeAspect {
     display: flex;
     flex-direction: row;
