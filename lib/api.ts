@@ -1,5 +1,10 @@
 import axios from "axios";
-import type { MoonDay, MoonDayData } from "@/type/type";
+import type {
+  MoonDay,
+  MoonDayData,
+  moonPhase,
+  moonPhaseData,
+} from "@/type/type";
 import { HttpError } from "./HttpError";
 
 export interface MoonDayListResp {
@@ -113,4 +118,24 @@ export const searchMoonDays = async (
     error.status = err.response?.status ?? 500;
     throw error; // ❗️ ГОЛОВНЕ
   }
+};
+
+export const getListPhases = async (): Promise<moonPhase[]> => {
+  const resAll = await axios.get<moonPhase[]>("/phases");
+  console.log(resAll.data);
+  return resAll.data;
+};
+
+export const getPhasesByDaynumber = async (
+  moonDay: number,
+): Promise<moonPhaseData> => {
+  const resDay = await axios.get<moonPhaseData>("/phasebyday", {
+    params: { moonDay },
+  });
+  return resDay.data;
+};
+
+export const getTodayPhases = async (): Promise<moonPhaseData> => {
+  const resToday = await axios.get<moonPhaseData>(`/phasetoday`);
+  return resToday.data;
 };

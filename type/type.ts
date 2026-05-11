@@ -114,3 +114,47 @@ export function normalizeDay(
   console.warn("Unknown day format:", raw);
   return null;
 }
+
+export interface moonPhase {
+  _id: string;
+  days: string;
+  energy: string;
+  description: string;
+  wellness_practices: string[];
+  nutrition: Nutrition;
+  phase: string;
+  phaseNumber: number;
+}
+
+export interface Nutrition {
+  general: string[];
+  seed_support: string[];
+  preferred: string[];
+  energyPurpose: string[];
+  avoid_excess: string[];
+}
+
+export interface moonPhaseData {
+  date: string;
+  moonDay: number;
+  rawPhase: number;
+  phaseNumber: number;
+  _id: string;
+  days: string;
+  energy: string;
+  description: string;
+  wellness_practices: string[];
+  nutrition: Nutrition;
+  phase: string;
+}
+
+export interface haircutDay {
+  _id: string;
+  dayNumber: number;
+  energy: string;
+  health: string[];
+  wealth: string[];
+  why: string;
+  recommend: string[];
+  avoid: string[];
+}

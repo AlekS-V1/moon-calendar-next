@@ -4,6 +4,7 @@ import { useMoonStore } from "@/store/calendarStore";
 import { useEffect } from "react";
 // import MoonLoader from "../MoonLoader/MoonLoader";
 import { moonImages160 } from "@/lib/moonPhase30";
+import Link from "next/link";
 
 const MoonToday = () => {
   const { today, fetchToday } = useMoonStore();
@@ -45,7 +46,9 @@ const MoonToday = () => {
               {today.phaseName}
               {")"}
             </p>
-            <p className={css.textMoonToday}>{resDay.phaseDescription}</p>
+            <Link href="/phasetoday" className={css.textMoonToday}>
+              {resDay.phaseDescription}
+            </Link>
           </div>
 
           <div className={css.contImageMoonPhase}>

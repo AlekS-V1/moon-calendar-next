@@ -1,12 +1,16 @@
 import {
   getListDays,
+  getListPhases,
   getTodayMoonday,
+  getTodayPhases,
   searchMoondayData,
   searchMoonDays,
 } from "@/lib/api";
 import { LuckyKeys } from "@/lib/aspect";
 import { RatingGroup, ratingGroups } from "@/lib/ratingGroups";
 import {
+  moonPhase,
+  moonPhaseData,
   normalizeDay,
   type MoonDay,
   type MoonDayData,
@@ -21,6 +25,9 @@ interface StoreState {
   total: number;
   today: MoonDayData | null;
   isLoaded: boolean;
+
+  phases: moonPhase[];
+  phasetoday: moonPhaseData | null;
 
   searchResults: MoonDayData[];
   isSearching: boolean;
@@ -41,6 +48,8 @@ interface StoreState {
   fetchDayByDate: (date: string) => Promise<void>;
   getDayById: (id: string) => MoonDay | undefined;
 
+  fetchPhases: () => Promise<void>;
+  fetchPhaseToday: () => Promise<void>;
   search5Days: (key: LuckyKeys, rating: RatingGroup) => Promise<void>;
   setSelectedKey: (key: LuckyKeys | "") => void;
 
@@ -62,6 +71,9 @@ export const useMoonStore = create<StoreState>()(
       today: null,
       isLoaded: false,
       cache: {},
+
+      phases: [],
+      phasetoday: null,
 
       searchResults: [],
       isSearching: false,
@@ -113,6 +125,19 @@ export const useMoonStore = create<StoreState>()(
 
         const data = await getListDays();
         set({ days: data.moonDay, total: data.total, isLoaded: true });
+      },
+
+      fetchPhases: async () => {
+        if (get().isLoaded) return;
+
+        const data = await getListPhases();
+        set({ phases: data, isLoaded: true });
+      },
+
+      fetchPhaseToday: async () => {
+        if (get().phasetoday) return;
+        const data = await getTodayPhases();
+        set({ phasetoday: data });
       },
 
       fetchToday: async () => {
