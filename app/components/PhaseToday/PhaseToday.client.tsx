@@ -3,7 +3,7 @@
 import { useMoonStore } from "@/store/calendarStore";
 import { useEffect } from "react";
 
-const PhaseToday = async () => {
+const PhaseTodayClient = async () => {
   const { phasetoday, fetchPhaseToday } = useMoonStore();
 
   useEffect(() => {
@@ -90,4 +90,4 @@ const PhaseToday = async () => {
     </>
   );
 };
-export default PhaseToday;
+export default PhaseTodayClient;

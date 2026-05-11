@@ -1,0 +1,81 @@
+.menuContainer {
+  position: relative;
+  display: block;
+}
+.menuButton {
+  font-size: 18px;
+  font-weight: 700;
+  text-decoration: none;
+  color: azure;
+  padding: 5px;
+  text-shadow: 0px 0px 9px black;
+  transform: scale(1.12);
+  /* display: block;
+  font-family: "Comfortaa", "Comfortaa Fallback";
+  font-size: 18px;
+  font-weight: 700;
+  background-color: transparent;
+  color: azure;
+  border: none;
+  text-shadow: 0px 0px 9px black;
+  cursor: pointer;
+  transition:
+    background-color 0.3s ease,
+    box-shadow 0.2s ease; */
+}
+
+.menuButton:hover {
+  color: rgb(9, 1, 53);
+  background: rgba(255, 255, 255, 0.659);
+  border-radius: 8px;
+  text-shadow: 0 0 #0141a5;
+  transform: scale(1.12);
+}
+
+.menuList {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: absolute;
+  top: calc(100% + 6px);
+  left: -7px;
+  background: linear-gradient(
+    182deg,
+    #4b9bcb80 0%,
+    #0d1624 50%,
+    #000000d6 100%
+  );
+  /* border: 1px solid #ddd; */
+  border-bottom-left-radius: 20px;
+  border-bottom-right-radius: 20px;
+  box-shadow: 0px 3px 7px 0px #fbf7e399;
+  padding: 15px 0;
+  margin: 0;
+  list-style: none;
+  min-width: 140px;
+  z-index: 1000;
+}
+
+.menuItem {
+  margin: 0;
+  text-align: center;
+}
+
+.linkMenu {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  text-decoration: none;
+  color: azure;
+  padding: 5px;
+  text-shadow: 0px 0px 9px black;
+  transition: background-color 0.2s ease;
+}
+
+.linkMenu:hover {
+  color: rgb(0, 0, 0);
+  background-color: rgba(255, 255, 255, 0.659);
+  border-radius: 8px;
+  text-shadow: none;
+  transform: scale(1.03);
+}

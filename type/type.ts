@@ -148,7 +148,21 @@ export interface moonPhaseData {
   phase: string;
 }
 
-export interface haircutDay {
+// --- HAIRCUT ---
+
+export interface HaircutDay {
+  _id: string;
+  dayNumber: number;
+  energy: string;
+  health: string[];
+  wealth: string[];
+  why: string;
+  recommend: string[];
+  avoid: string[];
+}
+
+export interface HaircutData {
+  date: string;
   _id: string;
   dayNumber: number;
   energy: string;

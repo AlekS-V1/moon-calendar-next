@@ -46,6 +46,7 @@ import css from "./TodayMoonday.module.css";
 import { useMoonStore } from "@/store/calendarStore";
 import { aspectGroups, aspectTitles } from "@/lib/aspect";
 import { MoonSearchByData } from "../MoonSearchByData/MoonSearchByData";
+import Link from "next/link";
 
 const TodayMoonday = () => {
   const {
@@ -169,10 +170,12 @@ const TodayMoonday = () => {
 
       <div className={`${css.containerLifeAspect} ${css.innerContainer}`}>
         <div className={css.containerHaircut}>
-          <h3 className={css.titleTodayMoonday}>
-            Стрижка — {resDay.haircut.rating.value}/
-            {resDay.haircut.rating.scale}
-          </h3>
+          <Link href={"/todayhaircut"}>
+            <h3 className={css.titleTodayMoonday}>
+              Стрижка — {resDay.haircut.rating.value}/
+              {resDay.haircut.rating.scale}
+            </h3>
+          </Link>
           <div className={css.listHeircut}>
             <div className={css.moonCalendar}>
               {/* <h4 className={css.underTitleMoonday}>Місячний календар</h4> */}

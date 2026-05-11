@@ -1,6 +1,8 @@
 import {
   getListDays,
+  getListHaircutDays,
   getListPhases,
+  getTodayHaircutDay,
   getTodayMoonday,
   getTodayPhases,
   searchMoondayData,
@@ -9,6 +11,8 @@ import {
 import { LuckyKeys } from "@/lib/aspect";
 import { RatingGroup, ratingGroups } from "@/lib/ratingGroups";
 import {
+  HaircutData,
+  HaircutDay,
   moonPhase,
   moonPhaseData,
   normalizeDay,
@@ -28,6 +32,9 @@ interface StoreState {
 
   phases: moonPhase[];
   phasetoday: moonPhaseData | null;
+
+  haircutDays: HaircutDay[];
+  todayHaircut: HaircutData | null;
 
   searchResults: MoonDayData[];
   isSearching: boolean;
@@ -50,6 +57,10 @@ interface StoreState {
 
   fetchPhases: () => Promise<void>;
   fetchPhaseToday: () => Promise<void>;
+
+  fetchHaircutDays: () => Promise<void>;
+  fetchTodayHaircut: () => Promise<void>;
+
   search5Days: (key: LuckyKeys, rating: RatingGroup) => Promise<void>;
   setSelectedKey: (key: LuckyKeys | "") => void;
 
@@ -74,6 +85,9 @@ export const useMoonStore = create<StoreState>()(
 
       phases: [],
       phasetoday: null,
+
+      haircutDays: [],
+      todayHaircut: null,
 
       searchResults: [],
       isSearching: false,
@@ -138,6 +152,19 @@ export const useMoonStore = create<StoreState>()(
         if (get().phasetoday) return;
         const data = await getTodayPhases();
         set({ phasetoday: data });
+      },
+
+      fetchHaircutDays: async () => {
+        if (get().isLoaded) return;
+
+        const data = await getListHaircutDays();
+        set({ haircutDays: data, isLoaded: true });
+      },
+
+      fetchTodayHaircut: async () => {
+        if (get().todayHaircut) return;
+        const data = await getTodayHaircutDay();
+        set({ todayHaircut: data });
       },
 
       fetchToday: async () => {

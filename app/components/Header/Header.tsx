@@ -4,9 +4,16 @@
 import Link from "next/link";
 import css from "./Header.module.css";
 import { useState } from "react";
+import Menu from "../Menu/Menu";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
+  const toggleMenu = () => setOpen(false);
+  const toggleUnderMenu = () => {
+    setIsOpen(!isOpen);
+    setOpen(false);
+  };
   return (
     <header className={css.header}>
       <div className={css.containerHeader}>
@@ -22,14 +29,15 @@ const Header = () => {
                 Сьогодні
               </Link>
             </li>
-            <li className={css.itemMenu}>
-              <Link
+            <li>
+              <Menu />
+              {/* <Link
                 href="/days"
                 aria-label="Moon days"
                 className={css.linkMenu}
               >
-                Більше
-              </Link>
+                Настанови
+              </Link> */}
             </li>
             <li className={css.itemMenu}>
               <Link
@@ -70,7 +78,7 @@ const Header = () => {
 
         {/* Затемнення фону */}
         <div
-          onClick={() => setOpen(false)}
+          onClick={toggleMenu}
           className={`${css.overlay} ${open ? css.show : ""}`}
         />
 
@@ -78,22 +86,53 @@ const Header = () => {
         <nav className={`${css.mobileNav} ${open ? css.show : ""}`}>
           <ul className={css.menuHeaderMobile}>
             <li className={css.itemMenuMobile}>
-              <Link
-                className={css.linkMenu}
-                href="/"
-                onClick={() => setOpen(false)}
-              >
+              <Link className={css.linkMenu} href="/" onClick={toggleMenu}>
                 Сьогодні
               </Link>
             </li>
             <li className={css.itemMenuMobile}>
               <Link
                 className={css.linkMenu}
-                href="/days"
-                onClick={() => setOpen(false)}
+                href={""}
+                onClick={() => setIsOpen(!isOpen)}
               >
-                Більше
+                Настанови
               </Link>
+
+              {isOpen && (
+                <ul className={css.menuList}>
+                  <li className={css.underMenuItem}>
+                    <Link
+                      href="/days"
+                      aria-label="Moon days"
+                      className={css.linkMenu}
+                      onClick={toggleUnderMenu}
+                    >
+                      Дня
+                    </Link>
+                  </li>
+                  <li className={css.underMenuItem}>
+                    <Link
+                      href="/phasetoday"
+                      aria-label="Moon phases"
+                      className={css.linkMenu}
+                      onClick={toggleUnderMenu}
+                    >
+                      Фази
+                    </Link>
+                  </li>
+                  <li className={css.underMenuItem}>
+                    <Link
+                      href="/todayhaircut"
+                      aria-label="Haircur today"
+                      className={css.linkMenu}
+                      onClick={toggleUnderMenu}
+                    >
+                      Стріжки
+                    </Link>
+                  </li>
+                </ul>
+              )}
             </li>
             <li className={css.itemMenuMobile}>
               <Link

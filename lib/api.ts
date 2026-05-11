@@ -1,5 +1,7 @@
 import axios from "axios";
 import type {
+  HaircutData,
+  HaircutDay,
   MoonDay,
   MoonDayData,
   moonPhase,
@@ -120,9 +122,10 @@ export const searchMoonDays = async (
   }
 };
 
+// --- PHASES RECOMINDATION---
+
 export const getListPhases = async (): Promise<moonPhase[]> => {
   const resAll = await axios.get<moonPhase[]>("/phases");
-  console.log(resAll.data);
   return resAll.data;
 };
 
@@ -137,5 +140,27 @@ export const getPhasesByDaynumber = async (
 
 export const getTodayPhases = async (): Promise<moonPhaseData> => {
   const resToday = await axios.get<moonPhaseData>(`/phasetoday`);
+  return resToday.data;
+};
+
+// --- HAIRCUT ---
+
+export const getListHaircutDays = async (): Promise<HaircutDay[]> => {
+  const resAll = await axios.get<HaircutDay[]>("/haircutdays");
+  console.log(resAll.data);
+  return resAll.data;
+};
+
+export const getHaircutDayByDaynumber = async (
+  moonDay: number,
+): Promise<HaircutData> => {
+  const resDay = await axios.get<HaircutData>("/haircutbyday", {
+    params: { moonDay },
+  });
+  return resDay.data;
+};
+
+export const getTodayHaircutDay = async (): Promise<HaircutData> => {
+  const resToday = await axios.get<HaircutData>(`/todayhaircut`);
   return resToday.data;
 };

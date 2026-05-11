@@ -1,9 +1,9 @@
-import PhaseToday from "../components/PhaseToday/PhaseToday";
+import PhaseTodayClient from "../components/PhaseToday/PhaseToday.client";
 
 const PhaseTodayPage = async () => {
   return (
     <section>
-      <PhaseToday />
+      <PhaseTodayClient />
     </section>
   );
 };
