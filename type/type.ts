@@ -1,6 +1,13 @@
 export interface MoonDayData {
   date: string; // ISO‑дата
   moonDay: number; // номер місячного дня
+  currentDayStart: string; // Дата та час початку місячного дня
+  durationHours: number; // Кількість годин місячного дня
+  fullMoon: string; // останній повний місяць
+  newMoon: string; // останній новий місяць
+  nextDayStart: string; // Дата та час початку наступного місячного дня
+  passedHours: number; // пройшло годин поточного дня
+  progressDay: number; // відсоток дня на поточний момент
   phase: number; // числове значення фази (0–1)
   phaseName: string; // назва фази ("спадний серп")
   details: MoonDay;
@@ -71,6 +78,13 @@ export interface NormalizedDay {
   details: MoonDay;
   date: string;
   moonDay: number;
+  currentDayStart: string;
+  durationHours: number;
+  fullMoon: string;
+  newMoon: string;
+  nextDayStart: string;
+  passedHours: number;
+  progressDay: number;
   phase?: number;
   phaseName?: string;
 }
@@ -88,6 +102,13 @@ export function normalizeDay(
       details: raw.details,
       date: raw.date ?? fallbackDate ?? "",
       moonDay: raw.moonDay,
+      currentDayStart: raw.currentDayStart,
+      durationHours: raw.currentDayStart,
+      fullMoon: raw.fullMoon,
+      newMoon: raw.newMoon,
+      nextDayStart: raw.nextDayStart,
+      passedHours: raw.passedHours,
+      progressDay: raw.progressDay,
       phase: raw.phase,
       phaseName: raw.phaseName,
     };
@@ -99,6 +120,13 @@ export function normalizeDay(
       details: raw,
       date: fallbackDate ?? "",
       moonDay: raw.dayNumber,
+      currentDayStart: raw.currentDayStart,
+      durationHours: raw.currentDayStart,
+      fullMoon: raw.fullMoon,
+      newMoon: raw.newMoon,
+      nextDayStart: raw.nextDayStart,
+      passedHours: raw.passedHours,
+      progressDay: raw.progressDay,
     };
   }
 
@@ -108,6 +136,13 @@ export function normalizeDay(
       details: raw.day,
       date: fallbackDate ?? "",
       moonDay: raw.day.dayNumber,
+      currentDayStart: raw.currentDayStart,
+      durationHours: raw.currentDayStart,
+      fullMoon: raw.fullMoon,
+      newMoon: raw.newMoon,
+      nextDayStart: raw.nextDayStart,
+      passedHours: raw.passedHours,
+      progressDay: raw.progressDay,
     };
   }
 

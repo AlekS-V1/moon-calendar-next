@@ -41,6 +41,11 @@
   margin-bottom: 16px;
 }
 
+.containerTimer {
+  padding-bottom: 10px;
+  font-size: 16px;
+}
+
 .textMoonToday {
   font-size: 17px;
   margin-bottom: 16px;
@@ -507,6 +512,10 @@
   }
   .textMoonToday {
     font-size: 24px;
+  }
+  .containerTimer {
+    padding-bottom: 16px;
+    font-size: 20px;
   }
   .textTodayMoonday {
     font-size: 23px;

@@ -174,9 +174,34 @@ export const MoondayTemplate = ({
                 {/* {day.date ? "Сьогодні:" : "В цей"} */}в цей
               </h2>
               {day.date ? (
-                <h4 className={css.underTitleMoonToday}>
-                  {day.moonDay} Місячний день
-                </h4>
+                <div>
+                  <h4 className={css.underTitleMoonToday}>
+                    {day.moonDay} Місячний день
+                  </h4>
+                  <p className={css.containerTimer}>
+                    {/* Рядок з датами */}
+
+                    {new Date(day.currentDayStart).toLocaleString("uk-UA", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                    {", "}
+                    {new Date(day.currentDayStart).toLocaleString("uk-UA", {
+                      day: "numeric",
+                      month: "short",
+                    })}
+                    {" → "}
+                    {new Date(day.nextDayStart).toLocaleString("uk-UA", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                    })}
+                    {", "}
+                    {new Date(day.nextDayStart).toLocaleString("uk-UA", {
+                      day: "numeric",
+                      month: "short",
+                    })}
+                  </p>
+                </div>
               ) : (
                 <h2 className={css.underTitleMoonToday}>
                   {day.moonDay} Місячний день

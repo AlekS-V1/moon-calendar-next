@@ -5,6 +5,7 @@ import { useEffect } from "react";
 // import MoonLoader from "../MoonLoader/MoonLoader";
 import { moonImages160 } from "@/lib/moonPhase30";
 import Link from "next/link";
+import Countdown from "../Countdown/Countdown";
 
 const MoonToday = () => {
   const { today, fetchToday } = useMoonStore();
@@ -22,6 +23,10 @@ const MoonToday = () => {
     );
   const resDay = today.details;
   const img = moonImages160[today.moonDay];
+  const progressRemaining = Math.max(
+    0,
+    100 - Math.round(Number(today.progressDay)),
+  );
 
   return (
     <div className={css.containerToday}>
@@ -41,11 +46,18 @@ const MoonToday = () => {
             <h4 className={css.underTitleMoonToday}>
               {today.moonDay} Місячний день
             </h4>
-            <p className={css.textMoonToday}>
-              {resDay.phase} {"("}
-              {today.phaseName}
-              {")"}
+            <p>
+              до{" "}
+              {new Date(today.nextDayStart).toLocaleDateString("uk-UA", {
+                hour: "2-digit",
+                minute: "2-digit",
+              })}
             </p>
+            <Countdown target={today.nextDayStart} />
+            {/* <p className={css.textMoonToday}>
+              до наступного ще {progressRemaining}%
+            </p> */}
+            <p className={css.textMoonToday}>{resDay.phase}</p>
             <Link href="/phasetoday" className={css.textMoonToday}>
               {resDay.phaseDescription}
             </Link>

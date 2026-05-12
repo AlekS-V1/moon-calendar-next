@@ -1,0 +1,22 @@
+.containerTimer {
+  padding-top: 8px;
+  padding-bottom: 10px;
+}
+.titleTimer {
+  padding-bottom: 5px;
+}
+.symbolsTimer {
+  font-size: 16px;
+}
+
+@media (min-width: 768px) {
+  .symbolsTimer {
+    font-size: 18px;
+  }
+}
+
+@media (min-width: 1085px) {
+  .symbolsTimer {
+    font-size: 14px;
+  }
+}
