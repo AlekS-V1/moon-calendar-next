@@ -1,4 +1,5 @@
 import {
+  getHaircutDayByDaynumber,
   getListDays,
   getListHaircutDays,
   getListPhases,
@@ -32,7 +33,7 @@ interface StoreState {
 
   phases: moonPhase[];
   phasetoday: moonPhaseData | null;
-
+  moonDayData: Record<number, HaircutDay>;
   haircutDays: HaircutDay[];
   todayHaircut: HaircutData | null;
 
@@ -60,8 +61,15 @@ interface StoreState {
 
   fetchHaircutDays: () => Promise<void>;
   fetchTodayHaircut: () => Promise<void>;
+  fetchHaircutDayByID: (id: string) => HaircutDay | undefined;
+  fetchHaircutDayByDaynumber: (
+    dayNumber: number,
+  ) => Promise<HaircutDay | undefined>;
 
-  search5Days: (key: LuckyKeys, rating: RatingGroup) => Promise<void>;
+  search5Days: (
+    key: LuckyKeys,
+    rating: RatingGroup,
+  ) => Promise<HaircutDay | undefined>;
   setSelectedKey: (key: LuckyKeys | "") => void;
 
   resetSearch: () => void;
@@ -85,7 +93,7 @@ export const useMoonStore = create<StoreState>()(
 
       phases: [],
       phasetoday: null,
-
+      moonDayData: {},
       haircutDays: [],
       todayHaircut: null,
 
@@ -166,6 +174,9 @@ export const useMoonStore = create<StoreState>()(
         const data = await getTodayHaircutDay();
         set({ todayHaircut: data });
       },
+      fetchHaircutDayByID: (id) => {
+        return get().haircutDays.find((hcid) => hcid._id === id);
+      },
 
       fetchToday: async () => {
         if (get().today) return;
@@ -173,8 +184,35 @@ export const useMoonStore = create<StoreState>()(
         set({ today: data });
       },
 
+      fetchHaircutDayByDaynumber: async (dayNumber: number) => {
+        const cache = get().moonDayData;
+
+        if (cache[dayNumber]) {
+          return cache[dayNumber];
+        }
+
+        set({ isLoaded: true, error: null });
+        try {
+          const resData = await getHaircutDayByDaynumber(dayNumber);
+          if (!resData) throw new Error("Помилка запиту");
+
+          const json: HaircutDay = await resData;
+
+          set({
+            moonDayData: {
+              ...cache,
+              [dayNumber]: json,
+            },
+            isLoaded: false,
+          });
+          return json;
+        } catch (error: any) {
+          set({ error: error.message, isLoaded: false });
+        }
+      },
+
       fetchDayByDate: async (date: string) => {
-        console.log("FETCH CALLED", date);
+        // console.log("FETCH CALLED", date);
 
         set({ isSearching: true }); // 🔥 ЛОАДЕР ПОЧАВСЯ
 
@@ -182,7 +220,7 @@ export const useMoonStore = create<StoreState>()(
           const { cache } = get();
 
           if (cache[date]) {
-            console.log("FROM CACHE", cache[date]);
+            // console.log("FROM CACHE", cache[date]);
             set({
               dayDate: cache[date],
               isLoaded: false,
@@ -194,7 +232,7 @@ export const useMoonStore = create<StoreState>()(
           set({ isLoaded: true });
 
           const dayResp = await searchMoondayData(date);
-          console.log("RAW API RESPONSE:", dayResp);
+          // console.log("RAW API RESPONSE:", dayResp);
 
           if (!dayResp) {
             console.warn("❌ API returned EMPTY or undefined");
@@ -203,7 +241,7 @@ export const useMoonStore = create<StoreState>()(
           }
 
           const normalized = normalizeDay(dayResp, date);
-          console.log("NORMALIZED:", normalized);
+          // console.log("NORMALIZED:", normalized);
 
           if (!normalized) {
             console.warn("❌ normalizeDay returned NULL");

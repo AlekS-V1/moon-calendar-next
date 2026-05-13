@@ -151,6 +151,11 @@ export const getListHaircutDays = async (): Promise<HaircutDay[]> => {
   return resAll.data;
 };
 
+export const getSingleHaircutDay = async (id: string) => {
+  // const resSingle = await axios.get<HaircutDay>(`/haircutday/${id}`);
+  // return resSingle.data;
+};
+
 export const getHaircutDayByDaynumber = async (
   moonDay: number,
 ): Promise<HaircutData> => {

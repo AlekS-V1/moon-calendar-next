@@ -3,7 +3,7 @@
 import { getListHaircutDays } from "@/lib/api";
 import { useEffect } from "react";
 
-const Phases = async () => {
+const ListHaircutDays = async () => {
   useEffect(() => {
     getListHaircutDays();
   }, []);
@@ -11,4 +11,4 @@ const Phases = async () => {
   return <div>Сторінка завантажена. Дивимось консоль</div>;
 };
 
-export default Phases;
+export default ListHaircutDays;
