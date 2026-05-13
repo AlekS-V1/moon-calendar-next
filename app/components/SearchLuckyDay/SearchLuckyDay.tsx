@@ -190,6 +190,7 @@ const SearchLuckyDay = () => {
                   </div>
                   <div className={css.containerDescription}>
                     <p className={css.textDate}>
+                      {selectedKey ? aspectLabels[selectedKey] : "Не вибрано"} у{" "}
                       {(() => {
                         const s = new Date(item.date).toLocaleDateString(
                           "uk-UA",
@@ -197,7 +198,6 @@ const SearchLuckyDay = () => {
                             weekday: "short",
                             day: "numeric",
                             month: "long",
-                            year: "numeric",
                           },
                         );
                         return s[0].toUpperCase() + s.slice(1);

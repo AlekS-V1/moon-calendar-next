@@ -66,10 +66,15 @@ export default function Countdown({ target }: CountdownProps) {
 
   return (
     <div className={css.containerTimer}>
-      <h5 className={css.titleTimer}>час до закінчення:</h5>
+      {/* <h5 className={css.titleTimer}>до наступного дня:</h5> */}
       {/* <span className={css.symbolsTimer}>{timeLeft.days} дн </span> */}
-      <span className={css.symbolsTimer}>{timeLeft.hours} год </span>
-      <span className={css.symbolsTimer}>{timeLeft.minutes} хв </span>
+      <span className={css.symbolsTimer}>
+        {" ("}
+        {timeLeft.hours} год{" "}
+      </span>
+      <span className={css.symbolsTimer}>
+        {timeLeft.minutes} хв {") "}
+      </span>
       {/* <span className={css.symbolsTimer}>{timeLeft.seconds} сек</span> */}
     </div>
   );

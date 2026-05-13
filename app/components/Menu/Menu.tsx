@@ -22,7 +22,7 @@ const Menu = () => {
               className={css.linkMenu}
               onClick={toggleMenu}
             >
-              Дня
+              Цього дня
             </Link>
           </li>
           <li className={css.menuItem}>

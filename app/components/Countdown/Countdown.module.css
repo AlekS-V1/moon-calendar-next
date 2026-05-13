@@ -1,21 +1,22 @@
 .containerTimer {
-  padding-top: 8px;
+  display: block;
+  /* padding-top: 8px; */
   padding-bottom: 10px;
 }
 .titleTimer {
   padding-bottom: 5px;
 }
 .symbolsTimer {
-  font-size: 16px;
+  font-size: 24px;
 }
 
 @media (min-width: 768px) {
   .symbolsTimer {
-    font-size: 18px;
+    font-size: 20px;
   }
 }
 
-@media (min-width: 1085px) {
+@media (min-width: 1200px) {
   .symbolsTimer {
     font-size: 14px;
   }

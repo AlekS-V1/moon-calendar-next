@@ -46,14 +46,16 @@ const MoonToday = () => {
             <h4 className={css.underTitleMoonToday}>
               {today.moonDay} Місячний день
             </h4>
-            <p>
-              до{" "}
-              {new Date(today.nextDayStart).toLocaleDateString("uk-UA", {
-                hour: "2-digit",
-                minute: "2-digit",
-              })}
-            </p>
-            <Countdown target={today.nextDayStart} />
+            <div className={css.timer}>
+              <p className={css.dateTimer}>
+                до{" "}
+                {new Date(today.nextDayStart).toLocaleDateString("uk-UA", {
+                  hour: "2-digit",
+                  minute: "2-digit",
+                })}
+              </p>
+              <Countdown target={today.nextDayStart} />
+            </div>
             {/* <p className={css.textMoonToday}>
               до наступного ще {progressRemaining}%
             </p> */}
