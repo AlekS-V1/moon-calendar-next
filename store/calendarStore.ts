@@ -66,10 +66,7 @@ interface StoreState {
     dayNumber: number,
   ) => Promise<HaircutDay | undefined>;
 
-  search5Days: (
-    key: LuckyKeys,
-    rating: RatingGroup,
-  ) => Promise<HaircutDay | undefined>;
+  search5Days: (key: LuckyKeys, rating: RatingGroup) => Promise<void>;
   setSelectedKey: (key: LuckyKeys | "") => void;
 
   resetSearch: () => void;
