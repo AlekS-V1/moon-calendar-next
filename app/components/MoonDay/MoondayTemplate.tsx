@@ -33,6 +33,8 @@ export const MoondayTemplate = ({
   // ❗ Вибираємо, що показувати: знайдений день або сьогоднішній
   // const day = searchedDay ?? today;
   const resDay = day.details;
+  console.log("dayNr", day.currentDayStart);
+  console.log("dayNr", day.nextDayStart);
 
   const [openGroups, setOpenGroups] = useState<string[]>([]);
 
@@ -209,12 +211,12 @@ export const MoondayTemplate = ({
               )}
               {day.phaseName ? (
                 <p className={css.textMoonToday}>
-                  {resDay.phase} {"("}
+                  {resDay.phase.text} {"("}
                   {day.phaseName}
                   {")"}
                 </p>
               ) : (
-                <p className={css.textMoonToday}>{resDay.phase}</p>
+                <p className={css.textMoonToday}>{resDay.phase.text}</p>
               )}
               <p className={css.textMoonToday}>{resDay.phaseDescription}</p>
             </div>

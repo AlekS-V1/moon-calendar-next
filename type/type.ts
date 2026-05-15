@@ -16,7 +16,10 @@ export interface MoonDayData {
 export interface MoonDay {
   _id: string;
   dayNumber: number;
-  phase: string;
+  phase: {
+    phaseId: moonPhase;
+    text: string;
+  };
   phaseDescription: string;
   qualities: string[];
   generalMeaning: string;
@@ -51,6 +54,7 @@ export interface Rating {
 }
 
 export interface Haircut {
+  haircutId: HaircutDay;
   lunarCalendar: string;
   tibetanCalendar: string;
   rating: Rating;

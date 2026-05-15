@@ -59,7 +59,7 @@ const MoonToday = () => {
             {/* <p className={css.textMoonToday}>
               до наступного ще {progressRemaining}%
             </p> */}
-            <p className={css.textMoonToday}>{resDay.phase}</p>
+            <p className={css.textMoonToday}>{resDay.phase.text}</p>
             <Link href="/phasetoday" className={css.textMoonToday}>
               {resDay.phaseDescription}
             </Link>
