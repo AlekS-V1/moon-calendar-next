@@ -4,7 +4,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import HaircutDayByIDClient from "./HaircutDayById.client";
-import { getSingleHaircutDay } from "@/lib/api";
+import { getSingleHaircutDay } from "@/lib/api/api";
 
 interface Props {
   params: Promise<{ id: string }>;

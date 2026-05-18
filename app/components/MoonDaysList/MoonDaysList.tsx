@@ -20,9 +20,6 @@ const MoonDaysList = () => {
     );
 
   const sortedDays = [...days].sort((a, b) => a.dayNumber - b.dayNumber);
-  {
-    sortedDays.map((day) => <MoonDayItem key={day.dayNumber} item={day} />);
-  }
 
   return (
     <div className={css.moondayList}>

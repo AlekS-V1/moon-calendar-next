@@ -8,7 +8,7 @@ import {
   getTodayPhases,
   searchMoondayData,
   searchMoonDays,
-} from "@/lib/api";
+} from "@/lib/api/api";
 import { LuckyKeys } from "@/lib/aspect";
 import { RatingGroup, ratingGroups } from "@/lib/ratingGroups";
 import {

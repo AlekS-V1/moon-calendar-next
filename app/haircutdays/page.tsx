@@ -1,6 +1,6 @@
 "use client";
 // import { useMoonStore } from "@/store/calendarStore";
-import { getListHaircutDays } from "@/lib/api";
+import { getListHaircutDays } from "@/lib/api/api";
 import { useEffect } from "react";
 
 const ListHaircutDays = async () => {

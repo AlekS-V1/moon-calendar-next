@@ -1,6 +1,6 @@
 "use client";
 // import { useMoonStore } from "@/store/calendarStore";
-import { getListPhases } from "@/lib/api";
+import { getListPhases } from "@/lib/api/api";
 import { useEffect } from "react";
 
 const Phases = async () => {

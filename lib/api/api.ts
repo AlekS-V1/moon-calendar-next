@@ -7,14 +7,57 @@ import type {
   moonPhase,
   moonPhaseData,
 } from "@/type/type";
-import { HttpError } from "./HttpError";
+import { HttpError } from "../HttpError";
+import { nextServer } from "./client";
 
 export interface MoonDayListResp {
   moonDay: MoonDay[];
   total: number;
 }
 
-axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
+// axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
+// const baseURL = process.env.NEXT_PUBLIC_API_URL;
+
+export const getMoondayList = async () => {
+  const resAll = await nextServer.get<MoonDayListResp>("/moonDays");
+  return resAll.data;
+};
+export const getMoondaySingle = async (id: string) => {
+  const resSingle = await nextServer.get<MoonDay>(`/moonDays/${id}`);
+  return resSingle.data;
+};
+
+export const getMoonToday = async () => {
+  const resToday = await nextServer.get<MoonDayData>(`/moon-today`);
+  return resToday.data;
+};
+
+export const getMoonByDate = async (
+  date: string,
+): Promise<MoonDayData | null> => {
+  try {
+    const res = await nextServer.get("/moon-date", {
+      params: { date },
+    });
+
+    if (!res.data) {
+      console.warn("❌ API returned empty body");
+      return null;
+    }
+
+    // Підтримка різних форматів
+    if (res.data.response) return res.data.response;
+    if (res.data.result) return res.data.result;
+    if (res.data.day) return res.data.day;
+    if (res.data.moonDay) return res.data;
+
+    console.warn("❌ Unknown API format:", res.data);
+    return null;
+  } catch (err: any) {
+    console.error("❌ searchMoondayData ERROR:", err);
+    return null;
+  }
+};
 
 //  глобальний wrapper для fetch перехоплення 429
 export async function fetchWithErrors(url: string, options?: RequestInit) {

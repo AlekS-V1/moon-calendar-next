@@ -1,4 +1,4 @@
-import { getListDays, getSingleMoonday } from "@/lib/api";
+import { getListDays, getSingleMoonday } from "@/lib/api/api";
 import {
   dehydrate,
   HydrationBoundary,
