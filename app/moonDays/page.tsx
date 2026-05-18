@@ -6,6 +6,8 @@ import {
 } from "@tanstack/react-query";
 import MoondaysListClient from "./DaysList.client";
 import { DaysTitlesList } from "../components/DaysTitleList/DaysTitleList.client";
+import { DatePicker } from "../components/DayByDate/SearchByDate";
+import { MoonDayInfo } from "../components/DayByDate/DayByDate";
 
 const NotesPage = async () => {
   const queryClient = new QueryClient();
@@ -18,6 +20,8 @@ const NotesPage = async () => {
   return (
     <>
       <DaysTitlesList />
+      <DatePicker />
+      <MoonDayInfo />
       <HydrationBoundary state={dehydrate(queryClient)}>
         <MoondaysListClient />
       </HydrationBoundary>

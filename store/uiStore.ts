@@ -1,5 +1,5 @@
 // store/uiStore.ts
-import { MoonDay } from "@/type/type";
+
 import { create } from "zustand";
 
 interface StoreState {
@@ -12,4 +12,14 @@ export const useUIStore = create<StoreState>()((set) => ({
   setActiveDayId: (id) => {
     set({ activeDayId: id }); // Оновлюємо стан
   },
+}));
+
+interface DateState {
+  searchDate: string; // Формат "YYYY-MM-DD"
+  setSearchDate: (date: string) => void;
+}
+
+export const useDateStore = create<DateState>((set) => ({
+  searchDate: "", // Початкове значення
+  setSearchDate: (date) => set({ searchDate: date }),
 }));
