@@ -16,7 +16,7 @@ import ErrorPage from "../ErrorPage/ErrorPage";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-const SearchLuckyDay = () => {
+const SearchLuckyDayOld = () => {
   const {
     search5Days,
     searchResults,
@@ -238,7 +238,7 @@ const SearchLuckyDay = () => {
   );
 };
 
-export default SearchLuckyDay;
+export default SearchLuckyDayOld;
 
 // "use client";
 

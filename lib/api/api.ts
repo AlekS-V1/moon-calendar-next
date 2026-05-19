@@ -59,6 +59,32 @@ export const getMoonByDate = async (
   }
 };
 
+interface MoonDayQueryParams {
+  key: string; //  key: 'date' | 'phase' | 'id'; // TypeScript видасть помилку, якщо прийде інше слово
+  value: string;
+}
+
+export const getLuckyMoonDays = async (
+  key: string,
+  value: string,
+): Promise<MoonDayData[]> => {
+  const queryParams: MoonDayQueryParams = { key, value };
+  try {
+    const res = await nextServer.get<LuckyDayResponse>("/your-moon", {
+      // params: { queryParams },
+      params: { key, value },
+    });
+
+    return res.data.result;
+  } catch (err: any) {
+    const error: HttpError = new Error(
+      err.response?.statusText || "Request failed",
+    );
+    error.status = err.response?.status ?? 500;
+    throw error; // ❗️ ГОЛОВНЕ
+  }
+};
+
 //  глобальний wrapper для fetch перехоплення 429
 export async function fetchWithErrors(url: string, options?: RequestInit) {
   const res = await fetch(url, options);

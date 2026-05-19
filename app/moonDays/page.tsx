@@ -8,6 +8,7 @@ import MoondaysListClient from "./DaysList.client";
 import { DaysTitlesList } from "../components/DaysTitleList/DaysTitleList.client";
 import { DatePicker } from "../components/DayByDate/SearchByDate";
 import { MoonDayInfo } from "../components/DayByDate/DayByDate";
+import SearchLuckyDay from "../components/TOPDaySearch/TOPDaySearch";
 
 const NotesPage = async () => {
   const queryClient = new QueryClient();
@@ -20,6 +21,7 @@ const NotesPage = async () => {
   return (
     <>
       <DaysTitlesList />
+      <SearchLuckyDay />
       <DatePicker />
       <MoonDayInfo />
       <HydrationBoundary state={dehydrate(queryClient)}>

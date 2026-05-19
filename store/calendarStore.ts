@@ -3,6 +3,7 @@ import {
   getListDays,
   getListHaircutDays,
   getListPhases,
+  getLuckyMoonDays,
   getTodayHaircutDay,
   getTodayMoonday,
   getTodayPhases,
@@ -326,7 +327,7 @@ export const useMoonStore = create<StoreState>()(
 
         for (const value of values) {
           try {
-            const res = await searchMoonDays(key, value);
+            const res = await getLuckyMoonDays(key, value);
 
             if (res.length > 0) {
               finalResults = res;

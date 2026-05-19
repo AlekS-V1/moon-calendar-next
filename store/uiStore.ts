@@ -1,5 +1,7 @@
 // store/uiStore.ts
 
+import { LuckyKeys } from "@/lib/aspect";
+import { RatingGroup, ratingGroups } from "@/lib/ratingGroups";
 import { create } from "zustand";
 
 interface StoreState {
@@ -22,4 +24,46 @@ interface DateState {
 export const useDateStore = create<DateState>((set) => ({
   searchDate: "", // Початкове значення
   setSearchDate: (date) => set({ searchDate: date }),
+}));
+
+interface SearchState {
+  // Те, що підтверджено кліком на кнопку (за цим стежить TanStack Query)
+  activeSearch: {
+    key: string;
+    values: readonly string[];
+  } | null;
+  triggerSearch: (
+    key: string,
+    rating: RatingGroup,
+    // ratingGroups: Record<string, string[]
+  ) => void;
+  resetSearch: () => void;
+}
+
+export const useSearchStore = create<SearchState>((set) => ({
+  activeSearch: null, // Спочатку пошук не активовано
+
+  // Екшен, який викликається ПО КЛІКУ на кнопку
+  triggerSearch: (key, rating) => {
+    const values = ratingGroups[rating] || [];
+    set({
+      activeSearch: { key, values },
+    });
+  },
+
+  resetSearch: () => set({ activeSearch: null }),
+}));
+
+interface MoonUiState {
+  selectedKey: LuckyKeys | "";
+  setSelectedKey: (key: LuckyKeys | "") => void;
+  resetSearch: () => void;
+}
+
+export const useMoonStore = create<MoonUiState>((set) => ({
+  selectedKey: "", // Спочатку нічого не вибрано
+
+  setSelectedKey: (key) => set({ selectedKey: key }),
+
+  resetSearch: () => set({ selectedKey: "" }),
 }));
