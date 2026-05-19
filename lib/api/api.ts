@@ -15,9 +15,6 @@ export interface MoonDayListResp {
   total: number;
 }
 
-// axios.defaults.baseURL = process.env.NEXT_PUBLIC_API_URL;
-// const baseURL = process.env.NEXT_PUBLIC_API_URL;
-
 export const getMoondayList = async () => {
   const resAll = await nextServer.get<MoonDayListResp>("/moonDays");
   return resAll.data;
@@ -98,20 +95,20 @@ export async function fetchWithErrors(url: string, options?: RequestInit) {
   return res.json();
 }
 
-export const getListDays = async () => {
-  const resAll = await axios.get<MoonDayListResp>("/days");
-  return resAll.data;
-};
+// export const getListDays = async () => {
+//   const resAll = await axios.get<MoonDayListResp>("/days");
+//   return resAll.data;
+// };
 
-export const getSingleMoonday = async (id: string) => {
-  const resSingle = await axios.get<MoonDay>(`/days/${id}`);
-  return resSingle.data;
-};
+// export const getSingleMoonday = async (id: string) => {
+//   const resSingle = await axios.get<MoonDay>(`/days/${id}`);
+//   return resSingle.data;
+// };
 
-export const getTodayMoonday = async () => {
-  const resToday = await axios.get<MoonDayData>(`/today`);
-  return resToday.data;
-};
+// export const getTodayMoonday = async () => {
+//   const resToday = await axios.get<MoonDayData>(`/today`);
+//   return resToday.data;
+// };
 
 interface LuckyDayResponse {
   result: MoonDayData[];
@@ -135,35 +132,35 @@ interface MoondayData {
   response: MoonDayData;
 }
 
-export const searchMoondayData = async (
-  date: string,
-): Promise<MoonDayData | null> => {
-  try {
-    const res = await axios.get("/moon-day", {
-      params: { date },
-    });
+// export const searchMoondayData = async (
+//   date: string,
+// ): Promise<MoonDayData | null> => {
+//   try {
+//     const res = await axios.get("/moon-day", {
+//       params: { date },
+//     });
 
-    console.log("RAW AXIOS RESPONSE:", res);
-    console.log("RAW DATA:", res.data);
+//     console.log("RAW AXIOS RESPONSE:", res);
+//     console.log("RAW DATA:", res.data);
 
-    if (!res.data) {
-      console.warn("❌ API returned empty body");
-      return null;
-    }
+//     if (!res.data) {
+//       console.warn("❌ API returned empty body");
+//       return null;
+//     }
 
-    // Підтримка різних форматів
-    if (res.data.response) return res.data.response;
-    if (res.data.result) return res.data.result;
-    if (res.data.day) return res.data.day;
-    if (res.data.moonDay) return res.data;
+//     // Підтримка різних форматів
+//     if (res.data.response) return res.data.response;
+//     if (res.data.result) return res.data.result;
+//     if (res.data.day) return res.data.day;
+//     if (res.data.moonDay) return res.data;
 
-    console.warn("❌ Unknown API format:", res.data);
-    return null;
-  } catch (err: any) {
-    console.error("❌ searchMoondayData ERROR:", err);
-    return null;
-  }
-};
+//     console.warn("❌ Unknown API format:", res.data);
+//     return null;
+//   } catch (err: any) {
+//     console.error("❌ searchMoondayData ERROR:", err);
+//     return null;
+//   }
+// };
 
 // export const searchMoondayData = async (date: string): Promise<MoonDayData> => {
 //   const res = await axios.get<MoondayData>("/moon-day", {
@@ -172,43 +169,43 @@ export const searchMoondayData = async (
 //   return res.data.response;
 // };
 
-export const searchMoonDays = async (
-  key: string,
-  value: string,
-): Promise<MoonDayData[]> => {
-  try {
-    const res = await axios.get<LuckyDayResponse>("/lucky-day/", {
-      params: { key, value },
-    });
+// export const searchMoonDays = async (
+//   key: string,
+//   value: string,
+// ): Promise<MoonDayData[]> => {
+//   try {
+//     const res = await axios.get<LuckyDayResponse>("/lucky-day/", {
+//       params: { key, value },
+//     });
 
-    return res.data.result;
-  } catch (err: any) {
-    const error: HttpError = new Error(
-      err.response?.statusText || "Request failed",
-    );
-    error.status = err.response?.status ?? 500;
-    throw error; // ❗️ ГОЛОВНЕ
-  }
-};
+//     return res.data.result;
+//   } catch (err: any) {
+//     const error: HttpError = new Error(
+//       err.response?.statusText || "Request failed",
+//     );
+//     error.status = err.response?.status ?? 500;
+//     throw error; // ❗️ ГОЛОВНЕ
+//   }
+// };
 
 // --- PHASES RECOMINDATION---
 
 export const getListPhases = async (): Promise<moonPhase[]> => {
-  const resAll = await axios.get<moonPhase[]>("/phases");
+  const resAll = await nextServer.get<moonPhase[]>("/phases");
   return resAll.data;
 };
 
 export const getPhasesByDaynumber = async (
   moonDay: number,
 ): Promise<moonPhaseData> => {
-  const resDay = await axios.get<moonPhaseData>("/phasebyday", {
+  const resDay = await nextServer.get<moonPhaseData>("/phases/byday", {
     params: { moonDay },
   });
   return resDay.data;
 };
 
 export const getTodayPhases = async (): Promise<moonPhaseData> => {
-  const resToday = await axios.get<moonPhaseData>(`/phasetoday`);
+  const resToday = await nextServer.get<moonPhaseData>(`/phases/today`);
   return resToday.data;
 };
 
