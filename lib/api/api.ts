@@ -212,26 +212,26 @@ export const getTodayPhases = async (): Promise<moonPhaseData> => {
 // --- HAIRCUT ---
 
 export const getListHaircutDays = async (): Promise<HaircutDay[]> => {
-  const resAll = await axios.get<HaircutDay[]>("/haircutdays");
+  const resAll = await nextServer.get<HaircutDay[]>("/haircut/days");
   console.log(resAll.data);
   return resAll.data;
 };
 
 export const getSingleHaircutDay = async (id: string) => {
-  // const resSingle = await axios.get<HaircutDay>(`/haircutday/${id}`);
+  // const resSingle = await nextServer.get<HaircutDay>(`/haircut/days/${id}`);
   // return resSingle.data;
 };
 
 export const getHaircutDayByDaynumber = async (
   moonDay: number,
 ): Promise<HaircutData> => {
-  const resDay = await axios.get<HaircutData>("/haircutbyday", {
+  const resDay = await nextServer.get<HaircutData>("/haircut/byday", {
     params: { moonDay },
   });
   return resDay.data;
 };
 
 export const getTodayHaircutDay = async (): Promise<HaircutData> => {
-  const resToday = await axios.get<HaircutData>(`/todayhaircut`);
+  const resToday = await nextServer.get<HaircutData>(`/haircut/today`);
   return resToday.data;
 };
