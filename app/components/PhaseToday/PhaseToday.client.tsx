@@ -1,30 +1,31 @@
 "use client";
 
-import { useMoonStore } from "@/store/calendarStore";
+import { usePhaseToday } from "@/lib/hooks/usePhaseToday";
+import { useMoonToday } from "@/lib/hooks/useToday";
 import { useEffect } from "react";
 
-const PhaseTodayClient = async () => {
-  const { phasetoday, fetchPhaseToday } = useMoonStore();
+const PhaseTodayClient = () => {
+  const { data: phaseToday } = usePhaseToday();
 
-  useEffect(() => {
-    fetchPhaseToday();
-  }, []);
+  // useEffect(() => {
+  //   fetchPhaseToday();
+  // }, []);
 
   return (
     <>
       <div>
         <h2> Рекомендаці на поточний період: </h2>
-        <h3>{phasetoday?.phase}</h3>
+        <h3>{phaseToday?.phase}</h3>
         <br />
-        <h4>{phasetoday?.energy}</h4>
+        <h4>{phaseToday?.energy}</h4>
         <br />
         <br />
-        {phasetoday?.description}
+        {phaseToday?.description}
         <br />
         <br />
         <h3>Оздоровчі практики</h3> <br />
         <ul>
-          {phasetoday?.wellness_practices.map((w) => (
+          {phaseToday?.wellness_practices.map((w) => (
             <li key={w}>{w}</li>
           ))}
         </ul>
@@ -34,7 +35,7 @@ const PhaseTodayClient = async () => {
           <h3>Харчування</h3>
           <br />
           <ul>
-            {phasetoday?.nutrition.general.map((g) => (
+            {phaseToday?.nutrition.general.map((g) => (
               <li key={g}>{g}</li>
             ))}
           </ul>
@@ -45,7 +46,7 @@ const PhaseTodayClient = async () => {
               <h4>Насіння:</h4>
               <br />
               <ul>
-                {phasetoday?.nutrition.seed_support.map((s) => (
+                {phaseToday?.nutrition.seed_support.map((s) => (
                   <li key={s}>{s}</li>
                 ))}
               </ul>
@@ -56,7 +57,7 @@ const PhaseTodayClient = async () => {
               <h4>Бажано вживати:</h4>
               <br />
               <ul>
-                {phasetoday?.nutrition.preferred.map((p) => (
+                {phaseToday?.nutrition.preferred.map((p) => (
                   <li key={p}>{p}</li>
                 ))}
               </ul>
@@ -67,7 +68,7 @@ const PhaseTodayClient = async () => {
               <h4>Для очищення організму:</h4>
               <br />
               <ul>
-                {phasetoday?.nutrition.energyPurpose.map((d) => (
+                {phaseToday?.nutrition.energyPurpose.map((d) => (
                   <li key={d}>{d}</li>
                 ))}
               </ul>
@@ -78,7 +79,7 @@ const PhaseTodayClient = async () => {
               <h4>Краще уникати:</h4>
               <br />
               <ul>
-                {phasetoday?.nutrition.avoid_excess.map((a) => (
+                {phaseToday?.nutrition.avoid_excess.map((a) => (
                   <li key={a}>{a}</li>
                 ))}
               </ul>

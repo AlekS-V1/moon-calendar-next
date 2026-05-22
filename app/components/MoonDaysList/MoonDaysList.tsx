@@ -3,34 +3,31 @@
 import MoonDayItem from "../MoonDay/MoonDayItem";
 import MoonLoader from "../MoonLoader/MoonLoader";
 import css from "./MoonDaysList.module.css";
-import { useMoonStore } from "@/store/calendarStore";
+// import { useMoonStore } from "@/store/calendarStore";
 import { useEffect } from "react";
 
 const MoonDaysList = () => {
-  const { days, fetchDays } = useMoonStore();
-
-  useEffect(() => {
-    fetchDays();
-  }, []);
-  if (!days.length)
-    return (
-      <div>
-        <MoonLoader />
-      </div>
-    );
-
-  const sortedDays = [...days].sort((a, b) => a.dayNumber - b.dayNumber);
-
-  return (
-    <div className={css.moondayList}>
-      {/* <p className={css.textMoodayList}>Дні місяця:</p> */}
-      <ul className={css.daysList}>
-        {sortedDays.map((day) => (
-          <MoonDayItem key={day._id} item={day} />
-        ))}
-      </ul>
-    </div>
-  );
+  // const { days, fetchDays } = useMoonStore();
+  // useEffect(() => {
+  //   fetchDays();
+  // }, []);
+  // if (!days.length)
+  //   return (
+  //     <div>
+  //       <MoonLoader />
+  //     </div>
+  //   );
+  // const sortedDays = [...days].sort((a, b) => a.dayNumber - b.dayNumber);
+  // return (
+  //   <div className={css.moondayList}>
+  //     {/* <p className={css.textMoodayList}>Дні місяця:</p> */}
+  //     <ul className={css.daysList}>
+  //       {sortedDays.map((day) => (
+  //         <MoonDayItem key={day._id} item={day} />
+  //       ))}
+  //     </ul>
+  //   </div>
+  // );
 };
 
 export default MoonDaysList;

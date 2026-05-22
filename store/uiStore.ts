@@ -67,3 +67,17 @@ export const useMoonStore = create<MoonUiState>((set) => ({
 
   resetSearch: () => set({ selectedKey: "" }),
 }));
+
+interface DayNumState {
+  searchPhase: number;
+  searchByPhaseNum: number;
+  setSearchPhase: (dayNumber: number) => void;
+  setSearchByPhaseNum: (dayNumber: number) => void;
+}
+
+export const usePhaseStore = create<DayNumState>((set) => ({
+  searchPhase: 0, // Початкове значення
+  searchByPhaseNum: 0,
+  setSearchPhase: (dayNumber) => set({ searchPhase: dayNumber }),
+  setSearchByPhaseNum: (phaseNumber) => set({ searchByPhaseNum: phaseNumber }),
+}));

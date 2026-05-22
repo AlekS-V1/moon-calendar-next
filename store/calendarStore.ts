@@ -1,14 +1,14 @@
 import {
   getHaircutDayByDaynumber,
-  getListDays,
+  // getListDays,
   getListHaircutDays,
   getListPhases,
   getLuckyMoonDays,
   getTodayHaircutDay,
-  getTodayMoonday,
+  // getTodayMoonday,
   getTodayPhases,
-  searchMoondayData,
-  searchMoonDays,
+  // searchMoondayData,
+  // searchMoonDays,
 } from "@/lib/api/api";
 import { LuckyKeys } from "@/lib/aspect";
 import { RatingGroup, ratingGroups } from "@/lib/ratingGroups";
@@ -79,322 +79,322 @@ interface StoreState {
   filteredAspects: () => any[];
 }
 
-export const useMoonStore = create<StoreState>()(
-  persist(
-    (set, get) => ({
-      dayDate: null,
-      days: [],
-      total: 0,
-      today: null,
-      isLoaded: false,
-      cache: {},
+// export const useMoonStore = create<StoreState>()(
+// persist(
+// (set, get) => ({
+//   dayDate: null,
+//   days: [],
+//   total: 0,
+//   today: null,
+//   isLoaded: false,
+//   cache: {},
 
-      phases: [],
-      phasetoday: null,
-      moonDayData: {},
-      haircutDays: [],
-      todayHaircut: null,
+//   phases: [],
+//   phasetoday: null,
+//   moonDayData: {},
+//   haircutDays: [],
+//   todayHaircut: null,
 
-      searchResults: [],
-      isSearching: false,
-      activeValue: null,
-      selectedAspectIds: [],
+//   searchResults: [],
+//   isSearching: false,
+//   activeValue: null,
+//   selectedAspectIds: [],
 
-      error: null,
-      retryCount: 0,
-      maxRetries: 3,
-      selectedKey: "",
-      setSelectedKey: (key) => set({ selectedKey: key }),
-      setError: (error) => set({ error }),
-      clearError: () => set({ error: null }),
-      incrementRetry: () => set((s) => ({ retryCount: s.retryCount + 1 })),
-      resetRetry: () => set({ retryCount: 0 }),
+//   error: null,
+//   retryCount: 0,
+//   maxRetries: 3,
+//   selectedKey: "",
+//   setSelectedKey: (key) => set({ selectedKey: key }),
+//   setError: (error) => set({ error }),
+//   clearError: () => set({ error: null }),
+//   incrementRetry: () => set((s) => ({ retryCount: s.retryCount + 1 })),
+//   resetRetry: () => set({ retryCount: 0 }),
 
-      toggleAspect: (id: string) => {
-        const { selectedAspectIds } = get();
-        const exists = selectedAspectIds.includes(id);
-        set({
-          selectedAspectIds: exists
-            ? selectedAspectIds.filter((x) => x !== id)
-            : [...selectedAspectIds, id],
-        });
-      },
+//   toggleAspect: (id: string) => {
+//     const { selectedAspectIds } = get();
+//     const exists = selectedAspectIds.includes(id);
+//     set({
+//       selectedAspectIds: exists
+//         ? selectedAspectIds.filter((x) => x !== id)
+//         : [...selectedAspectIds, id],
+//     });
+//   },
 
-      selectAllAspects: () => {
-        const { today } = get();
-        if (!today) return;
-        const allKeys = Object.keys(today.details.lifeAspects);
-        set({ selectedAspectIds: allKeys });
-      },
-      clearAllAspects: () => {
-        set({ selectedAspectIds: [] });
-      },
-      filteredAspects: () => {
-        const { today, selectedAspectIds } = get();
-        if (!today) return [];
+//   selectAllAspects: () => {
+//     const { today } = get();
+//     if (!today) return;
+//     const allKeys = Object.keys(today.details.lifeAspects);
+//     set({ selectedAspectIds: allKeys });
+//   },
+//   clearAllAspects: () => {
+//     set({ selectedAspectIds: [] });
+//   },
+//   filteredAspects: () => {
+//     const { today, selectedAspectIds } = get();
+//     if (!today) return [];
 
-        if (selectedAspectIds.length === 0) return [];
+//     if (selectedAspectIds.length === 0) return [];
 
-        return Object.entries(today.details.lifeAspects)
-          .filter(([key]) => selectedAspectIds.includes(key))
-          .map(([key, aspect]) => ({ key, aspect }));
-      },
+//     return Object.entries(today.details.lifeAspects)
+//       .filter(([key]) => selectedAspectIds.includes(key))
+//       .map(([key, aspect]) => ({ key, aspect }));
+//   },
 
-      fetchDays: async () => {
-        if (get().isLoaded) return;
+//   fetchDays: async () => {
+//     if (get().isLoaded) return;
 
-        const data = await getListDays();
-        set({ days: data.moonDay, total: data.total, isLoaded: true });
-      },
+//     const data = await getListDays();
+//     set({ days: data.moonDay, total: data.total, isLoaded: true });
+//   },
 
-      fetchPhases: async () => {
-        if (get().isLoaded) return;
+//   fetchPhases: async () => {
+//     if (get().isLoaded) return;
 
-        const data = await getListPhases();
-        set({ phases: data, isLoaded: true });
-      },
+//     const data = await getListPhases();
+//     set({ phases: data, isLoaded: true });
+//   },
 
-      fetchPhaseToday: async () => {
-        if (get().phasetoday) return;
-        const data = await getTodayPhases();
-        set({ phasetoday: data });
-      },
+//   fetchPhaseToday: async () => {
+//     if (get().phasetoday) return;
+//     const data = await getTodayPhases();
+//     set({ phasetoday: data });
+//   },
 
-      fetchHaircutDays: async () => {
-        if (get().isLoaded) return;
+//   fetchHaircutDays: async () => {
+//     if (get().isLoaded) return;
 
-        const data = await getListHaircutDays();
-        set({ haircutDays: data, isLoaded: true });
-      },
+//     const data = await getListHaircutDays();
+//     set({ haircutDays: data, isLoaded: true });
+//   },
 
-      fetchTodayHaircut: async () => {
-        if (get().todayHaircut) return;
-        const data = await getTodayHaircutDay();
-        set({ todayHaircut: data });
-      },
-      fetchHaircutDayByID: (id) => {
-        return get().haircutDays.find((hcid) => hcid._id === id);
-      },
+//   fetchTodayHaircut: async () => {
+//     if (get().todayHaircut) return;
+//     const data = await getTodayHaircutDay();
+//     set({ todayHaircut: data });
+//   },
+//   fetchHaircutDayByID: (id) => {
+//     return get().haircutDays.find((hcid) => hcid._id === id);
+//   },
 
-      fetchToday: async () => {
-        if (get().today) return;
-        const data = await getTodayMoonday();
-        set({ today: data });
-      },
+//   fetchToday: async () => {
+//     if (get().today) return;
+//     const data = await getTodayMoonday();
+//     set({ today: data });
+//   },
 
-      fetchHaircutDayByDaynumber: async (dayNumber: number) => {
-        const cache = get().moonDayData;
+//   fetchHaircutDayByDaynumber: async (dayNumber: number) => {
+//     const cache = get().moonDayData;
 
-        if (cache[dayNumber]) {
-          return cache[dayNumber];
-        }
+//     if (cache[dayNumber]) {
+//       return cache[dayNumber];
+//     }
 
-        set({ isLoaded: true, error: null });
-        try {
-          const resData = await getHaircutDayByDaynumber(dayNumber);
-          if (!resData) throw new Error("Помилка запиту");
+//     set({ isLoaded: true, error: null });
+//     try {
+//       const resData = await getHaircutDayByDaynumber(dayNumber);
+//       if (!resData) throw new Error("Помилка запиту");
 
-          const json: HaircutDay = await resData;
+//       const json: HaircutDay = await resData;
 
-          set({
-            moonDayData: {
-              ...cache,
-              [dayNumber]: json,
-            },
-            isLoaded: false,
-          });
-          return json;
-        } catch (error: any) {
-          set({ error: error.message, isLoaded: false });
-        }
-      },
+//       set({
+//         moonDayData: {
+//           ...cache,
+//           [dayNumber]: json,
+//         },
+//         isLoaded: false,
+//       });
+//       return json;
+//     } catch (error: any) {
+//       set({ error: error.message, isLoaded: false });
+//     }
+//   },
 
-      fetchDayByDate: async (date: string) => {
-        // console.log("FETCH CALLED", date);
+//   fetchDayByDate: async (date: string) => {
+//     // console.log("FETCH CALLED", date);
 
-        set({ isSearching: true }); // 🔥 ЛОАДЕР ПОЧАВСЯ
+//     set({ isSearching: true }); // 🔥 ЛОАДЕР ПОЧАВСЯ
 
-        try {
-          const { cache } = get();
+//     try {
+//       const { cache } = get();
 
-          if (cache[date]) {
-            // console.log("FROM CACHE", cache[date]);
-            set({
-              dayDate: cache[date],
-              isLoaded: false,
-              isSearching: false, // 🔥 ЛОАДЕР ЗАВЕРШЕНО
-            });
-            return;
-          }
+//       if (cache[date]) {
+//         // console.log("FROM CACHE", cache[date]);
+//         set({
+//           dayDate: cache[date],
+//           isLoaded: false,
+//           isSearching: false, // 🔥 ЛОАДЕР ЗАВЕРШЕНО
+//         });
+//         return;
+//       }
 
-          set({ isLoaded: true });
+//       set({ isLoaded: true });
 
-          const dayResp = await searchMoondayData(date);
-          // console.log("RAW API RESPONSE:", dayResp);
+//       const dayResp = await searchMoondayData(date);
+//       // console.log("RAW API RESPONSE:", dayResp);
 
-          if (!dayResp) {
-            console.warn("❌ API returned EMPTY or undefined");
-            set({ dayDate: null, isLoaded: false, isSearching: false });
-            return;
-          }
+//       if (!dayResp) {
+//         console.warn("❌ API returned EMPTY or undefined");
+//         set({ dayDate: null, isLoaded: false, isSearching: false });
+//         return;
+//       }
 
-          const normalized = normalizeDay(dayResp, date);
-          // console.log("NORMALIZED:", normalized);
+//       const normalized = normalizeDay(dayResp, date);
+//       // console.log("NORMALIZED:", normalized);
 
-          if (!normalized) {
-            console.warn("❌ normalizeDay returned NULL");
-            set({ dayDate: null, isLoaded: false });
-            return;
-          }
+//       if (!normalized) {
+//         console.warn("❌ normalizeDay returned NULL");
+//         set({ dayDate: null, isLoaded: false });
+//         return;
+//       }
 
-          set((state) => ({
-            dayDate: normalized,
-            isLoaded: false,
-            cache: { ...state.cache, [date]: normalized },
-            isSearching: false, // 🔥 ЛОАДЕР ЗАВЕРШЕНО
-          }));
-        } catch (err) {
-          console.error("❌ fetchDayByDate ERROR:", err);
-          set({ dayDate: null, isLoaded: false, isSearching: false });
-        }
-      },
-      // fetchDayByDate: async (date: string) => {
-      //   const { cache } = get();
+//       set((state) => ({
+//         dayDate: normalized,
+//         isLoaded: false,
+//         cache: { ...state.cache, [date]: normalized },
+//         isSearching: false, // 🔥 ЛОАДЕР ЗАВЕРШЕНО
+//       }));
+//     } catch (err) {
+//       console.error("❌ fetchDayByDate ERROR:", err);
+//       set({ dayDate: null, isLoaded: false, isSearching: false });
+//     }
+//   },
+//   // fetchDayByDate: async (date: string) => {
+//   //   const { cache } = get();
 
-      //   console.log("FETCH CALLED", date);
+//   //   console.log("FETCH CALLED", date);
 
-      //   // 1. Якщо є в кеші — повертаємо нормалізовані дані
-      //   if (cache[date]) {
-      //     set({
-      //       dayDate: cache[date],
-      //       error: null,
-      //       isLoaded: false,
-      //     });
-      //     return;
-      //   }
+//   //   // 1. Якщо є в кеші — повертаємо нормалізовані дані
+//   //   if (cache[date]) {
+//   //     set({
+//   //       dayDate: cache[date],
+//   //       error: null,
+//   //       isLoaded: false,
+//   //     });
+//   //     return;
+//   //   }
 
-      //   // 2. Завантаження
-      //   set({ isLoaded: true, error: null });
+//   //   // 2. Завантаження
+//   //   set({ isLoaded: true, error: null });
 
-      //   const dayResp = await searchMoondayData(date);
-      //   const normalizedDate = normalizeDay(dayResp, date);
+//   //   const dayResp = await searchMoondayData(date);
+//   //   const normalizedDate = normalizeDay(dayResp, date);
 
-      //   // 3. Записуємо нормалізовані дані + кеш
-      //   if (!normalizedDate) {
-      //     set({ dayDate: null, isLoaded: false });
-      //     return;
-      //   }
+//   //   // 3. Записуємо нормалізовані дані + кеш
+//   //   if (!normalizedDate) {
+//   //     set({ dayDate: null, isLoaded: false });
+//   //     return;
+//   //   }
 
-      //   set((state) => ({
-      //     dayDate: normalizedDate,
-      //     isLoaded: false,
-      //     cache: {
-      //       ...state.cache,
-      //       [date]: normalizedDate,
-      //     },
-      //   }));
+//   //   set((state) => ({
+//   //     dayDate: normalizedDate,
+//   //     isLoaded: false,
+//   //     cache: {
+//   //       ...state.cache,
+//   //       [date]: normalizedDate,
+//   //     },
+//   //   }));
 
-      //   console.log("FETCH CALLED", date);
+//   //   console.log("FETCH CALLED", date);
 
-      //   console.log("details:", dayResp.details);
-      //   console.log("dayNumber:", dayResp.details.dayNumber);
+//   //   console.log("details:", dayResp.details);
+//   //   console.log("dayNumber:", dayResp.details.dayNumber);
 
-      //   // set({ dayDate: normalizedDate, isLoaded: false });
-      //   // if (dayResp) {
-      //   //   set((state) => ({
-      //   //     dayDate: dayResp,
-      //   //     isLoading: false,
-      //   //     // 3. Зберігаємо результат у кеш для майбутніх викликів
-      //   //     cache: { ...state.cache, [date]: dayResp },
-      //   //   }));
-      //   // }
-      // },
+//   //   // set({ dayDate: normalizedDate, isLoaded: false });
+//   //   // if (dayResp) {
+//   //   //   set((state) => ({
+//   //   //     dayDate: dayResp,
+//   //   //     isLoading: false,
+//   //   //     // 3. Зберігаємо результат у кеш для майбутніх викликів
+//   //   //     cache: { ...state.cache, [date]: dayResp },
+//   //   //   }));
+//   //   // }
+//   // },
 
-      getDayById: (id) => {
-        return get().days.find((d) => d._id === id);
-      },
-      search5Days: async (key: LuckyKeys, rating: RatingGroup) => {
-        const values = ratingGroups[rating];
+//   getDayById: (id) => {
+//     return get().days.find((d) => d._id === id);
+//   },
+//   search5Days: async (key: LuckyKeys, rating: RatingGroup) => {
+//     const values = ratingGroups[rating];
 
-        set({
-          isSearching: true,
-          searchResults: [],
-          activeValue: null,
-        });
+//     set({
+//       isSearching: true,
+//       searchResults: [],
+//       activeValue: null,
+//     });
 
-        let finalResults: MoonDayData[] = [];
-        let matchedValue: string | null = null;
+//     let finalResults: MoonDayData[] = [];
+//     let matchedValue: string | null = null;
 
-        for (const value of values) {
-          try {
-            const res = await getLuckyMoonDays(key, value);
+//     for (const value of values) {
+//       try {
+//         const res = await getLuckyMoonDays(key, value);
 
-            if (res.length > 0) {
-              finalResults = res;
-              matchedValue = value;
-              break;
-            }
-          } catch (err: any) {
-            // Якщо axios не отримав response, але DevTools показує 429 → це network error
-            if (!err.response) {
-              set({
-                error: {
-                  status: 429,
-                  message: "Забагато запитів. Сервер тимчасово недоступний.",
-                },
-                isSearching: false,
-              });
-              return;
-            }
-            const status = err.response.status;
-            set({
-              error: {
-                status,
-                message: err.response?.statusText || "Сталася помилка",
-              },
-              isSearching: false,
-            });
-            return;
-          }
-        }
+//         if (res.length > 0) {
+//           finalResults = res;
+//           matchedValue = value;
+//           break;
+//         }
+//       } catch (err: any) {
+//         // Якщо axios не отримав response, але DevTools показує 429 → це network error
+//         if (!err.response) {
+//           set({
+//             error: {
+//               status: 429,
+//               message: "Забагато запитів. Сервер тимчасово недоступний.",
+//             },
+//             isSearching: false,
+//           });
+//           return;
+//         }
+//         const status = err.response.status;
+//         set({
+//           error: {
+//             status,
+//             message: err.response?.statusText || "Сталася помилка",
+//           },
+//           isSearching: false,
+//         });
+//         return;
+//       }
+//     }
 
-        if (finalResults.length > 0) {
-          finalResults.sort((a, b) => a.moonDay - b.moonDay);
-        }
+//     if (finalResults.length > 0) {
+//       finalResults.sort((a, b) => a.moonDay - b.moonDay);
+//     }
 
-        set({
-          searchResults: finalResults,
-          activeValue: matchedValue,
-          isSearching: false,
-        });
-      },
+//     set({
+//       searchResults: finalResults,
+//       activeValue: matchedValue,
+//       isSearching: false,
+//     });
+//   },
 
-      resetSearch: () => {
-        set({
-          searchResults: [],
-          isSearching: false,
-          activeValue: null,
-        });
-      },
-    }),
-    {
-      name: "moon-store-storage",
+//   resetSearch: () => {
+//     set({
+//       searchResults: [],
+//       isSearching: false,
+//       activeValue: null,
+//     });
+//   },
+// }),
+// {
+// name: "moon-store-storage",
 
-      // Зберігаємо тільки те, що потрібно
-      partialize: (state) => ({
-        // dayDate: state.dayDate,
-        // today: state.today,
-        cache: state.cache,
+// // Зберігаємо тільки те, що потрібно
+// partialize: (state) => ({
+//   // dayDate: state.dayDate,
+//   // today: state.today,
+//   cache: state.cache,
 
-        searchResults: state.searchResults,
-        activeValue: state.activeValue,
-        selectedKey: state.selectedKey,
+//   searchResults: state.searchResults,
+//   activeValue: state.activeValue,
+//   selectedKey: state.selectedKey,
 
-        selectedAspectIds: state.selectedAspectIds,
-      }),
-    },
-  ),
-);
+//   selectedAspectIds: state.selectedAspectIds,
+// }),
+// },
+// ),
+// );
 
 // export const useMoonStore = create<MoonState>((set, get) => ({
 //   day: null,

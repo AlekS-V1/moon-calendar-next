@@ -6,7 +6,7 @@ import React, { useState, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useLuckyDaysQuery } from "@/lib/hooks/useLuckyDay"; // Новий хук запитів
-import ErrorPage from "../ErrorPage/ErrorPage"; // Ваш компонент помилки
+// import ErrorPage from "../ErrorPage/ErrorPage"; // Ваш компонент помилки
 import { RatingGroup } from "@/lib/ratingGroups";
 import {
   allowedAspects,
@@ -69,11 +69,12 @@ const SearchLuckyDay = () => {
   // 4. Обробка помилок через ErrorPage (перезапуск через refetch)
   if (error) {
     return (
-      <ErrorPage
-        status={error.status || 500}
-        message={error.message || "Помилка завантаження даних"}
-        onRetry={() => refetch()}
-      />
+      <div>Error</div>
+      // <ErrorPage
+      //   status={error.status || 500}
+      //   message={error.message || "Помилка завантаження даних"}
+      //   onRetry={() => refetch()}
+      // />
     );
   }
 

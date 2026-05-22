@@ -204,6 +204,15 @@ export const getPhasesByDaynumber = async (
   return resDay.data;
 };
 
+export const getPhasesByPhaseNum = async (
+  phaseNumber: number,
+): Promise<moonPhaseData> => {
+  const resDay = await nextServer.get<moonPhaseData>("/phases/byphase", {
+    params: { phaseNumber },
+  });
+  return resDay.data;
+};
+
 export const getTodayPhases = async (): Promise<moonPhaseData> => {
   const resToday = await nextServer.get<moonPhaseData>(`/phases/today`);
   return resToday.data;

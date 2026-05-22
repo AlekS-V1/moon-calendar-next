@@ -1,6 +1,6 @@
 import Image from "next/image";
 import css from "./page.module.css";
-import MoonToday from "./components/MoonToday/MoonToday";
+// import MoonToday from "./components/MoonToday/MoonToday";
 import MoonDaysList from "./components/MoonDaysList/MoonDaysList";
 
 export default function Home() {
@@ -8,8 +8,8 @@ export default function Home() {
     <div className={css.page}>
       <main className={css.main}>
         <section className={css.sectionHome}>
-          <MoonDaysList />
-          <MoonToday />
+          {/* <MoonDaysList /> */}
+          {/* <MoonToday /> */}
         </section>
       </main>
     </div>

@@ -2,13 +2,13 @@ import { NextRequest, NextResponse } from "next/server";
 import { serverApi, ApiError } from "@/lib/api/server";
 
 type Props = {
-  params: Promise<{ moonDay: number }>;
+  params: Promise<{ phaseNumber: number }>;
 };
 
 export async function GET(request: NextRequest, { params }: Props) {
-  const moonDay = request.nextUrl.searchParams.get("moonDay");
+  const phaseNumber = request.nextUrl.searchParams.get("phaseNumber");
   try {
-    const { data } = await serverApi("/phasebyday", { params: { moonDay } }); // тут формуємо адресу запиту на бекенд
+    const { data } = await serverApi("/byphase", { params: { phaseNumber } }); // тут формуємо адресу запиту на бекенд
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(
