@@ -25,7 +25,7 @@ export const getMoondaySingle = async (id: string) => {
 };
 
 export const getMoonToday = async () => {
-  const resToday = await nextServer.get<MoonDayData>(`/moon-today`);
+  const resToday = await nextServer.get<MoonDayData>(`/moonDays/moon-today`);
   return resToday.data;
 };
 
@@ -33,7 +33,7 @@ export const getMoonByDate = async (
   date: string,
 ): Promise<MoonDayData | null> => {
   try {
-    const res = await nextServer.get("/moon-date", {
+    const res = await nextServer.get("/moonDays/moon-date", {
       params: { date },
     });
 
@@ -67,7 +67,7 @@ export const getLuckyMoonDays = async (
 ): Promise<MoonDayData[]> => {
   const queryParams: MoonDayQueryParams = { key, value };
   try {
-    const res = await nextServer.get<LuckyDayResponse>("/your-moon", {
+    const res = await nextServer.get<LuckyDayResponse>("/moonDays/your-moon", {
       // params: { queryParams },
       params: { key, value },
     });
