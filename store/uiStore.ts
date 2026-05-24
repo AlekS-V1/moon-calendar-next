@@ -81,3 +81,12 @@ export const usePhaseStore = create<DayNumState>((set) => ({
   setSearchPhase: (dayNumber) => set({ searchPhase: dayNumber }),
   setSearchByPhaseNum: (phaseNumber) => set({ searchByPhaseNum: phaseNumber }),
 }));
+
+interface HaircutDaysState {
+  searchByDayNum: number;
+  setSearchByDayNum: (dayNumber: number) => void;
+}
+export const useHaircutDays = create<HaircutDaysState>((set) => ({
+  searchByDayNum: 0,
+  setSearchByDayNum: (dayNumber) => set({ searchByDayNum: dayNumber }),
+}));

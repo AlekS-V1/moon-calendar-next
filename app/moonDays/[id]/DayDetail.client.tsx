@@ -10,7 +10,7 @@ const MoondayDetailsClient = ({ id }: { id: string }) => {
     queryFn: () => getMoondaySingle(id),
     staleTime: 1000 * 60 * 15, // 15 хвилин вважати дані свіжими
   });
-  console.log("moonDay: ", moonDay);
+  // console.log("moonDay: ", moonDay);
   if (error) return <div>Помилка: {error.message}</div>;
   if (!moonDay) return <div>Лодінг...</div>; // Цей рядок користувач ніколи не побачить
   const day = moonDay;

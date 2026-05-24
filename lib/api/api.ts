@@ -227,14 +227,14 @@ export const getListHaircutDays = async (): Promise<HaircutDay[]> => {
 };
 
 export const getSingleHaircutDay = async (id: string) => {
-  // const resSingle = await nextServer.get<HaircutDay>(`/haircut/days/${id}`);
-  // return resSingle.data;
+  const resSingle = await nextServer.get<HaircutDay>(`/haircut/days/${id}`);
+  return resSingle.data;
 };
 
 export const getHaircutDayByDaynumber = async (
   moonDay: number,
-): Promise<HaircutData> => {
-  const resDay = await nextServer.get<HaircutData>("/haircut/byday", {
+): Promise<HaircutDay> => {
+  const resDay = await nextServer.get<HaircutDay>("/haircut/byday", {
     params: { moonDay },
   });
   return resDay.data;

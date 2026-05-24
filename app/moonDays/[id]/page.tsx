@@ -1,6 +1,6 @@
-// app/notes/[id]/page.tsx
+// app/moonDays/[id]/page.tsx
 
-import { getMoondaySingle, getSingleMoonday } from "@/lib/api/api";
+import { getMoondaySingle } from "@/lib/api/api";
 import {
   HydrationBoundary,
   QueryClient,
@@ -9,9 +9,9 @@ import {
 import MoondayDetailsClient from "./DayDetail.client";
 import { DaysTitlesList } from "@/app/components/DaysTitleList/DaysTitleList.client";
 
-type Props = {
+interface Props {
   params: Promise<{ id: string }>;
-};
+}
 
 const MoondayPage = async ({ params }: Props) => {
   const { id } = await params;
