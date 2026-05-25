@@ -97,7 +97,7 @@ const TodayMoonday = () => {
 
   const showRemoveAll = selectedAspectIds.length >= 2;
 
-  if (!today) return <p>Завантаження...</p>;
+  if (isLoading || !today) return <p>Завантаження...</p>;
 
   const resDay = today.details;
 

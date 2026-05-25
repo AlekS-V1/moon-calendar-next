@@ -74,40 +74,9 @@ export const MoondayTemplate = ({
   const img =
     moonImages160[dayNumber as keyof typeof moonImages160] || moonImages160[1];
 
-  // export const MoondayTemplate = ({
-  //   date,
-  //   day,
-  //   selectedAspectIds,
-  //   toggleAspect,
-  //   selectAllAspects,
-  //   clearAllAspects,
-  // }: MoondayTemplateProps) => {
-  //   const [openGroups, setOpenGroups] = useState<string[]>([]);
-
-  //   console.log("Поточні дані в шаблоні:", date);
-
-  //   const { fetchDayByDate } = useMoonStore();
-  //   console.log("fetchDayByDate:", fetchDayByDate);
-
-  //   const resDay = day?.details;
-
-  //   const groupedAspects = useMemo(() => {
-  //     if (!resDay?.lifeAspects) return {};
-
-  //     return Object.entries(resDay.lifeAspects).reduce(
-  //       (acc, [key, aspect]) => {
-  //         const group = aspectGroups[key] ?? "Інше";
-  //         if (!acc[group]) acc[group] = [];
-  //         acc[group].push({ key, aspect });
-  //         return acc;
-  //       },
-  //       {} as Record<string, { key: string; aspect: any }[]>,
-  //     );
-  //   }, [resDay]);
-
-  //   if (!day || !resDay) {
-  //     return <p>Завантаження...</p>;
-  //   }
+  if (!day || !resDay) {
+    return <p>Завантаження...</p>;
+  }
 
   //   const dayNumber = Number(day.moonDay ?? resDay.dayNumber ?? 1);
   //   const img =
@@ -125,18 +94,8 @@ export const MoondayTemplate = ({
   //     setOpenGroups((prev) => Array.from(new Set([...prev, ...groupsToOpen])));
   //   }, [selectedAspectIds, groupedAspects]);
 
-  //   const toggleGroup = (groupName: string) => {
-  //     setOpenGroups((prev) =>
-  //       prev.includes(groupName)
-  //         ? prev.filter((g) => g !== groupName)
-  //         : [...prev, groupName],
-  //     );
-  //   };
-
+  //
   //   const showRemoveAll = selectedAspectIds.length >= 2;
-  //   console.log("TEMPLATE RENDER", date);
-
-  //   console.log("store B:", useMoonStore.getState());
 
   return (
     <>

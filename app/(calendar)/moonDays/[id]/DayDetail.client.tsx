@@ -9,7 +9,12 @@ import css from "./MoondayDetailsClient.module.css";
 
 const MoondayDetailsClient = ({ id }: { id: string }) => {
   // Дані підтягнуться МИТТЄВО з серверного кешу, isLoading відразу буде false
-  const { data: moonDay, error } = useQuery({
+  const {
+    data: moonDay,
+    isLoading,
+    isFetching,
+    error,
+  } = useQuery({
     queryKey: ["day", id],
     queryFn: () => getMoondaySingle(id),
     staleTime: 1000 * 60 * 60, //  хвилин вважати дані свіжими
@@ -18,9 +23,9 @@ const MoondayDetailsClient = ({ id }: { id: string }) => {
   const { selectedAspectIds, toggleAspect, selectAllAspects, clearAllAspects } =
     useAspectsSelectStore();
   if (error) return <div>Помилка: {error.message}</div>;
-  if (!moonDay) return <div>Лоадінг...</div>; // Цей рядок користувач ніколи не побачить
+  if (isLoading || !moonDay) return <div>Завантаження...</div>; // Цей рядок користувач ніколи не побачить
   const day = normalizeDay(moonDay);
-  if (!day) {
+  if (!day || isFetching) {
     return <p>Пошук дня...</p>;
   }
 
