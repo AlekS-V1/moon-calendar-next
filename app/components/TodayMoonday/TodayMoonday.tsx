@@ -43,26 +43,29 @@
 
 import { useEffect, useMemo, useState } from "react";
 import css from "./TodayMoonday.module.css";
-import { useMoonStore } from "@/store/calendarStore";
 import { aspectGroups, aspectTitles } from "@/lib/aspect";
 import { MoonSearchByData } from "../MoonSearchByData/MoonSearchByData";
 import Link from "next/link";
+import { useMoonToday } from "@/lib/hooks/useToday";
+import { useAspectsSelectStore } from "@/store/uiStore";
 
 const TodayMoonday = () => {
   const {
-    today,
-    fetchToday,
+    // today,
+    // fetchToday,
     selectedAspectIds,
     toggleAspect,
     selectAllAspects,
     clearAllAspects,
-  } = useMoonStore();
+  } = useAspectsSelectStore();
+
+  const { data: today, isLoading, isFetching } = useMoonToday();
 
   const [openGroups, setOpenGroups] = useState<string[]>([]);
 
-  useEffect(() => {
-    fetchToday();
-  }, [fetchToday]);
+  // useEffect(() => {
+  //   fetchToday();
+  // }, [fetchToday]);
 
   const groupedAspects = useMemo(() => {
     if (!today) return {} as Record<string, { key: string; aspect: any }[]>;

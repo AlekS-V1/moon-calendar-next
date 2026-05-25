@@ -222,7 +222,7 @@ export const getTodayPhases = async (): Promise<moonPhaseData> => {
 
 export const getListHaircutDays = async (): Promise<HaircutDay[]> => {
   const resAll = await nextServer.get<HaircutDay[]>("/haircut/days");
-  console.log(resAll.data);
+  // console.log(resAll.data);
   return resAll.data;
 };
 

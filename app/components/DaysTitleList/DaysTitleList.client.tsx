@@ -15,6 +15,7 @@ export function DaysTitlesList() {
     // Трансформуємо дані: витягуємо тільки _id та title
     select: (days) =>
       days.moonDay.map((day) => ({ _id: day._id, title: day.dayNumber })),
+    staleTime: Infinity,
   });
   const { data: today, error } = useMoonToday();
 

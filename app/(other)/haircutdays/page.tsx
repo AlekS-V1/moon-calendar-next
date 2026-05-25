@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-query";
 // import { useEffect } from "react";
 import HaircutDaysListClient from "./HaircutDays.client";
-import HaircutByDayClient from "../components/HaircutByDay/HaircutByDayClient";
+import HaircutByDayClient from "../../components/HaircutByDay/HaircutByDayClient";
 
 const ListHaircutDays = async () => {
   const queryClient = new QueryClient();

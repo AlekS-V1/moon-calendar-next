@@ -1,46 +1,46 @@
 "use client";
 
-import { MoondayTemplate } from "@/app/components/MoonDay/MoondayTemplate";
-import { useMoonStore } from "@/store/calendarStore";
+import { MoondayTemplate } from "@/app/components/AllInMoondayTemplate/MoondayTemplate";
+// import { useMoonStore } from "@/store/calendarStore";
 import { normalizeDay } from "@/type/type";
 import { useParams } from "next/navigation";
 import { useEffect } from "react";
 
 export default function MoondayDetailsClient() {
   const { id } = useParams<{ id: string }>();
-  const {
-    getDayById,
-    fetchDays,
-    selectedAspectIds,
-    toggleAspect,
-    selectAllAspects,
-    clearAllAspects,
-  } = useMoonStore();
+  // const {
+  //   getDayById,
+  //   fetchDays,
+  //   selectedAspectIds,
+  //   toggleAspect,
+  //   selectAllAspects,
+  //   clearAllAspects,
+  // } = useMoonStore();
 
-  useEffect(() => {
-    fetchDays();
-  }, []);
+  // useEffect(() => {
+  //   fetchDays();
+  // }, []);
 
-  if (!id || typeof id !== "string") {
-    return <p>Невірний ID</p>;
-  }
+  // if (!id || typeof id !== "string") {
+  //   return <p>Невірний ID</p>;
+  // }
 
-  const raw = getDayById(id); // MoonDay
-  const day = normalizeDay(raw);
+  // const raw = getDayById(id); // MoonDay
+  // const day = normalizeDay(raw);
 
-  if (!day) {
-    return <p>Пошук дня...</p>;
-  }
+  // if (!day) {
+  //   return <p>Пошук дня...</p>;
+  // }
 
-  return (
-    <MoondayTemplate
-      day={day}
-      selectedAspectIds={selectedAspectIds}
-      toggleAspect={toggleAspect}
-      selectAllAspects={selectAllAspects}
-      clearAllAspects={clearAllAspects}
-    />
-  );
+  // return (
+  //   <MoondayTemplate
+  //     day={day}
+  //     selectedAspectIds={selectedAspectIds}
+  //     toggleAspect={toggleAspect}
+  //     selectAllAspects={selectAllAspects}
+  //     clearAllAspects={clearAllAspects}
+  //   />
+  // );
 }
 
 // "use client";

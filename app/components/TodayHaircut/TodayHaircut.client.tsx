@@ -1,14 +1,12 @@
 "use client";
 
-import { useMoonStore } from "@/store/calendarStore";
+import { useHaircutToday } from "@/lib/hooks/useHaircutToday";
+// import { useMoonStore } from "@/store/calendarStore";
 import { useEffect } from "react";
 
 const TodayHaircutClient = async () => {
-  const { todayHaircut, fetchTodayHaircut } = useMoonStore();
+  const { data: todayHaircut } = useHaircutToday();
 
-  useEffect(() => {
-    fetchTodayHaircut();
-  }, []);
   return (
     <div>
       <br />

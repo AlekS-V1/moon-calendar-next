@@ -9,4 +9,4 @@ export const serverApi = axios.create({
   withCredentials: true,
 });
 
-console.log(serverApi);
+// console.log(serverApi);

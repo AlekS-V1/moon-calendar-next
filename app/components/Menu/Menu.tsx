@@ -17,7 +17,7 @@ const Menu = () => {
         <ul className={css.menuList}>
           <li className={css.menuItem}>
             <Link
-              href="/days"
+              href="/recommendation"
               aria-label="Moon days"
               className={css.linkMenu}
               onClick={toggleMenu}
@@ -27,7 +27,7 @@ const Menu = () => {
           </li>
           <li className={css.menuItem}>
             <Link
-              href="/phasetoday"
+              href="/phases/today"
               aria-label="Moon phases"
               className={css.linkMenu}
               onClick={toggleMenu}
@@ -37,7 +37,7 @@ const Menu = () => {
           </li>
           <li className={css.menuItem}>
             <Link
-              href="/todayhaircut"
+              href="/haircutdays/today"
               aria-label="Haircur today"
               className={css.linkMenu}
               onClick={toggleMenu}

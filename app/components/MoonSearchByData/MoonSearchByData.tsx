@@ -1,15 +1,16 @@
 "use client";
 
-import { useMoonStore } from "@/store/calendarStore";
+// import { useMoonStore } from "@/store/calendarStore";
 import { redirect } from "next/navigation";
 import { useState } from "react";
 import css from "./MoonSearchByData.module.css";
+import { useDateStore } from "@/store/uiStore";
 
 export const MoonSearchByData = () => {
   const [inputValue, setInputValue] = useState("");
 
   // ❗ ПРАВИЛЬНО: кожен селектор окремо
-  const fetchDayByDate = useMoonStore((s) => s.fetchDayByDate);
+  const fetchDayByDate = useDateStore((s) => s.setSearchDate);
   // const isLoaded = useMoonStore((s) => s.isLoaded);
 
   const handleSearch = () => {

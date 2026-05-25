@@ -98,7 +98,7 @@ export function normalizeDay(
 ): NormalizedDay | null {
   if (!raw) return null;
 
-  console.log("NORMALIZE", raw);
+  // console.log("NORMALIZE", raw);
 
   // Формат MoonDayData (твій основний випадок)
   if (raw.details && typeof raw.moonDay === "number") {

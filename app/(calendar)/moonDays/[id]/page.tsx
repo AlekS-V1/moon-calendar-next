@@ -25,8 +25,6 @@ const MoondayPage = async ({ params }: Props) => {
 
   return (
     <>
-      <DaysTitlesList />
-
       <HydrationBoundary state={dehydrate(queryClient)}>
         <MoondayDetailsClient id={id} />
       </HydrationBoundary>

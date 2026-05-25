@@ -1,6 +1,6 @@
 // app/luckyday/page.tsx
 
-import SearchLuckyDay from "@/app/components/SearchLuckyDay/SearchLuckyDay";
+import SearchLuckyDay from "@/app/components/TOPDaySearch/TOPDaySearch";
 import css from "./LuckyMoonDay.module.css";
 
 const LuckyMoonDay = () => {

@@ -7,7 +7,6 @@ import TodayMoonday from "../components/TodayMoonday/TodayMoonday";
 const Days = async () => {
   return (
     <section className={css.sectionTodayMoonday}>
-      <MoonDaysList />
       <TodayMoonday />
     </section>
   );

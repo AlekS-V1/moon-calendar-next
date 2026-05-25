@@ -2,7 +2,12 @@
 
 import { LuckyKeys } from "@/lib/aspect";
 import { RatingGroup, ratingGroups } from "@/lib/ratingGroups";
+import { MoonDayData } from "@/type/type";
 import { create } from "zustand";
+import { PersistOptions } from "zustand/middleware";
+import { persist } from "zustand/middleware";
+
+// --- Стан для підсвідчування вибраного дня ---
 
 interface StoreState {
   activeDayId: string | null; // Тут зберігається поточний ID
@@ -10,11 +15,71 @@ interface StoreState {
 }
 
 export const useUIStore = create<StoreState>()((set) => ({
-  activeDayId: null, // Спочатку жодна нотатка не обрана
+  activeDayId: null, // Спочатку жоден день не обран
   setActiveDayId: (id) => {
     set({ activeDayId: id }); // Оновлюємо стан
   },
 }));
+
+// --- Вибор аспекта ---
+
+interface AsspectState {
+  today: MoonDayData | null;
+  selectedAspectIds: string[];
+  toggleAspect: (id: string) => void;
+  selectAllAspects: () => void;
+  clearAllAspects: () => void;
+  filteredAspects: () => any[];
+}
+
+export const useAspectsSelectStore = create<AsspectState>()(
+  // Видалено явне типізування <AsspectState, [], PersistedAspectsState>
+  persist(
+    (set, get) => ({
+      today: null,
+      selectedAspectIds: [],
+
+      toggleAspect: (id: string) => {
+        const { selectedAspectIds } = get();
+        const exists = selectedAspectIds.includes(id);
+        set({
+          selectedAspectIds: exists
+            ? selectedAspectIds.filter((x) => x !== id)
+            : [...selectedAspectIds, id],
+        });
+      },
+
+      selectAllAspects: () => {
+        const { today } = get();
+        if (!today) return;
+        const allKeys = Object.keys(today.details.lifeAspects);
+        set({ selectedAspectIds: allKeys });
+      },
+
+      clearAllAspects: () => {
+        set({ selectedAspectIds: [] });
+      },
+
+      filteredAspects: () => {
+        const { today, selectedAspectIds } = get();
+        if (!today) return [];
+        if (selectedAspectIds.length === 0) return [];
+
+        return Object.entries(today.details.lifeAspects)
+          .filter(([key]) => selectedAspectIds.includes(key))
+          .map(([key, aspect]) => ({ key, aspect }));
+      },
+    }),
+    {
+      name: "moon-store-storage",
+      partialize: (state) => ({
+        selectedAspectIds: state.selectedAspectIds,
+      }),
+    },
+  ),
+);
+
+// --- Пошук за Датою ---
 
 interface DateState {
   searchDate: string; // Формат "YYYY-MM-DD"

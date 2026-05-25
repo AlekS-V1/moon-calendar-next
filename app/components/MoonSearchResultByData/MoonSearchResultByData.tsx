@@ -1,19 +1,33 @@
 "use client";
 
-import { useMoonStore } from "@/store/calendarStore";
-import { MoondayTemplate } from "../MoonDay/MoondayTemplate";
+import { useMoonDayByDate } from "@/lib/hooks/useDate";
+import { MoondayTemplate } from "../AllInMoondayTemplate/MoondayTemplate";
+import { useAspectsSelectStore, useDateStore } from "@/store/uiStore";
+import { redirect } from "next/navigation";
 
 export const MoonSearchResultView = () => {
-  const searched = useMoonStore((s) => s.dayDate);
-  const isSearching = useMoonStore((s) => s.isSearching);
+  const searchDate = useDateStore((state) => state.searchDate);
 
-  const selectedAspectIds = useMoonStore((s) => s.selectedAspectIds);
-  const toggleAspect = useMoonStore((s) => s.toggleAspect);
-  const selectAllAspects = useMoonStore((s) => s.selectAllAspects);
-  const clearAllAspects = useMoonStore((s) => s.clearAllAspects);
+  const {
+    data: searched,
+    isLoading,
+    isFetching,
+    error,
+  } = useMoonDayByDate(searchDate);
+
+  // const isSearching = useMoonStore((s) => s.isSearching);
+  // const { searchDate, setSearchDate } = useDateStore();
+
+  const { selectedAspectIds, toggleAspect, selectAllAspects, clearAllAspects } =
+    useAspectsSelectStore();
+
+  // const selectedAspectIds = useMoonStore((s) => s.selectedAspectIds);
+  // const toggleAspect = useMoonStore((s) => s.toggleAspect);
+  // const selectAllAspects = useMoonStore((s) => s.selectAllAspects);
+  // const clearAllAspects = useMoonStore((s) => s.clearAllAspects);
 
   // 🔄 ЛОАДЕР ПІД ЧАС ЗАПИТУ
-  if (isSearching) {
+  if (isFetching) {
     return (
       <div style={{ padding: "20px", textAlign: "center" }}>
         <div className="loader"></div>
@@ -22,13 +36,15 @@ export const MoonSearchResultView = () => {
     );
   }
 
+  if (isLoading) return <div>Завантаження даних для дати...</div>;
+
   // ❌ НІЧОГО НЕ ЗНАЙДЕНО
   if (!searched) {
-    return (
-      <div style={{ padding: "20px", textAlign: "center" }}>
-        <p>Нічого не знайдено</p>
-      </div>
-    );
+    <div>
+      <p>❌ Нічого не знайдено</p>
+    </div>;
+    redirect("/recommendation");
+    // return;
   }
 
   // ✅ Є РЕЗУЛЬТАТ

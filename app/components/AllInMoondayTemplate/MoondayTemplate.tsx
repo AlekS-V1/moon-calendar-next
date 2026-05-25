@@ -21,20 +21,11 @@ export const MoondayTemplate = ({
   selectAllAspects,
   clearAllAspects,
 }: MoondayTemplateProps) => {
-  // ❗ Беремо дані тільки зі стора
-  // const today = useMoonStore((s) => s.today);
-  // const searchedDay = useMoonStore((s) => s.dayDate);
-  // const selectedAspectIds = useMoonStore((s) => s.selectedAspectIds);
-  // const toggleAspect = useMoonStore((s) => s.toggleAspect);
-  // const selectAllAspects = useMoonStore((s) => s.selectAllAspects);
-  // const clearAllAspects = useMoonStore((s) => s.clearAllAspects);
-  // const showRemoveAll = selectedAspectIds.length >= 2;
-
   // ❗ Вибираємо, що показувати: знайдений день або сьогоднішній
   // const day = searchedDay ?? today;
   const resDay = day.details;
-  console.log("dayNr", day.currentDayStart);
-  console.log("dayNr", day.nextDayStart);
+  // console.log("dayNr", day.currentDayStart);
+  // console.log("dayNr", day.nextDayStart);
 
   const [openGroups, setOpenGroups] = useState<string[]>([]);
 
@@ -68,15 +59,6 @@ export const MoondayTemplate = ({
   //   }
   // }, [groupedAspects, resDay]);
 
-  // ❗ Якщо даних немає взагалі
-  // if (!day || !resDay) {
-  //   return (
-  //     <div className={css.containerToday}>
-  //       <MoonSearchByData />
-  //       <p>Оберіть дату для перегляду</p>
-  //     </div>
-  //   );
-  // }
   const toggleGroup = (groupName: string) => {
     setOpenGroups((prev) =>
       prev.includes(groupName)

@@ -1,6 +1,6 @@
 "use client";
 
-import css from "../SearchLuckyDay/SearchLuckyDay.module.css";
+import css from "./SearchLuckyDay.module.css";
 
 import React, { useState, useMemo } from "react";
 import Link from "next/link";
@@ -17,9 +17,6 @@ import {
 import { moonImages32 } from "@/lib/moonPhase30";
 import { useMoonStore } from "@/store/uiStore"; // Оновлений чистий стор
 
-// Припущення щодо імпорту ваших констант (підставте власні шляхи)
-// import { allowedAspects, aspectLabels, aspectMap, moonImages32 } from '@/constants';
-
 const SearchLuckyDay = () => {
   const router = useRouter();
 
@@ -28,12 +25,10 @@ const SearchLuckyDay = () => {
   const [selectedRating, setSelectedRating] = useState<RatingGroup>("positive");
 
   // 2. Викликаємо новий хук. Він дає нам усе необхідне для UI замість старого стору
-  const {
-    data,
-    isFetching, // Замінює старий isSearching
-    error,
-    refetch,
-  } = useLuckyDaysQuery(selectedKey, selectedRating);
+  const { data, isFetching, error, refetch } = useLuckyDaysQuery(
+    selectedKey,
+    selectedRating,
+  );
 
   // Витягуємо результати та активне значення з кешу TanStack Query
   const searchResults = data?.results || [];

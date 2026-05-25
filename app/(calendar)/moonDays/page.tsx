@@ -5,12 +5,12 @@ import {
   dehydrate,
 } from "@tanstack/react-query";
 import MoondaysListClient from "./DaysList.client";
-import { DaysTitlesList } from "../components/DaysTitleList/DaysTitleList.client";
-import { DatePicker } from "../components/DayByDate/SearchByDate";
-import { MoonDayInfo } from "../components/DayByDate/DayByDate";
-import SearchLuckyDay from "../components/TOPDaySearch/TOPDaySearch";
+import { DaysTitlesList } from "../../components/DaysTitleList/DaysTitleList.client";
+import { DatePicker } from "../../components/DayByDate/SearchByDate";
+import { MoonDayInfo } from "../../components/DayByDate/DayByDate";
+import SearchLuckyDay from "../../components/TOPDaySearch/TOPDaySearch";
 
-const NotesPage = async () => {
+const CalendarPage = async () => {
   const queryClient = new QueryClient();
 
   await queryClient.prefetchQuery({
@@ -31,4 +31,4 @@ const NotesPage = async () => {
   );
 };
 
-export default NotesPage;
+export default CalendarPage;
