@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { serverApi, ApiError } from "@/lib/api/server";
 
-type Props = {
-  params: Promise<{ phaseNumber: number }>;
-};
-
-export async function GET(request: NextRequest, { params }: Props) {
+export async function GET(request: NextRequest) {
   const phaseNumber = request.nextUrl.searchParams.get("phaseNumber");
   try {
     const { data } = await serverApi("/byphase", { params: { phaseNumber } }); // тут формуємо адресу запиту на бекенд

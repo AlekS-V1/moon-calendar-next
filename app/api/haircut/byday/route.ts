@@ -1,11 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { serverApi, ApiError } from "@/lib/api/server";
 
-type Props = {
-  params: Promise<{ moonDay: number }>;
-};
-
-export async function GET(request: NextRequest, { params }: Props) {
+export async function GET(request: NextRequest) {
   const moonDay = request.nextUrl.searchParams.get("moonDay");
   try {
     const { data } = await serverApi("/haircutbyday", { params: { moonDay } }); // тут формуємо адресу запиту на бекенд
