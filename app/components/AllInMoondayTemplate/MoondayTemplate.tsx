@@ -10,7 +10,7 @@ type MoondayTemplateProps = {
   day: NormalizedDay;
   selectedAspectIds: string[];
   toggleAspect: (key: string) => void;
-  selectAllAspects: () => void;
+  selectAllAspects: (allKeys: string[]) => void;
   clearAllAspects: () => void;
 };
 
@@ -421,7 +421,15 @@ export const MoondayTemplate = ({
                 <li className={css.accordionGroupButtonShow}>
                   <button
                     className={css.accordionHeader}
-                    onClick={showRemoveAll ? clearAllAspects : selectAllAspects}
+                    onClick={() => {
+                      if (showRemoveAll) {
+                        clearAllAspects();
+                      } else {
+                        // Отримуємо всі ключі аспектів безпосередньо з завантажених даних React Query
+                        const allKeys = Object.keys(day.details.lifeAspects);
+                        selectAllAspects(allKeys);
+                      }
+                    }}
                   >
                     {showRemoveAll ? "Прибрати все" : "Показати все"}
                   </button>

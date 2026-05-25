@@ -50,22 +50,12 @@ import { useMoonToday } from "@/lib/hooks/useToday";
 import { useAspectsSelectStore } from "@/store/uiStore";
 
 const TodayMoonday = () => {
-  const {
-    // today,
-    // fetchToday,
-    selectedAspectIds,
-    toggleAspect,
-    selectAllAspects,
-    clearAllAspects,
-  } = useAspectsSelectStore();
+  const { selectedAspectIds, toggleAspect, selectAllAspects, clearAllAspects } =
+    useAspectsSelectStore();
 
   const { data: today, isLoading, isFetching } = useMoonToday();
 
   const [openGroups, setOpenGroups] = useState<string[]>([]);
-
-  // useEffect(() => {
-  //   fetchToday();
-  // }, [fetchToday]);
 
   const groupedAspects = useMemo(() => {
     if (!today) return {} as Record<string, { key: string; aspect: any }[]>;
@@ -251,7 +241,15 @@ const TodayMoonday = () => {
               <li className={css.accordionGroupButtonShow}>
                 <button
                   className={css.accordionHeader}
-                  onClick={showRemoveAll ? clearAllAspects : selectAllAspects}
+                  onClick={() => {
+                    if (showRemoveAll) {
+                      clearAllAspects();
+                    } else {
+                      // Отримуємо всі ключі аспектів безпосередньо з завантажених даних React Query
+                      const allKeys = Object.keys(today.details.lifeAspects);
+                      selectAllAspects(allKeys);
+                    }
+                  }}
                 >
                   {showRemoveAll ? "Прибрати все" : "Показати все"}
                 </button>

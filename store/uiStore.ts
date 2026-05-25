@@ -27,9 +27,9 @@ interface AsspectState {
   today: MoonDayData | null;
   selectedAspectIds: string[];
   toggleAspect: (id: string) => void;
-  selectAllAspects: () => void;
+  selectAllAspects: (allAspectIds: string[]) => void;
   clearAllAspects: () => void;
-  filteredAspects: () => any[];
+  filteredAspects: (lifeAspects: Record<string, any>) => any[];
 }
 
 export const useAspectsSelectStore = create<AsspectState>()(
@@ -49,32 +49,42 @@ export const useAspectsSelectStore = create<AsspectState>()(
         });
       },
 
-      selectAllAspects: () => {
-        const { today } = get();
-        if (!today) return;
-        const allKeys = Object.keys(today.details.lifeAspects);
-        set({ selectedAspectIds: allKeys });
+      // функція приймає масив ключів (ID) ззовні
+
+      selectAllAspects: (allAspectIds: string[]) => {
+        set({ selectedAspectIds: allAspectIds });
       },
 
       clearAllAspects: () => {
         set({ selectedAspectIds: [] });
       },
 
-      filteredAspects: () => {
-        const { today, selectedAspectIds } = get();
-        if (!today) return [];
-        if (selectedAspectIds.length === 0) return [];
+      // filteredAspects: () => {
+      //   const { today, selectedAspectIds } = get();
+      //   if (!today) return [];
+      //   if (selectedAspectIds.length === 0) return [];
 
-        return Object.entries(today.details.lifeAspects)
+      //   return Object.entries(today.details.lifeAspects)
+      //     .filter(([key]) => selectedAspectIds.includes(key))
+      //     .map(([key, aspect]) => ({ key, aspect }));
+      // },
+
+      //функція приймає об'єкт з аспектами ззовні
+
+      filteredAspects: (lifeAspects: Record<string, any>) => {
+        const { selectedAspectIds } = get();
+        if (!lifeAspects || selectedAspectIds.length === 0) return [];
+
+        return Object.entries(lifeAspects)
           .filter(([key]) => selectedAspectIds.includes(key))
           .map(([key, aspect]) => ({ key, aspect }));
       },
     }),
     {
       name: "moon-store-storage",
-      partialize: (state) => ({
-        selectedAspectIds: state.selectedAspectIds,
-      }),
+      // partialize: (state) => ({
+      //   selectedAspectIds: state.selectedAspectIds,
+      // }),
     },
   ),
 );
