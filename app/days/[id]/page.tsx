@@ -1,4 +1,4 @@
-import { getListDays, getSingleMoonday } from "@/lib/api/api";
+// import { getListDays, getSingleMoonday } from "@/lib/api/api";
 import {
   dehydrate,
   HydrationBoundary,
@@ -13,22 +13,20 @@ interface Props {
 }
 
 const MoonDayDetails = async ({ params }: Props) => {
-  const { id } = await params;
-  const queryClient = new QueryClient();
-
-  await queryClient.prefetchQuery({
-    queryKey: ["moonDay", id],
-    queryFn: () => getSingleMoonday(id),
-  });
-
-  return (
-    <section className={css.sectionMoondayDetails}>
-      <MoonDaysList />
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <MoondayDetailsClient />
-      </HydrationBoundary>
-    </section>
-  );
+  // const { id } = await params;
+  // const queryClient = new QueryClient();
+  // await queryClient.prefetchQuery({
+  //   queryKey: ["moonDay", id],
+  //   queryFn: () => getSingleMoonday(id),
+  // });
+  // return (
+  //   <section className={css.sectionMoondayDetails}>
+  //     <MoonDaysList />
+  //     <HydrationBoundary state={dehydrate(queryClient)}>
+  //       <MoondayDetailsClient />
+  //     </HydrationBoundary>
+  //   </section>
+  // );
 };
 
 export default MoonDayDetails;
