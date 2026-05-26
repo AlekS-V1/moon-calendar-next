@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import css from "./Countdown.module.css";
+// import { redirect, useRouter } from "next/navigation";s
 
 type CountdownProps = {
   target: string; // ISO date string
@@ -22,6 +23,9 @@ export default function Countdown({ target }: CountdownProps) {
     seconds: 0,
     finished: false,
   });
+
+  // const router = useRouter();
+  // const [hasRefreshed, setHasRefreshed] = useState(false);
 
   useEffect(() => {
     if (!target) return;
@@ -59,6 +63,14 @@ export default function Countdown({ target }: CountdownProps) {
   }, [target]);
 
   if (!target) return null;
+
+  // 🔥 Автоматичне оновлення сторінки
+  // useEffect(() => {
+  //   if (timeLeft.finished && !hasRefreshed) {
+  //     setHasRefreshed(true);
+  //     router.refresh();
+  //   }
+  // }, [timeLeft.finished, hasRefreshed]);
 
   if (timeLeft.finished) {
     return <div>Час вийшов</div>;

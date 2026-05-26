@@ -5,5 +5,6 @@ export function useMoonToday() {
   return useQuery({
     queryKey: ["today"],
     queryFn: async () => getMoonToday(),
+    // staleTime: 1000 * 60 * 15,
   });
 }

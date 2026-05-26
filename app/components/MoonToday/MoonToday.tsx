@@ -7,7 +7,7 @@ import Countdown from "../Countdown/Countdown";
 import { useMoonToday } from "@/lib/hooks/useToday";
 
 const MoonToday = () => {
-  const { data: moonToday, error, isLoading } = useMoonToday();
+  const { data: moonToday, error, isLoading, isFetching } = useMoonToday();
 
   //   if (!today)
   //     return (
@@ -22,10 +22,11 @@ const MoonToday = () => {
   const nextDayStartDate = moonToday?.nextDayStart
     ? new Date(moonToday.nextDayStart)
     : undefined;
-  const progressRemaining = Math.max(
-    0,
-    100 - Math.round(Number(moonToday?.progressDay)),
-  );
+  // const progressRemaining = Math.max(
+  //   0,
+  //   100 - Math.round(Number(moonToday?.progressDay)),
+  // );
+  if (isFetching || isLoading) return <div>Обробка запиту...</div>;
 
   return (
     <div className={css.containerToday}>
@@ -61,7 +62,7 @@ const MoonToday = () => {
               до наступного ще {progressRemaining}%
             </p> */}
             <p className={css.textMoonToday}>{resDay?.phase.text}</p>
-            <Link href="/phasetoday" className={css.textMoonToday}>
+            <Link href="/phases/today" className={css.textMoonToday}>
               {resDay?.phaseDescription}
             </Link>
           </div>

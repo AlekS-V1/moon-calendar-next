@@ -113,7 +113,7 @@ const Header = () => {
                   </li>
                   <li className={css.underMenuItem}>
                     <Link
-                      href="/phasetoday"
+                      href="/phasee/today"
                       aria-label="Moon phases"
                       className={css.linkMenu}
                       onClick={toggleUnderMenu}
