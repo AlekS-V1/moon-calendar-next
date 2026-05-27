@@ -7,41 +7,56 @@ import { useUIStore } from "@/store/uiStore";
 import { moonImages32 } from "@/lib/moonPhase30";
 import css from "./MoonDayItem.module.css";
 import { useMoonToday } from "@/lib/hooks/useToday";
+import { useMemo } from "react";
+import { useParams } from "next/navigation";
 
 export function DaysTitlesList() {
-  const { data: titles, isLoading } = useQuery({
-    queryKey: ["days"],
+  const { data: days, isPending } = useQuery({
+    queryKey: ["catalogdays"],
     queryFn: getMoondayList,
-    // Трансформуємо дані: витягуємо тільки _id та title
-    select: (days) =>
-      days.moonDay.map((day) => ({ _id: day._id, title: day.dayNumber })),
     staleTime: Infinity,
   });
-  const { data: today, error } = useMoonToday();
+  const { data: today } = useMoonToday();
+  const { id: activeUrlId } = useParams();
 
   // 1. Дістаємо функцію запису з Zustand
-  const setActiveDayId = useUIStore((state) => state.setActiveDayId);
+  // const setActiveDayId = useUIStore((state) => state.setActiveDayId);
   // Дістаємо поточний activeNoteId, щоб підсвітити обрану нотатку в списку (активний стиль)
-  const activeDayId = useUIStore((state) => state.activeDayId);
+  // const activeDayId = useUIStore((state) => state.activeDayId);
 
-  if (isLoading) return <p>Завантаження назв...</p>;
-  const sortedDays = [...(titles ?? [])].sort((a, b) => a.title - b.title);
+  // Сортуємо легкий масив .
+  // Цей код запуститься лише якщо РЕАЛЬНО зміняться дані в базі.
+  const sortedTitles = [...(days?.moonDay ?? [])].sort(
+    (a, b) => a.dayNumber - b.dayNumber,
+  );
+
+  if (isPending && sortedTitles.length === 0) {
+    return <p>Завантаження назв...</p>;
+  }
 
   return (
     <ul className={css.daysList}>
-      {sortedDays.map((day) => (
-        /* TypeScript чітко знає, що тут є ТІЛЬКИ note._id та note.title */
-        <Link
-          href={`/moonDays/${day._id}`}
-          onClick={() => setActiveDayId(day._id)}
-          className={`${css.moonIcon} ${activeDayId === day._id ? css.activeDay : today?.moonDay === day.title ? css.activeDay : ""}`}
-          style={{ backgroundImage: `url(${moonImages32[day.title]})` }}
-        >
-          <li key={day._id} className={css.dayStyle}>
-            {day.title}
-          </li>
-        </Link>
-      ))}
+      {sortedTitles.map((day) => {
+        // Динамічно визначаємо клас для картинки, наприклад: css.day_1, css.day_2
+        const imageClass = css[`day_${day.dayNumber}`] || "";
+
+        const isActive = activeUrlId
+          ? activeUrlId === day._id
+          : today?.moonDay === day.dayNumber;
+
+        return (
+          /* TypeScript чітко знає, що тут є ТІЛЬКИ note._id та note.title */
+          <Link
+            key={day._id}
+            href={`/moonDays/${day._id}`}
+            // onClick={() => setActiveDayId(day._id)}
+            className={`${css.moonIcon} ${imageClass} ${isActive ? css.activeDay : ""}`}
+            style={{ backgroundImage: `url(${moonImages32[day.dayNumber]})` }}
+          >
+            <li className={css.dayStyle}>{day.dayNumber}</li>
+          </Link>
+        );
+      })}
     </ul>
   );
 }
