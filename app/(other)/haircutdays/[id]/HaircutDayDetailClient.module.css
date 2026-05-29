@@ -1,0 +1,13 @@
+.containerGoBack {
+  display: block;
+  text-align: right;
+}
+.goBack {
+  font-size: 14px;
+  color: rgb(0, 174, 255);
+  padding: 18px;
+}
+
+.back {
+  font-size: 32px;
+}

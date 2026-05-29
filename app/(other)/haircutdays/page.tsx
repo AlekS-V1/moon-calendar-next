@@ -9,6 +9,8 @@ import {
 // import { useEffect } from "react";
 import HaircutDaysListClient from "./HaircutDays.client";
 import HaircutByDayClient from "../../components/HaircutByDay/HaircutByDayClient";
+import HaircutTodayClient from "./today/HaircutToday.client";
+import css from "./HaircutPage.module.css";
 
 const ListHaircutDays = async () => {
   const queryClient = new QueryClient();
@@ -18,14 +20,10 @@ const ListHaircutDays = async () => {
     queryFn: getListHaircutDays,
   });
 
-  return (
-    <>
-      <HaircutByDayClient />
-      <HydrationBoundary state={dehydrate(queryClient)}>
-        <HaircutDaysListClient />
-      </HydrationBoundary>
-    </>
-  );
+  return <HaircutTodayClient />;
+  // <section className={css.sectionHaircut}>
+
+  // </section>
 };
 
 export default ListHaircutDays;

@@ -16,7 +16,10 @@ const Phases = () => {
     <div>
       <ul>
         {phases?.map((phase) => (
-          <li>Фаза: {phase.phaseNumber}</li>
+          <li key={phase._id}>
+            Фаза: {phase.phaseNumber}
+            <p>Дні: {phase.days}</p>
+          </li>
         ))}
       </ul>
     </div>

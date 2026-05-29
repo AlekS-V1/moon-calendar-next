@@ -1,7 +1,7 @@
 /* components/Header/Header.module.css */
 .header {
   width: 100%;
-  max-width: 460px;
+  max-width: 430px;
   margin: 0 auto;
   background-image: url("/image/fonHeader120085.webp");
   border-radius: 10px;

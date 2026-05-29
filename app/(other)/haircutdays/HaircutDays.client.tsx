@@ -2,6 +2,9 @@
 
 import { getListHaircutDays } from "@/lib/api/api";
 import { useQuery } from "@tanstack/react-query";
+import css from "./HaircutDaysClient.module.css";
+import { useMoonToday } from "@/lib/hooks/useToday";
+import Link from "next/link";
 
 const HaircutDaysListClient = () => {
   const { data, isLoading, error } = useQuery({
@@ -10,6 +13,8 @@ const HaircutDaysListClient = () => {
     staleTime: Infinity,
   });
 
+  const { data: today } = useMoonToday();
+
   if (isLoading) return <div>Завантаження…</div>;
   if (error) return <div>Помилка завантаження</div>;
   if (!data) return null;
@@ -17,16 +22,24 @@ const HaircutDaysListClient = () => {
   const haircutDays = data;
 
   return (
-    <ul>
-      {haircutDays.map((day) => (
-        <li>
-          {day._id}
-          {". "} {day.energy}
-          <br />
-          <br />
-        </li>
-      ))}
-    </ul>
+    <div className={css.containerListHaircutDays}>
+      <h3 className={css.titleList}>Дні за місяцем:</h3>
+      <ul className={css.daysList}>
+        {haircutDays.map((day) => (
+          <Link
+            href={`/haircutdays/${day._id}`}
+            className={`${css.link} ${day.dayNumber === today?.moonDay ? css.today : ""}`}
+          >
+            <li
+              key={day._id}
+              className={`${css.itemList} ${day.avoid.length !== 0 ? css.itemAvoid : ""} `}
+            >
+              {day.dayNumber}
+            </li>
+          </Link>
+        ))}
+      </ul>
+    </div>
   );
 };
 

@@ -1,0 +1,37 @@
+.sectionHaircut {
+  margin: 0 auto;
+  padding: 0 5px 16px;
+}
+.titleHaircut {
+  text-align: center;
+  color: beige;
+}
+.containerHaircut {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  border: 1px solid #fff;
+  border-radius: 19px;
+  font-size: 18px;
+  background-color: #003c9149;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+@media (min-width: 724px) {
+  .containerHaircut {
+    max-width: 979px;
+  }
+}
+
+@media (min-width: 980px) {
+  .containerHaircut {
+    max-width: 1084px;
+  }
+}
+@media (min-width: 1085px) {
+  .containerHaircut {
+    max-width: 1200px;
+  }
+}

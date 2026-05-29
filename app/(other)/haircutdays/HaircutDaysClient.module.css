@@ -1,0 +1,47 @@
+.containerListHaircutDays {
+  margin: 0 auto;
+}
+.titleList {
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  color: beige;
+}
+.daysList {
+  display: flex;
+  flex-wrap: wrap;
+  width: 250px;
+  gap: 10px;
+  margin: 0 auto;
+  /* flex-shrink: 0; */
+  /* margin-left: 8px; */
+}
+
+.itemList {
+  text-align: center;
+  /* padding: 6px; */
+  /* width: calc(100% / 17); */
+  font-size: 20px;
+  color: green;
+}
+
+.itemAvoid {
+  color: crimson;
+}
+.today {
+  text-shadow: 1px 0 2px #312c2c;
+  border: 1px solid #9fb19f;
+  border-radius: 50%;
+  /* font-size: 18px; */
+  font-weight: 800;
+  transform: scale(1.1);
+  box-shadow:
+    0 0 7px 2px #a77d7d,
+    inset 0 0 4px 1px #8d8383;
+}
+
+.link {
+  text-decoration: none;
+  width: calc(100% / 11);
+  padding: 2px;
+}

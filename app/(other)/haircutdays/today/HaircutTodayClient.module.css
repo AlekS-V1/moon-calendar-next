@@ -1,0 +1,23 @@
+.containerTodayHaircut {
+  display: flex;
+  gap: 12px;
+  flex-direction: column;
+  font-size: 17px;
+  padding: 16px 24px 0;
+}
+.titleTodayHaircut {
+  font-size: 21px;
+  text-align: center;
+  padding: 0 25px;
+  color: beige;
+}
+.textTodayHaircut {
+  padding-top: 4px;
+}
+.titleTextTodayHaircut {
+  font-size: 19px;
+  color: beige;
+}
+.listTextTodayHaircut {
+  padding-bottom: 8px;
+}
