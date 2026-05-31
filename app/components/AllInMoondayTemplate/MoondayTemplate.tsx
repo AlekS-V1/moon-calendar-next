@@ -5,6 +5,7 @@ import { aspectGroups, aspectTitles } from "@/lib/aspect";
 import { moonImages160 } from "@/lib/moonPhase30";
 import { useMemo, useState } from "react";
 import { NormalizedDay } from "@/type/type";
+import Link from "next/link";
 
 type MoondayTemplateProps = {
   day: NormalizedDay;
@@ -313,10 +314,12 @@ export const MoondayTemplate = ({
 
         <div className={`${css.containerLifeAspect} ${css.innerContainer}`}>
           <div className={css.containerHaircut}>
-            <h3 className={css.titleTodayMoonday}>
-              Стрижка — {resDay.haircut.rating.value}/
-              {resDay.haircut.rating.scale}
-            </h3>
+            <Link href={`/haircutdays/${resDay.haircut.haircutId._id}`}>
+              <h3 className={css.titleTodayMoonday}>
+                Стрижка — {resDay.haircut.rating.value}/
+                {resDay.haircut.rating.scale}
+              </h3>
+            </Link>
             <div className={css.listHeircut}>
               <div className={css.moonCalendar}>
                 <p className={css.textTodayMoonday}>

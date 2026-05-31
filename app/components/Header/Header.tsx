@@ -4,7 +4,7 @@
 import Link from "next/link";
 import css from "./Header.module.css";
 import { useState } from "react";
-import Menu from "../Menu/Menu";
+import Menu from "../DesktopMenu/Menu";
 
 const Header = () => {
   const [open, setOpen] = useState(false);
@@ -103,17 +103,17 @@ const Header = () => {
                 <ul className={css.menuList}>
                   <li className={css.underMenuItem}>
                     <Link
-                      href="/days"
+                      href="/recommendation"
                       aria-label="Moon days"
                       className={css.linkMenu}
                       onClick={toggleUnderMenu}
                     >
-                      Дня
+                      Цього дня
                     </Link>
                   </li>
                   <li className={css.underMenuItem}>
                     <Link
-                      href="/phasee/today"
+                      href="/phases/today"
                       aria-label="Moon phases"
                       className={css.linkMenu}
                       onClick={toggleUnderMenu}
@@ -123,7 +123,7 @@ const Header = () => {
                   </li>
                   <li className={css.underMenuItem}>
                     <Link
-                      href="/todayhaircut"
+                      href="/haircutdays"
                       aria-label="Haircur today"
                       className={css.linkMenu}
                       onClick={toggleUnderMenu}

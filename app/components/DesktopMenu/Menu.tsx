@@ -37,7 +37,7 @@ const Menu = () => {
           </li>
           <li className={css.menuItem}>
             <Link
-              href="/haircutdays/today"
+              href="/haircutdays"
               aria-label="Haircur today"
               className={css.linkMenu}
               onClick={toggleMenu}

@@ -122,7 +122,7 @@ const TodayMoonday = () => {
 
       <div className={`${css.containerLifeAspect} ${css.innerContainer}`}>
         <div className={css.containerHaircut}>
-          <Link href={"/todayhaircut"}>
+          <Link href={"/haircutdays"}>
             <h3 className={css.titleTodayMoonday}>
               Стрижка — {resDay.haircut.rating.value}/
               {resDay.haircut.rating.scale}
