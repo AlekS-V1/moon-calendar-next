@@ -13,7 +13,8 @@
   width: 250px;
   gap: 10px;
   margin: 0 auto;
-  /* flex-shrink: 0; */
+  padding-top: 40px;
+  flex-shrink: 0;
   /* margin-left: 8px; */
 }
 
@@ -22,11 +23,11 @@
   /* padding: 6px; */
   /* width: calc(100% / 17); */
   font-size: 20px;
-  color: green;
+  color: #b8f9b8;
 }
 
 .itemAvoid {
-  color: crimson;
+  color: #ffb1b1;
 }
 .today {
   text-shadow: 1px 0 2px #312c2c;

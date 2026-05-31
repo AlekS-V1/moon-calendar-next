@@ -8,10 +8,9 @@ const HaircutLayout = ({ children, sidebar }: Props) => {
   return (
     // <section className={css.sectionHaircut}>
     <section className={css.containerHaircut}>
-      <aside>{sidebar}</aside>
-      <div>{children}</div>
+      <aside className={css.asideBar}>{sidebar}</aside>
+      <div className={css.containerContent}>{children}</div>
     </section>
-    // </section>
   );
 };
 

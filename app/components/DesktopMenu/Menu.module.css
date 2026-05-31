@@ -76,5 +76,17 @@
   color: rgb(0, 0, 0);
   background-color: rgba(255, 255, 255, 0.659);
   text-shadow: none;
-  transform: scale(1.03);
+  transform: scale(1.12);
+}
+
+@media (min-width: 724px) {
+  .menuButton {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 980px) {
+  .menuButton {
+    font-size: 17px;
+  }
 }

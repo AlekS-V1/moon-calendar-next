@@ -30,7 +30,7 @@
 
 .menuHeader {
   display: flex;
-  /* align-items: center; */
+  align-items: center;
   /* justify-content: flex-start; */
   gap: 8px;
   list-style-type: none;
@@ -165,14 +165,17 @@
   .logo {
     font-size: 24px;
   }
+  .linkMenu {
+    font-size: 15px;
+  }
+}
+
+@media (min-width: 747px) {
   .burger {
     display: none;
   }
   .desktopNav {
     display: flex;
-  }
-  .linkMenu {
-    font-size: 15px;
   }
 }
 
