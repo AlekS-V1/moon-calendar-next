@@ -7,7 +7,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 // import { useEffect } from "react";
-import HaircutDaysListClient from "./HaircutDays.client";
+import HaircutDaysListClient from "../../components/ListHaircutdays/HaircutDays.client";
 import HaircutByDayClient from "../../components/HaircutByDay/HaircutByDayClient";
 import HaircutTodayClient from "./today/HaircutToday.client";
 import css from "./HaircutPage.module.css";

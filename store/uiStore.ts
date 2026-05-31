@@ -89,7 +89,7 @@ export const useAspectsSelectStore = create<AsspectState>()(
   ),
 );
 
-// --- Пошук за Датою ---
+// --- Пошук дня за Датою ---
 
 interface DateState {
   searchDate: string; // Формат "YYYY-MM-DD"
@@ -164,4 +164,14 @@ interface HaircutDaysState {
 export const useHaircutDays = create<HaircutDaysState>((set) => ({
   searchByDayNum: 0,
   setSearchByDayNum: (dayNumber) => set({ searchByDayNum: dayNumber }),
+}));
+
+interface DateHaircutState {
+  searchDate: string; // Формат "YYYY-MM-DD"
+  setSearchDate: (date: string) => void;
+}
+
+export const useHaircutDateStore = create<DateHaircutState>((set) => ({
+  searchDate: "", // Початкове значення
+  setSearchDate: (date) => set({ searchDate: date }),
 }));

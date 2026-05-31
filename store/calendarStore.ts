@@ -13,7 +13,7 @@ import {
 import { LuckyKeys } from "@/lib/aspect";
 import { RatingGroup, ratingGroups } from "@/lib/ratingGroups";
 import {
-  HaircutData,
+  HaircutDate,
   HaircutDay,
   moonPhase,
   moonPhaseData,
@@ -36,7 +36,7 @@ interface StoreState {
   phasetoday: moonPhaseData | null;
   moonDayData: Record<number, HaircutDay>;
   haircutDays: HaircutDay[];
-  todayHaircut: HaircutData | null;
+  todayHaircut: HaircutDate | null;
 
   searchResults: MoonDayData[];
   isSearching: boolean;

@@ -200,7 +200,7 @@ export interface HaircutDay {
   avoid: string[];
 }
 
-export interface HaircutData {
+export interface HaircutDate {
   date: string;
   _id: string;
   dayNumber: number;
@@ -211,3 +211,23 @@ export interface HaircutData {
   recommend: string[];
   avoid: string[];
 }
+
+export interface HaircutFullData {
+  date: string;
+  moonDay: number;
+  currentDayStart: string;
+  nextDayStart: string;
+  durationHours: number;
+  passedHours: number;
+  progressDay: number;
+  _id: string;
+  dayNumber: number;
+  energy: string;
+  health: string[];
+  wealth: string[];
+  why: string;
+  recommend: string[];
+  avoid: string[];
+}
+
+export type HaircutAnyDay = HaircutDay | HaircutDate | HaircutFullData;

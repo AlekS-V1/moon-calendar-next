@@ -6,8 +6,8 @@ import {
   HydrationBoundary,
   QueryClient,
 } from "@tanstack/react-query";
-import css from "../HaircutPage.module.css";
-import HaircutDaysListClient from "../HaircutDays.client";
+import HaircutDaysListClient from "../../../components/ListHaircutdays/HaircutDays.client";
+import { HaircutDatePicker } from "@/app/components/HaircutByDate/SearchHaircutByDate";
 
 const HaircutSidebar = async () => {
   const queryClient = new QueryClient();
@@ -17,11 +17,12 @@ const HaircutSidebar = async () => {
     queryFn: getListHaircutDays,
   });
   return (
-    // <div className={css.containerHaircut}>
-    <HydrationBoundary state={dehydrate(queryClient)}>
-      <HaircutDaysListClient />
-    </HydrationBoundary>
-    // </div>
+    <>
+      <HydrationBoundary state={dehydrate(queryClient)}>
+        <HaircutDaysListClient />
+      </HydrationBoundary>
+      <HaircutDatePicker />
+    </>
   );
 };
 

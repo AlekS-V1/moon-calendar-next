@@ -4,7 +4,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { ApiError, serverApi } from "@/lib/api/server";
 
 export async function GET(request: NextRequest) {
-  // 1. Отримуємо дату з query-рядка: /moon-day?date=2026-05-18
+  // 1. Отримуємо дату з query-рядка: /haircut-day?date=2026-05-18
   const date = request.nextUrl.searchParams.get("date");
 
   try {

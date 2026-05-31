@@ -27,11 +27,11 @@ const HaircutDaysListClient = () => {
       <ul className={css.daysList}>
         {haircutDays.map((day) => (
           <Link
+            key={day._id}
             href={`/haircutdays/${day._id}`}
             className={`${css.link} ${day.dayNumber === today?.moonDay ? css.today : ""}`}
           >
             <li
-              key={day._id}
               className={`${css.itemList} ${day.avoid.length !== 0 ? css.itemAvoid : ""} `}
             >
               {day.dayNumber}

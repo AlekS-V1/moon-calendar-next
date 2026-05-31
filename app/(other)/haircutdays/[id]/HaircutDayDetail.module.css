@@ -11,3 +11,10 @@
 .back {
   font-size: 32px;
 }
+
+.titleHaircut {
+  font-size: 21px;
+  text-align: center;
+  padding: 25px 25px 0;
+  color: beige;
+}

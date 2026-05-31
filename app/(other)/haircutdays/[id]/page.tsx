@@ -8,7 +8,7 @@ import {
 } from "@tanstack/react-query";
 import HaircutDayDetailsClient from "./HaircutDayDetail.client";
 import Link from "next/link";
-import css from "./HaircutDayDetailClient.module.css";
+import css from "./HaircutDayDetail.module.css";
 
 interface Props {
   params: Promise<{ id: string }>;

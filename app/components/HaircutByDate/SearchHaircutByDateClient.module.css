@@ -1,0 +1,16 @@
+.containerDatePicker {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.lableChooseDate {
+  font-size: 18px;
+  display: block;
+  padding: 20px;
+}
+.inputChooseDate {
+  padding: 5px 10px;
+  width: 150px;
+  margin-bottom: 20px;
+}
