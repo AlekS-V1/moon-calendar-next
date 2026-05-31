@@ -128,6 +128,7 @@
 }
 .activeValueSearch {
   font-size: 16px;
+  padding-bottom: 10px;
 }
 .descriptionRaiting {
   font-size: 17px;
@@ -140,7 +141,15 @@
   font-size: 20px;
   cursor: pointer;
   margin-top: 20px;
-  padding: 16px;
+  padding-top: 16px;
+}
+
+.haircutLink {
+  font-size: 18px;
+  color: #637394;
+}
+.haircutLink:hover {
+  color: azure;
 }
 
 @media (min-width: 768px) {
@@ -200,6 +209,9 @@
     font-size: 14px;
   }
   .descriptionRaiting {
+    font-size: 14px;
+  }
+  .haircutLink {
     font-size: 14px;
   }
 }

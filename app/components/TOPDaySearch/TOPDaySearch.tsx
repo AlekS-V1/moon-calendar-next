@@ -1,8 +1,6 @@
 "use client";
 
-import css from "./SearchLuckyDay.module.css";
-
-import React, { useState, useMemo } from "react";
+import { useState, useMemo } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useLuckyDaysQuery } from "@/lib/hooks/useLuckyDay"; // Новий хук запитів
@@ -16,6 +14,7 @@ import {
 } from "@/lib/aspect";
 import { moonImages32 } from "@/lib/moonPhase30";
 import { useMoonStore } from "@/store/uiStore"; // Оновлений чистий стор
+import css from "./SearchLuckyDay.module.css";
 
 const SearchLuckyDay = () => {
   const router = useRouter();
@@ -165,7 +164,7 @@ const SearchLuckyDay = () => {
               <li key={item.date} className={css.listItem}>
                 <Link
                   className={css.linkFullMoonday}
-                  href={`/days/${item.details._id}`}
+                  href={`/moonDays/${item.details._id}`}
                 >
                   <div className={css.containerMoon}>
                     <img
@@ -177,40 +176,48 @@ const SearchLuckyDay = () => {
                       {item.moonDay}-й місячний день
                     </h4>
                   </div>
-                  <div className={css.containerDescription}>
-                    <p className={css.textDate}>
-                      {selectedKey ? aspectLabels[selectedKey] : "Не вибрано"} у{" "}
-                      {(() => {
-                        const s = new Date(item.date).toLocaleDateString(
-                          "uk-UA",
-                          {
-                            weekday: "short",
-                            day: "numeric",
-                            month: "long",
-                          },
-                        );
-                        return s[0].toUpperCase() + s.slice(1);
-                      })()}
-                    </p>
-                    <p className={css.textDescription}>
-                      {selectedKey && (
-                        <>
-                          {aspectMap[selectedKey]?.getDescription(item) ||
-                            "Немає даних"}
-                          <br />
-                        </>
-                      )}
-                    </p>
-                  </div>
-                  {activeValue && (
-                    <h4 className={css.activeValueSearch}>
-                      Знайдено за значенням:{" "}
-                      <strong className={css.descriptionRaiting}>
-                        {activeValue}
-                      </strong>
-                    </h4>
-                  )}
                 </Link>
+                <div className={css.containerDescription}>
+                  <p className={css.textDate}>
+                    {selectedKey ? aspectLabels[selectedKey] : "Не вибрано"} у{" "}
+                    {(() => {
+                      const s = new Date(item.date).toLocaleDateString(
+                        "uk-UA",
+                        {
+                          weekday: "short",
+                          day: "numeric",
+                          month: "long",
+                        },
+                      );
+                      return s[0].toUpperCase() + s.slice(1);
+                    })()}
+                  </p>
+                  <p className={css.textDescription}>
+                    {selectedKey && (
+                      <>
+                        {aspectMap[selectedKey]?.getDescription(item) ||
+                          "Немає даних"}
+                        <br />
+                      </>
+                    )}
+                  </p>
+                </div>
+                {activeValue && (
+                  <h4 className={css.activeValueSearch}>
+                    Знайдено за значенням:{" "}
+                    <strong className={css.descriptionRaiting}>
+                      {activeValue}
+                    </strong>
+                  </h4>
+                )}
+                {selectedKey === "haircut" && (
+                  <Link
+                    className={css.haircutLink}
+                    href={`/haircutdays/${item.details.haircut.haircutId}`}
+                  >
+                    Детальніше
+                  </Link>
+                )}
               </li>
             ))}
           </ul>
