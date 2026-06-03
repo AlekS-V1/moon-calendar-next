@@ -36,6 +36,8 @@ const MoonToday = () => {
             {/* <h1 className={css.titleHead}>Під світлом Місяця</h1> */}
             <h2 className={css.underTitleMoonToday}>Сьогодні:</h2>
             <h2 className={css.underTitleMoonToday}>
+              {" "}
+              в{" "}
               {moonDate?.toLocaleDateString("uk-UA", {
                 weekday: "long",
                 day: "numeric",

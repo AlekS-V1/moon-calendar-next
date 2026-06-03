@@ -1,6 +1,7 @@
 "use client";
 import { getListPhases } from "@/lib/api/api";
 import { useQuery } from "@tanstack/react-query";
+import css from "./phasesToday.module.css";
 
 const Phases = () => {
   const { data: titles, isLoading } = useQuery({
@@ -13,7 +14,7 @@ const Phases = () => {
   const phases = titles;
 
   return (
-    <div>
+    <div className={css.containerPhase}>
       <ul>
         {phases?.map((phase) => (
           <li key={phase._id}>

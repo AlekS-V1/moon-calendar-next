@@ -1,0 +1,127 @@
+.containerPhase {
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  background-color: #003c9149;
+  color: azure;
+  padding: 32px 16px;
+  border: darkgray solid 2px;
+  border-radius: 50px;
+  margin-top: 16px;
+  gap: 20px;
+}
+.containerBlocks {
+  font-size: 22px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 20px 2px rgba(238, 239, 247, 0.459);
+  border-radius: 10px;
+  gap: 18px;
+}
+.containerBlock {
+  font-size: 22px;
+}
+
+.titleSectionPhases {
+  font-size: 22px;
+  text-align: center;
+  color: beige;
+}
+.spanTitleSectionPhases {
+  margin-top: 5px;
+  font-size: 30px;
+}
+
+.titleBlock {
+  font-size: 26px;
+  color: beige;
+}
+.centerText {
+  text-align: center;
+}
+.underBlock {
+  font-size: 17px;
+  width: auto;
+  box-shadow: inset 0px 1px 4px 1px rgba(238, 239, 247, 0.459);
+  border-radius: 10px;
+  padding: 8px 12px;
+}
+.underTitleBlock {
+  font-size: 25px;
+  margin-bottom: 15px;
+  color: beige;
+}
+.containerPreferredAvoid {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  box-shadow: 0 0 20px 2px rgba(238, 239, 247, 0.459);
+  border-radius: 10px;
+  gap: 18px;
+}
+.listWraperPhases {
+  padding-bottom: 10px;
+}
+.textPhaseToday {
+  font-size: 17px;
+  padding: 0 8px;
+  margin-bottom: 16px;
+  letter-spacing: 1px;
+  line-height: 140%;
+  color: azure;
+}
+.underTitleBlock {
+  color: beige;
+  padding-top: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1rem;
+  text-shadow: 0 0 4px black;
+  text-align: center;
+  border-bottom: #28436c49 solid 4px;
+  border-radius: 10px;
+}
+
+@media (min-width: 430px) {
+  .containerToday {
+    font-size: 24px;
+  }
+  .underTitleMoonToday {
+    font-size: 28px;
+    margin-bottom: 16px;
+  }
+  .textPhaseToday {
+    font-size: 24px;
+  }
+  .underTitleBlock {
+    font-size: 22px;
+  }
+}
+
+@media (min-width: 768px) {
+  .containerToday {
+    padding: 32px 25px;
+  }
+
+  .containerPreferredAvoid {
+    display: flex;
+    flex-direction: row;
+  }
+}
+
+@media (min-width: 1200px) {
+  .containerToday {
+    font-size: 16px;
+  }
+  .containerBlocks {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .textPhaseToday {
+    font-size: 16px;
+  }
+  .underTitleBlockSign {
+    font-size: 14px;
+  }
+}

@@ -1,9 +1,9 @@
-import PhaseByNumPhase from "@/app/components/PhaseByNum/PhaseByNum.client";
 import PhaseTodayClient from "../../../components/PhaseToday/PhaseToday.client";
+import css from "./PhaseTodayPage.module.css";
 
 const PhaseTodayPage = async () => {
   return (
-    <section>
+    <section className={css.pageSectionPhases}>
       <PhaseTodayClient />
     </section>
   );
