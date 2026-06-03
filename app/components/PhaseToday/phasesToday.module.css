@@ -86,10 +86,10 @@
   .containerToday {
     font-size: 24px;
   }
-  .underTitleMoonToday {
+  /* .underTitleMoonToday {
     font-size: 28px;
     margin-bottom: 16px;
-  }
+  } */
   .textPhaseToday {
     font-size: 24px;
   }
@@ -121,7 +121,7 @@
   .textPhaseToday {
     font-size: 16px;
   }
-  .underTitleBlockSign {
-    font-size: 14px;
+  .underTitleBlock {
+    font-size: 19px;
   }
 }
