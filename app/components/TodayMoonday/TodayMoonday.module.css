@@ -65,10 +65,10 @@
 }
 .textTodayMoonday {
   margin-bottom: 24px;
-  letter-spacing: 1px;
+  letter-spacing: -0.03em;
   line-height: 140%;
   text-align: justify;
-  text-justify: inter-word;
+  text-justify: inter-character;
 }
 
 .containerBirth {
@@ -399,6 +399,7 @@
 @media (min-width: 768px) {
   .textTodayMoonday {
     font-size: 18px;
+    letter-spacing: 1px;
   }
   .containerLifeAspect {
     display: flex;

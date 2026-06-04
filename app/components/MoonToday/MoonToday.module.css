@@ -22,9 +22,9 @@
   padding: 16px 0;
   color: beige;
 }
-.spanTitleWellcomeLoading {
-  /* margin: 16px; */
-}
+/* .spanTitleWellcomeLoading {
+ 
+} */
 
 .textWellcomeLoading {
   line-height: 22px;
@@ -32,6 +32,9 @@
   padding-bottom: 6px;
   letter-spacing: 1px;
   word-spacing: 1px;
+}
+.linkWellcomeLoading {
+  color: #75b4fc;
 }
 .containerToday {
   font-size: 18px;
@@ -91,7 +94,7 @@
 
 .alignJustify {
   text-align: justify;
-  text-justify: inter-word;
+  text-justify: inter-character;
 }
 
 .itemBlockSimbol {

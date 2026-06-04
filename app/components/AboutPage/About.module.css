@@ -1,0 +1,43 @@
+/*   --  ShortAbout  --   */
+
+.containerShortAbout {
+  background-color: #003c9149;
+  color: azure;
+  padding: 32px;
+  display: flex;
+  flex-direction: column;
+  border: darkgray solid 2px;
+  border-radius: 50px;
+  margin: 0 auto;
+}
+/* 
+.waitImgWellcomeLoading {
+  display: inline-block;
+  vertical-align: middle;
+}
+.waitTextWellcomeLoading {
+  display: inline-block;
+  vertical-align: middle;
+} */
+
+.titleShortAbout {
+  font-size: 16px;
+  line-height: 28px;
+  text-align: center;
+  padding: 16px 0;
+  color: beige;
+  text-shadow: 0 0 4px black;
+}
+.spanTitleShortAbout {
+  font-size: 26px;
+}
+
+.textShortAbout {
+  line-height: 22px;
+  text-indent: 20px;
+  padding-bottom: 6px;
+  /* letter-spacing: 1px; */
+  text-align: justify;
+  text-justify: inter-character;
+  text-shadow: 0 0 4px black;
+}

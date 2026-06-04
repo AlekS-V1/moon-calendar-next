@@ -148,6 +148,15 @@ const Header = () => {
                 Щасливий день
               </Link>
             </li>
+            <li className={css.itemMenuMobile}>
+              <Link
+                href="/about"
+                onClick={() => setIsOpen(!isOpen)}
+                className={css.linkMenu}
+              >
+                Для чого
+              </Link>
+            </li>
           </ul>
         </nav>
       </div>
