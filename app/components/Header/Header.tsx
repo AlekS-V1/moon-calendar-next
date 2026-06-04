@@ -18,7 +18,12 @@ const Header = () => {
     <header className={css.header}>
       <div className={css.containerHeader}>
         <Link href="/" aria-label="Home">
-          <h2 className={css.logo}>Під світлом Місяця</h2>
+          <h2 className={css.logo}>
+            Під світлом Місяця <br />
+            <span className={css.underLogo}>
+              Живи в ритмі. Відчувай день. Дій усвідомлено.
+            </span>
+          </h2>
         </Link>
 
         {/* Десктоп меню */}
