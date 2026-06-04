@@ -5,7 +5,7 @@ const ShortAbout = () => {
   return (
     <div className={css.containerShortAbout}>
       <h3 className={css.titleShortAbout}>
-        Вітаю! Коротко що це за календар та для чого він. <br />
+        Вітаю! Коротко, що це за календар та для чого він. <br />
         <span className={css.spanTitleShortAbout}>
           {" "}
           Це місячний календар, що допомагає жити в ритмі, а не в хаосі.

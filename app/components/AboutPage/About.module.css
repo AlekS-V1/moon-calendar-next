@@ -20,6 +20,15 @@
   vertical-align: middle;
 } */
 
+.titleAbout {
+  font-size: 18px;
+  line-height: 28px;
+  text-align: center;
+  /* padding: 16px 0; */
+  color: beige;
+  text-shadow: 0 0 4px black;
+}
+
 .titleShortAbout {
   font-size: 16px;
   line-height: 28px;
@@ -28,6 +37,16 @@
   color: beige;
   text-shadow: 0 0 4px black;
 }
+
+.titleListAbout {
+  font-size: 14px;
+  /* line-height: 28px; */
+  text-align: center;
+  padding: 8px 0 4px;
+  color: beige;
+  text-shadow: 0 0 4px black;
+}
+
 .spanTitleShortAbout {
   font-size: 26px;
 }
@@ -39,5 +58,17 @@
   /* letter-spacing: 1px; */
   text-align: justify;
   text-justify: inter-character;
+  text-shadow: 0 0 4px black;
+}
+.listAbout {
+  /* list-style-type: disc; */
+  padding-left: 20px;
+}
+.itemListAbout {
+  line-height: 22px;
+  text-indent: -10px;
+  padding: 6px 0;
+  /* letter-spacing: 1px; */
+
   text-shadow: 0 0 4px black;
 }

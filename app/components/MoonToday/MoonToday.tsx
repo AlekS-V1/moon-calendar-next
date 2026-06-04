@@ -71,7 +71,7 @@ const MoonToday = () => {
         </p>
         <p className={css.textWellcomeLoading}>
           Більш детально зможете дізнатися у розділі "
-          <Link href={"/about"} className={css.linkWellcomeLoading}>
+          <Link href={"/about#FullAboutMe"} className={css.linkWellcomeLoading}>
             Для чого
           </Link>
           ".
