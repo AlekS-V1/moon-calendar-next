@@ -1,0 +1,22 @@
+.containerAbout {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+}
+
+@media (min-width: 724px) {
+  .containerAbout {
+    max-width: 979px;
+  }
+}
+
+@media (min-width: 980px) {
+  .containerAbout {
+    max-width: 1084px;
+  }
+}
+@media (min-width: 1085px) {
+  .containerAbout {
+    max-width: 1200px;
+  }
+}
