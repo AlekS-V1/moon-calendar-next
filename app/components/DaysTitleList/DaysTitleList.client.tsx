@@ -31,7 +31,7 @@ export function DaysTitlesList() {
   );
 
   if (isPending && sortedTitles.length === 0) {
-    return <p>Завантаження назв...</p>;
+    return <p>Оновлення даних...</p>;
   }
 
   return (
