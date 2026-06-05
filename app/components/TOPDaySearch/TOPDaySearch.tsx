@@ -13,7 +13,7 @@ import {
   LuckyKeys,
 } from "@/lib/aspect";
 import { moonImages32 } from "@/lib/moonPhase30";
-import { useMoonStore } from "@/store/uiStore"; // Оновлений чистий стор
+import { useHaircutDateStore, useMoonStore } from "@/store/uiStore"; // Оновлений чистий стор
 import css from "./SearchLuckyDay.module.css";
 
 const SearchLuckyDay = () => {
@@ -28,6 +28,8 @@ const SearchLuckyDay = () => {
     selectedKey,
     selectedRating,
   );
+
+  const { setSearchDate } = useHaircutDateStore();
 
   // Витягуємо результати та активне значення з кешу TanStack Query
   const searchResults = data?.results || [];
@@ -178,20 +180,51 @@ const SearchLuckyDay = () => {
                   </div>
                 </Link>
                 <div className={css.containerDescription}>
-                  <p className={css.textDate}>
-                    {selectedKey ? aspectLabels[selectedKey] : "Не вибрано"} у{" "}
-                    {(() => {
-                      const s = new Date(item.date).toLocaleDateString(
-                        "uk-UA",
-                        {
-                          weekday: "short",
-                          day: "numeric",
-                          month: "long",
-                        },
-                      );
-                      return s[0].toUpperCase() + s.slice(1);
-                    })()}
-                  </p>
+                  {selectedKey === "haircut" ? (
+                    <button
+                      className={css.haircutDateButton}
+                      type="button"
+                      onClick={() => {
+                        // 1. Передаємо чисте значення дати з об'єкта в Zustand
+                        setSearchDate(item.date.split("T")[0]);
+                        // 2. Робимо перехід на потрібну сторінку
+                        router.push("/haircutdays/bydate");
+                        console.log("дата", item.date.split("T")[0]);
+                      }}
+                    >
+                      <p className={css.textDate}>
+                        {selectedKey ? aspectLabels[selectedKey] : "Не вибрано"}{" "}
+                        у{" "}
+                        {(() => {
+                          const s = new Date(item.date).toLocaleDateString(
+                            "uk-UA",
+                            {
+                              weekday: "short",
+                              day: "numeric",
+                              month: "long",
+                            },
+                          );
+                          return s[0].toUpperCase() + s.slice(1);
+                        })()}
+                      </p>
+                    </button>
+                  ) : (
+                    <p className={css.textDate}>
+                      {selectedKey ? aspectLabels[selectedKey] : "Не вибрано"} у{" "}
+                      {(() => {
+                        const s = new Date(item.date).toLocaleDateString(
+                          "uk-UA",
+                          {
+                            weekday: "short",
+                            day: "numeric",
+                            month: "long",
+                          },
+                        );
+                        return s[0].toUpperCase() + s.slice(1);
+                      })()}
+                    </p>
+                  )}
+
                   <p className={css.textDescription}>
                     {selectedKey && (
                       <>

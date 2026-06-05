@@ -126,6 +126,17 @@
 .textDate {
   margin-bottom: 16px;
 }
+.haircutDateButton {
+  font-size: 24px;
+  font-family: var(--font-comfortaa);
+  color: azure;
+  margin-bottom: 16px;
+  background: none;
+  border: none;
+  padding: 0;
+  text-align: left;
+  cursor: pointer;
+}
 .activeValueSearch {
   font-size: 16px;
   padding-bottom: 10px;
