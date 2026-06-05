@@ -10,7 +10,16 @@ const HaircutTodayClient = () => {
   return (
     <>
       <h2 className={css.titleTodayHaircut}>
-        Результат стрижки на {haircutToday?.date}
+        Результат стрижки <br />{" "}
+        {(() => {
+          const s = new Date(haircutToday.date).toLocaleDateString("uk-UA", {
+            weekday: "long",
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          });
+          return s[0].toUpperCase() + s.slice(1);
+        })()}
       </h2>
       <HaircutDayClient day={haircutToday} />
     </>

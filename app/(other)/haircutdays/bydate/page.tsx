@@ -7,7 +7,7 @@ const HaircutdayByDatePage = async () => {
     <>
       <div className={css.containerGoBack}>
         <Link href={"/haircutdays"} className={css.goBack}>
-          <span className={css.back}>&#11178;</span> Повернутися
+          <span className={css.back}>&#8592;</span> До сьогодні
         </Link>
       </div>
       <HaircutDayInfo />
