@@ -24,7 +24,7 @@ export function HaircutDayInfo() {
   useEffect(() => {
     if (!isLoading && (day === null || day === undefined)) {
       const timer = setTimeout(() => {
-        router.push("/");
+        router.push("/haircutdays");
       }, 5000);
 
       return () => clearTimeout(timer);
