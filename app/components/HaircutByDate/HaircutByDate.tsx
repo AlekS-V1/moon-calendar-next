@@ -28,7 +28,7 @@ export function HaircutDayInfo() {
       {isFetching && <span>Оновлення...</span>}
 
       <h2 className={css.titleTodayHaircut}>
-        Результат стрижки на {day?.date}{" "}
+        Результат стрижки на {day?.date.split("T")[0]}{" "}
       </h2>
       <HaircutDayClient day={day} />
     </div>

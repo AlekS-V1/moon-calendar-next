@@ -189,7 +189,6 @@ const SearchLuckyDay = () => {
                         setSearchDate(item.date.split("T")[0]);
                         // 2. Робимо перехід на потрібну сторінку
                         router.push("/haircutdays/bydate");
-                        console.log("дата", item.date.split("T")[0]);
                       }}
                     >
                       <p className={css.textDate}>
