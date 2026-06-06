@@ -1,7 +1,17 @@
+/* --- МОБІЛЬНІ НАЛАШТУВАННЯ (за замовчуванням) --- */
+.desktopSection {
+  display: none !important; /* Ховаємо десктопну сітку на мобільних */
+}
+
+.mobileSection {
+  display: block !important; /* Показуємо Swiper на мобільних */
+  width: 100%;
+}
+
 .dayStyle {
   padding: 4px;
   font-size: 20px;
-  flex-basis: calc(100% / 13);
+  /* flex-basis: calc(100% / 13); */
 }
 
 .moonIcon {
@@ -187,9 +197,64 @@
   width: 100px;
 }
 .daysList {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
+  position: relative; /* Обов'язково для позиціонування масок */
+  width: 100%;
+  padding: 15px 0 !important;
+  /* display: flex; */
+  /* flex-wrap: wrap;
+  justify-content: space-around; */
+  margin-top: -15px;
+  margin-bottom: -15px;
+}
+/* Дозволяємо відображення елементів, що виступають по вертикалі */
+.daysList :global(.swiper) {
+  overflow: visible !important; /* Дозволяє тіням виходити за межі головного контейнера */
+}
+.daysList :global(.swiper-wrapper) {
+  /* Залежно від версії Swiper, іноді треба продублювати і тут */
+  overflow: visible !important;
+}
+.daysList :global(.swiper-slide) {
+  /* Перевірте, щоб самі слайди також не мали hidden */
+  overflow: visible !important;
+}
+.daysList::before,
+.daysList::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100px; /* Ширина зони затемнення під стрілками */
+  z-index: 2; /* Поверх слайдів, але під стрілками */
+  /* pointer-events: none; Щоб крізь затемнення можна було свайпати */
+}
+
+/* Ліве затемнення */
+.daysList::before {
+  left: 0;
+  background: linear-gradient(to right, rgba(0, 16, 39), transparent);
+}
+
+/* Праве затемнення */
+.daysList::after {
+  right: 0;
+  background: linear-gradient(to left, rgba(0, 16, 39), transparent);
+}
+/* Робимо стрілочки поверх затемнення */
+.daysList :global(.swiper-button-next),
+.daysList :global(.swiper-button-prev) {
+  z-index: 3;
+  color: #ffffff;
+}
+/* Скидаємо підсвічування для лівої та правої стрілочок Swiper */
+.daysList :global(.swiper-button-next),
+.daysList :global(.swiper-button-prev) {
+  /* 1. Прибирає синій або сірий прямокутник на мобільних (iOS / Android Chrome) */
+  -webkit-tap-highlight-color: transparent !important;
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0) !important;
+
+  /* 2. Прибирає контур фокусування (прямокутник), який з'являється на десктопах при кліку */
+  outline: none !important;
 }
 
 @media (min-width: 724px) {
@@ -229,6 +294,42 @@
 
   .moonIcon:hover {
     font-size: 18px;
+  }
+}
+
+/* --- ДЕСКТОПНІ НАЛАШТУВАННЯ (екран від 1024px і більше) --- */
+@media (min-width: 1024px) {
+  .mobileSection {
+    display: none !important; /* Повністю вимикаємо мобільний Swiper */
+  }
+
+  .desktopSection {
+    display: block !important; /* Вмикаємо десктопну версію */
+  }
+
+  .desktopWrapper {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .daysGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    /* grid-template-columns: repeat(
+      auto-fill,
+      minmax(50px, 1fr)
+    ); Охайні ряди */
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .daysList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
   }
 }
 

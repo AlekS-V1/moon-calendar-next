@@ -6,9 +6,23 @@ import Link from "next/link";
 import { useUIStore } from "@/store/uiStore";
 import { moonImages32 } from "@/lib/moonPhase30";
 import css from "./MoonDayItem.module.css";
+import "swiper/css";
+import "swiper/css/navigation";
+import "swiper/css/pagination";
 import { useMoonToday } from "@/lib/hooks/useToday";
-import { useMemo } from "react";
-import { useParams } from "next/navigation";
+// import { useMemo } from "react";
+import { useParams, useRouter } from "next/navigation";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Navigation, Pagination } from "swiper/modules";
+import type { Swiper as SwiperType } from "swiper";
+import { useWindowSize } from "@/lib/hooks/useWindowSize";
+import { useEffect, useState } from "react";
+import DaysTitlesDesktop from "./DaysTitlesDesktop";
+// import dynamic from "next/dynamic";
+
+// const DaysTitlesDesktop = dynamic(() => import("./DaysTitlesDesktop"), {
+//   ssr: false,
+// });
 
 export function DaysTitlesList() {
   const { data: days, isPending } = useQuery({
@@ -16,47 +30,105 @@ export function DaysTitlesList() {
     queryFn: getMoondayList,
     staleTime: Infinity,
   });
-  const { data: today } = useMoonToday();
+  const { data: today, isPending: isTodayPending } = useMoonToday();
   const { id: activeUrlId } = useParams();
+  const router = useRouter();
 
-  // 1. Дістаємо функцію запису з Zustand
-  // const setActiveDayId = useUIStore((state) => state.setActiveDayId);
-  // Дістаємо поточний activeNoteId, щоб підсвітити обрану нотатку в списку (активний стиль)
-  // const activeDayId = useUIStore((state) => state.activeDayId);
+  // 2. Обчислюємо тип екрана
+  // const isDesktop = width ? width >= 1024 : false;
 
-  // Сортуємо легкий масив .
-  // Цей код запуститься лише якщо РЕАЛЬНО зміняться дані в базі.
   const sortedTitles = [...(days?.moonDay ?? [])].sort(
     (a, b) => a.dayNumber - b.dayNumber,
   );
 
-  if (isPending && sortedTitles.length === 0) {
-    return <p>Оновлення даних...</p>;
+  const activeIndex = sortedTitles.findIndex((day) =>
+    activeUrlId ? day._id === activeUrlId : today?.moonDay === day.dayNumber,
+  );
+
+  if (
+    isPending ||
+    isTodayPending ||
+    sortedTitles.length === 0 ||
+    activeIndex === -1
+  ) {
+    return <p className={css.loader}>Оновлення даних...</p>;
   }
 
   return (
-    <ul className={css.daysList}>
-      {sortedTitles.map((day) => {
-        // Динамічно визначаємо клас для картинки, наприклад: css.day_1, css.day_2
-        const imageClass = css[`day_${day.dayNumber}`] || "";
+    <>
+      {/* ==========================================
+          1. ДЕСКТОПНА ВЕРСІЯ (Клас контролюється через CSS)
+          ========================================== */}
+      <div className={css.desktopSection}>
+        {/* <div className={css.desktopWrapper}> */}
+        <ul className={css.daysGrid}>
+          {" "}
+          {/* css.daysList*/}
+          {sortedTitles.map((day) => {
+            const imageClass = css[`day_${day.dayNumber}`] || "";
+            const isActive = activeUrlId
+              ? activeUrlId === day._id
+              : today?.moonDay === day.dayNumber;
 
-        const isActive = activeUrlId
-          ? activeUrlId === day._id
-          : today?.moonDay === day.dayNumber;
+            return (
+              <li key={day._id}>
+                <Link
+                  href={`/moonDays/${day._id}`}
+                  className={`${css.moonIcon} ${imageClass} ${isActive ? css.activeDay : ""}`}
+                  style={{
+                    backgroundImage: `url(${moonImages32[day.dayNumber]})`,
+                  }}
+                >
+                  <span className={css.dayStyle}>{day.dayNumber}</span>
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+        {/* </div> */}
+      </div>
+      {/* ==========================================
+          2. МОБІЛЬНА ВЕРСІЯ (Карусель Swiper)
+          ========================================== */}
+      <div className={css.mobileSection}>
+        <Swiper
+          modules={[Navigation, Pagination]}
+          navigation={true}
+          spaceBetween={0}
+          slidesPerView={"auto"}
+          centeredSlides={true}
+          initialSlide={activeIndex}
+          observer={true}
+          observeParents={true}
+          key={sortedTitles.length}
+          breakpoints={{
+            320: { slidesPerView: 8, spaceBetween: 5 },
+            480: { slidesPerView: 11, spaceBetween: 12 },
+            768: { slidesPerView: 18, spaceBetween: 15 },
+            880: { slidesPerView: 30, spaceBetween: 30 },
+          }}
+          className={css.daysList}
+        >
+          {sortedTitles.map((day, index) => {
+            const imageClass = css[`day_${day.dayNumber}`] || "";
+            const isActive = index === activeIndex;
 
-        return (
-          /* TypeScript чітко знає, що тут є ТІЛЬКИ note._id та note.title */
-          <Link
-            key={day._id}
-            href={`/moonDays/${day._id}`}
-            // onClick={() => setActiveDayId(day._id)}
-            className={`${css.moonIcon} ${imageClass} ${isActive ? css.activeDay : ""}`}
-            style={{ backgroundImage: `url(${moonImages32[day.dayNumber]})` }}
-          >
-            <li className={css.dayStyle}>{day.dayNumber}</li>
-          </Link>
-        );
-      })}
-    </ul>
+            return (
+              <SwiperSlide key={day._id}>
+                <Link
+                  href={`/moonDays/${day._id}`}
+                  className={`${css.moonIcon} ${imageClass} ${isActive ? css.activeDay : ""}`}
+                  style={{
+                    backgroundImage: `url(${moonImages32[day.dayNumber]})`,
+                  }}
+                >
+                  {day.dayNumber}
+                </Link>
+              </SwiperSlide>
+            );
+          })}
+        </Swiper>
+      </div>
+    </>
   );
 }
