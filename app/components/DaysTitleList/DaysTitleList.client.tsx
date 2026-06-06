@@ -13,11 +13,12 @@ import { useMoonToday } from "@/lib/hooks/useToday";
 // import { useMemo } from "react";
 import { useParams, useRouter } from "next/navigation";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
+import { EffectCoverflow, Navigation, Pagination } from "swiper/modules";
 import type { Swiper as SwiperType } from "swiper";
 import { useWindowSize } from "@/lib/hooks/useWindowSize";
 import { useEffect, useState } from "react";
 import DaysTitlesDesktop from "./DaysTitlesDesktop";
+import MoonLoader from "../MoonLoader/MoonLoader";
 // import dynamic from "next/dynamic";
 
 // const DaysTitlesDesktop = dynamic(() => import("./DaysTitlesDesktop"), {
@@ -51,7 +52,7 @@ export function DaysTitlesList() {
     sortedTitles.length === 0 ||
     activeIndex === -1
   ) {
-    return <p className={css.loader}>Оновлення даних...</p>;
+    return <MoonLoader />;
   }
 
   return (
@@ -92,20 +93,31 @@ export function DaysTitlesList() {
           ========================================== */}
       <div className={css.mobileSection}>
         <Swiper
-          modules={[Navigation, Pagination]}
+          modules={[EffectCoverflow, Navigation, Pagination]}
+          effect={"coverflow"}
+          grabCursor={true}
           navigation={true}
           spaceBetween={0}
           slidesPerView={"auto"}
           centeredSlides={true}
+          loop={true}
+          loopAdditionalSlides={1}
+          coverflowEffect={{
+            rotate: 0, // Кут повороту карток (0 — якщо поворот не потрібен)
+            stretch: -25, // Витягування карток один на одну
+            depth: 70, // Глибина (чим більша, тим менші крайні картки)
+            modifier: 2, // Множник ефекту
+            slideShadows: false, // Тіні на крайніх картках
+          }}
           initialSlide={activeIndex}
           observer={true}
           observeParents={true}
           key={sortedTitles.length}
           breakpoints={{
-            320: { slidesPerView: 8, spaceBetween: 5 },
-            480: { slidesPerView: 11, spaceBetween: 12 },
-            768: { slidesPerView: 18, spaceBetween: 15 },
-            880: { slidesPerView: 30, spaceBetween: 30 },
+            320: { slidesPerView: 5.5, spaceBetween: 2 },
+            480: { slidesPerView: 10, spaceBetween: 8 },
+            768: { slidesPerView: 14, spaceBetween: 15 },
+            980: { slidesPerView: 19, spaceBetween: 0 },
           }}
           className={css.daysList}
         >
