@@ -9,8 +9,18 @@ import Menu from "../DesktopMenu/Menu";
 const Header = () => {
   const [open, setOpen] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-  const toggleMenu = () => setOpen(false);
+  const [isUnOpen, setUnIsOpen] = useState(false);
+  const toggleMenu = () => {
+    setOpen(false);
+    setUnIsOpen(false);
+    setIsOpen(false);
+  };
   const toggleUnderMenu = () => {
+    setIsOpen(!isOpen);
+    setOpen(false);
+  };
+  const toggleUnderUnMenu = () => {
+    setUnIsOpen(!isUnOpen);
     setIsOpen(!isOpen);
     setOpen(false);
   };
@@ -136,6 +146,40 @@ const Header = () => {
                       Стріжки
                     </Link>
                   </li>
+                  <li className={css.underMenuItem}>
+                    <Link
+                      href=""
+                      aria-label="Practics"
+                      className={css.linkMenu}
+                      onClick={() => setUnIsOpen(!isUnOpen)}
+                    >
+                      Практики
+                    </Link>
+                    {isUnOpen && (
+                      <ul>
+                        <li className={css.underMenuItem}>
+                          <Link
+                            href="/meditation/today"
+                            aria-label="Meditation today"
+                            className={css.linkMenu}
+                            onClick={toggleUnderUnMenu}
+                          >
+                            Медитативні
+                          </Link>
+                        </li>
+                        <li className={css.underMenuItem}>
+                          <Link
+                            href=""
+                            aria-label="Ritual today"
+                            className={css.linkMenu}
+                            onClick={toggleUnderUnMenu}
+                          >
+                            Альтернатівні
+                          </Link>
+                        </li>
+                      </ul>
+                    )}
+                  </li>
                 </ul>
               )}
             </li>
@@ -151,7 +195,7 @@ const Header = () => {
             <li className={css.itemMenuMobile}>
               <Link
                 href="/about"
-                onClick={() => setIsOpen(!isOpen)}
+                onClick={() => setOpen(false)}
                 className={css.linkMenu}
               >
                 Для чого
