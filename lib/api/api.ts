@@ -7,6 +7,7 @@ import type {
   MoonDayData,
   moonPhase,
   moonPhaseData,
+  RitualFullData,
 } from "@/type/type";
 import { HttpError } from "../HttpError";
 import { nextServer } from "./client";
@@ -253,6 +254,43 @@ export const getHaircutByDate = async (
     const res = await nextServer.get<HaircutFullData>("/haircut/bydate", {
       params: { date },
     });
+
+    if (!res.data) {
+      console.warn("❌ API returned empty body");
+      return null;
+    }
+
+    return res.data;
+  } catch (err: any) {
+    console.error("❌ searchMoondayData ERROR:", err);
+    return null;
+  }
+};
+//--------------------------
+// --- RITUAL MEDITATION ---
+//--------------------------
+
+export const getTodayMeditationRitualDay =
+  async (): Promise<RitualFullData> => {
+    const resToday = await nextServer.get<RitualFullData>(
+      "/meditation-ritual/today",
+    );
+    return resToday.data;
+  };
+
+// -------
+
+export const getMeditationRitualByDate = async (
+  date: string,
+): Promise<RitualFullData | null> => {
+  try {
+    const res = await nextServer.get<RitualFullData>(
+      "/meditation-ritual/bydate",
+      {
+        params: { date },
+      },
+    );
+    console.log("API", res.data);
 
     if (!res.data) {
       console.warn("❌ API returned empty body");

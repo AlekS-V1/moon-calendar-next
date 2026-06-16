@@ -65,7 +65,7 @@ const PhaseTodayClient = () => {
           <ul className={css.listWraperPhases}>
             {phaseToday?.nutrition.energyPurpose.map((d) => (
               <li key={d} className={css.textPhaseToday}>
-                -{d}
+                - {d}
               </li>
             ))}
           </ul>
