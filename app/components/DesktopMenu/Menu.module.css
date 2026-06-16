@@ -79,6 +79,21 @@
   transform: scale(1.12);
 }
 
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: transparent;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 900;
+}
+
+.overlay.show {
+  opacity: 1;
+  pointer-events: auto;
+}
+
 @media (min-width: 724px) {
   .menuButton {
     font-size: 15px;

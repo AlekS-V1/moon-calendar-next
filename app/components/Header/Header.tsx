@@ -46,13 +46,6 @@ const Header = () => {
             </li>
             <li>
               <Menu />
-              {/* <Link
-                href="/days"
-                aria-label="Moon days"
-                className={css.linkMenu}
-              >
-                Настанови
-              </Link> */}
             </li>
             <li className={css.itemMenu}>
               <Link

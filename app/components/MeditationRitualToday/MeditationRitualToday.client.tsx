@@ -142,11 +142,11 @@ const RitualMeditationTodayClient = () => {
           Інструкція до духовної практики
         </h3>
         <p className={css.textBlokMeditation}>
-          Він складається з послідовного алгоритму дій. Реалізація методу
+          Вона складається з послідовного алгоритму дій. Реалізація методу
           вимагає точного відтворення кожного кроку для досягнення запланованого
           внутрішнього результату:
         </p>
-        <ol className={css.listBlokMeditation}>
+        <ol className={css.numListBlokMeditation}>
           {ritualToday.ritual_steps.map((s) => (
             <li key={s} className={css.itemListBlokMeditation}>
               {" "}

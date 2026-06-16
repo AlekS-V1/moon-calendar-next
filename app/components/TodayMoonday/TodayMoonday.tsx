@@ -109,7 +109,9 @@ const TodayMoonday = () => {
         </div>
 
         <div className={css.containerMeditations}>
-          <h3 className={css.titleTodayMoonday}>Медитації</h3>
+          <Link href={"/meditation/today"}>
+            <h3 className={css.titleTodayMoonday}>Медитації</h3>
+          </Link>
           <ul className={css.listTodayMoonday}>
             {resDay.meditations.map((m) => (
               <li className={css.itemList} key={m}>

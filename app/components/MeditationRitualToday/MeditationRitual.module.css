@@ -24,7 +24,7 @@
   padding-bottom: 8px;
 }
 .spanDate {
-  font-size: 18px;
+  font-size: 17px;
 }
 .textBlokMeditation {
   line-height: 22px;
@@ -37,9 +37,42 @@
 .listBlokMeditation {
   padding-bottom: 8px;
   margin: 0;
+  padding-inline-start: 5px;
+}
+.numListBlokMeditation {
+  padding-bottom: 8px;
+  margin: 0;
+  padding-inline-start: 26px;
 }
 .itemListBlokMeditation {
   padding: 3px;
   line-height: 22px;
   letter-spacing: 1px;
+}
+
+@media (min-width: 430px) and (max-width: 980px) {
+  .containerMeditation {
+    font-size: 19px;
+  }
+  .headTitleMeditation {
+    font-size: 22px;
+  }
+  .spanDate {
+    font-size: 20px;
+  }
+  .titleBlokMeditation {
+    font-size: 20px;
+  }
+  .textBlokMeditation {
+    line-height: 24px;
+  }
+}
+
+@media (min-width: 724px) {
+}
+
+@media (min-width: 980px) {
+}
+
+@media (min-width: 1200px) {
 }
