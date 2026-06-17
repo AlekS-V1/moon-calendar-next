@@ -112,13 +112,14 @@ const TodayMoonday = () => {
           <Link href={"/meditation/today"}>
             <h3 className={css.titleTodayMoonday}>Медитації</h3>
           </Link>
-          <ul className={css.listTodayMoonday}>
-            {resDay.meditations.map((m) => (
+          <p className={css.textTodayMoonday}>{resDay.meditations.text}</p>
+          {/* <ul className={css.listTodayMoonday}>
+            {resDay.meditations.text.map((m) => (
               <li className={css.itemList} key={m}>
                 <p className={css.textTodayMoonday}>{m}</p>
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       </div>
 

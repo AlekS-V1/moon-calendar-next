@@ -31,7 +31,7 @@ export interface MoonDay {
   haircut: Haircut;
   symbols: string[];
   stones: string[];
-  meditations: string[];
+  meditations: Meditation;
   signs: Signs;
   extendedMeaning: string;
 }
@@ -58,6 +58,11 @@ export interface Haircut {
   lunarCalendar: string;
   tibetanCalendar: string;
   rating: Rating;
+}
+
+export interface Meditation {
+  haircutId: RitualFullData;
+  text: string;
 }
 
 export interface Health {

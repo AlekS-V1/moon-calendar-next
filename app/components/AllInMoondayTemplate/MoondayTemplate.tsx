@@ -302,13 +302,14 @@ export const MoondayTemplate = ({
 
           <div className={css.containerMeditations}>
             <h3 className={css.titleTodayMoonday}>Медитації</h3>
-            <ul className={css.listTodayMoonday}>
+            <p className={css.textTodayMoonday}>{resDay.meditations.text}</p>
+            {/* <ul className={css.listTodayMoonday}>
               {resDay.meditations.map((m) => (
                 <li className={css.itemList} key={m}>
                   <p className={css.textTodayMoonday}>{m}</p>
                 </li>
               ))}
-            </ul>
+            </ul> */}
           </div>
         </div>
 
