@@ -208,7 +208,7 @@ export interface HaircutDay {
 export interface HaircutDate {
   date: string;
   _id: string;
-  day: number;
+  dayNumber: number;
   energy: string;
   health: string[];
   wealth: string[];
