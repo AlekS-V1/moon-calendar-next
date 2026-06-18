@@ -79,6 +79,8 @@ export const MoondayTemplate = ({
     return <p>Завантаження...</p>;
   }
 
+  console.log(resDay.meditations.meditationId._id);
+
   //   const dayNumber = Number(day.moonDay ?? resDay.dayNumber ?? 1);
   //   const img =
   //     moonImages160[dayNumber as keyof typeof moonImages160] || moonImages160[1];
@@ -301,15 +303,10 @@ export const MoondayTemplate = ({
           </div>
 
           <div className={css.containerMeditations}>
-            <h3 className={css.titleTodayMoonday}>Медитації</h3>
+            <Link href={`/meditation/${resDay?.meditations?.meditationId._id}`}>
+              <h3 className={css.titleTodayMoonday}>Медитації</h3>
+            </Link>
             <p className={css.textTodayMoonday}>{resDay.meditations.text}</p>
-            {/* <ul className={css.listTodayMoonday}>
-              {resDay.meditations.map((m) => (
-                <li className={css.itemList} key={m}>
-                  <p className={css.textTodayMoonday}>{m}</p>
-                </li>
-              ))}
-            </ul> */}
           </div>
         </div>
 

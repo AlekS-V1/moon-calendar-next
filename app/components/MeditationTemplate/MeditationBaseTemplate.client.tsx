@@ -1,43 +1,16 @@
 "use client";
 
-import { useMeditationRitualToday } from "@/lib/hooks/useMeditationRitualToday";
-import css from "./MeditationRitual.module.css";
-import MeditationBaseTemplateClient from "../MeditationTemplate/MeditationBaseTemplate.client";
 import { RitualMeditation } from "@/type/type";
+import css from "./MeditationDayClient.module.css";
 
-const RitualMeditationTodayClient = () => {
-  const { data: ritualToday } = useMeditationRitualToday();
-  // console.log(ritualToday);
-  const moonDate = ritualToday?.date ? new Date(ritualToday.date) : undefined;
-  if (!ritualToday) return null;
+interface Prop {
+  day: RitualMeditation;
+}
+const MeditationBaseTemplateClient = ({ day }: Prop) => {
+  if (!day) return null;
+  const meditationDay = day;
   return (
-    <div className={css.containerMeditation}>
-      <h2 className={css.headTitleMeditation}>{ritualToday.title}</h2>
-      <p className={css.textBlokMeditation}>
-        Ментальні практики цієї системи є інструментом езотеричної психотехніки
-        для психологічного та енергетичного саморозвитку. Вони поєднують
-        елементи неоязичництва (слов’янського та трипільського) і тибетського
-        буддизму. У тибетській лінії практики можуть спиратися на чотири ключові
-        акценти, залежно від конкретного дня: споглядання (шине) — стабілізація
-        уваги; внутрішній простір (ка) — робота з “порожнечею як потенціалом”;
-        м’які енергетичні візуалізації — не магія, а психотехніка; дихальні
-        цикли — спосіб впорядкувати внутрішній рух.
-      </p>
-      <div className={css.blokMeditation}>
-        <h3 className={css.titleBlokMeditation}>
-          Сьогодні:{" "}
-          <span className={css.spanDate}>
-            {moonDate?.toLocaleDateString("uk-UA", {
-              weekday: "short",
-              day: "numeric",
-              month: "long",
-              year: "numeric",
-            })}
-          </span>
-        </h3>
-      </div>
-      <MeditationBaseTemplateClient day={ritualToday} />
-      {/* 
+    <div className={css.content}>
       <div className={css.blokMeditation}>
         <h3 className={css.titleBlokMeditation}>Енергетичний ефект</h3>
         <p className={css.textBlokMeditation}>
@@ -47,7 +20,7 @@ const RitualMeditationTodayClient = () => {
           циклів і проявляється через те, що:
         </p>{" "}
         <ul className={css.listBlokMeditation}>
-          {ritualToday.energy_effect.map((e) => (
+          {meditationDay?.energy_effect?.map((e) => (
             <li key={e} className={css.itemListBlokMeditation}>
               {" "}
               {e}
@@ -64,7 +37,7 @@ const RitualMeditationTodayClient = () => {
           оскільки безпосередньо це:
         </p>
         <ul className={css.listBlokMeditation}>
-          {ritualToday.health_effect.map((h) => (
+          {meditationDay.health_effect.map((h) => (
             <li key={h} className={css.itemListBlokMeditation}>
               {" "}
               - {h}
@@ -83,7 +56,7 @@ const RitualMeditationTodayClient = () => {
           соціальні процеси та повсякденну зовнішню діяльність і:
         </p>
         <ul className={css.listBlokMeditation}>
-          {ritualToday.material_effect.map((m) => (
+          {meditationDay.material_effect.map((m) => (
             <li key={m} className={css.itemListBlokMeditation}>
               {" "}
               - {m}
@@ -100,7 +73,7 @@ const RitualMeditationTodayClient = () => {
           психіки, тому під час практики неприпустимим є:
         </p>
         <ul className={css.listBlokMeditation}>
-          {ritualToday.forbidden.map((f) => (
+          {meditationDay.forbidden.map((f) => (
             <li key={f} className={css.itemListBlokMeditation}>
               {" "}
               - {f}
@@ -115,7 +88,7 @@ const RitualMeditationTodayClient = () => {
           тому для найкращого результату варто:
         </p>
         <ul>
-          {ritualToday.recommended.map((r) => (
+          {meditationDay.recommended.map((r) => (
             <li key={r} className={css.itemListBlokMeditation}>
               {" "}
               - {r}
@@ -132,7 +105,7 @@ const RitualMeditationTodayClient = () => {
           культур для глибинного розуміння суті процесу, де в цей день:
         </p>
         <div className={css.listBlokMeditation}>
-          {ritualToday.logic.map((l) => (
+          {meditationDay?.logic?.map((l) => (
             <p key={l} className={css.textBlokMeditation}>
               {" "}
               {l}
@@ -151,7 +124,7 @@ const RitualMeditationTodayClient = () => {
           внутрішнього результату:
         </p>
         <ol className={css.numListBlokMeditation}>
-          {ritualToday.ritual_steps.map((s) => (
+          {meditationDay.ritual_steps.map((s) => (
             <li key={s} className={css.itemListBlokMeditation}>
               {" "}
               {s}
@@ -163,9 +136,9 @@ const RitualMeditationTodayClient = () => {
         Правильне та регулярне застосування цієї інструкції дозволяє екологічно
         завершувати відпрацьовані етапи, своєчасно скидати ментальний баласт і
         підготувати надійний внутрішній фундамент для подальшого розвитку.
-      </p> */}
+      </p>
     </div>
   );
 };
 
-export default RitualMeditationTodayClient;
+export default MeditationBaseTemplateClient;

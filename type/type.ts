@@ -61,7 +61,7 @@ export interface Haircut {
 }
 
 export interface Meditation {
-  haircutId: RitualFullData;
+  meditationId: RitualFullData;
   text: string;
 }
 
@@ -208,7 +208,7 @@ export interface HaircutDay {
 export interface HaircutDate {
   date: string;
   _id: string;
-  dayNumber: number;
+  day: number;
   energy: string;
   health: string[];
   wealth: string[];
@@ -234,10 +234,22 @@ export interface HaircutFullData {
   recommend: string[];
   avoid: string[];
 }
+export interface RitualMeditation {
+  _id: string;
+  day: number;
+  title: string;
+  energy_effect: string[];
+  health_effect: string[];
+  material_effect: string[];
+  logic: string[];
+  ritual_steps: string[];
+  recommended: string[];
+  forbidden: string[];
+}
 
 export interface RitualFullData {
   date: string;
-  dayRitual: number;
+  day: number;
   currentDayStart: string;
   nextDayStart: string;
   durationHours: number;

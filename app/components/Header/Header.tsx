@@ -162,12 +162,12 @@ const Header = () => {
                         </li>
                         <li className={css.underMenuItem}>
                           <Link
-                            href=""
-                            aria-label="Ritual today"
+                            href="/okultritual/today"
+                            aria-label="Okult-Ritual today"
                             className={css.linkMenu}
                             onClick={toggleUnderUnMenu}
                           >
-                            Альтернатівні
+                            Окультні
                           </Link>
                         </li>
                       </ul>

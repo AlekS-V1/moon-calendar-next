@@ -1,0 +1,83 @@
+/* .containerMeditation {
+  background-color: #003c9149;
+  color: azure;
+  padding: 18px;
+  border: darkgray solid 2px;
+  border-radius: 30px;
+  margin: 0 auto;
+  font-size: 17px;
+} */
+.content {
+  color: azure;
+  margin: 0 auto;
+  font-size: 17px;
+}
+/* .headTitleMeditation {
+  font-size: 20px;
+  text-align: center;
+} */
+.blokMeditation {
+  margin-top: 16px;
+  box-shadow: 1px 3px 8px 4px rgba(238, 239, 247, 0.459);
+  border-radius: 10px;
+  padding: 8px 14px;
+  margin: 25px 0;
+}
+.titleBlokMeditation {
+  font-size: 18px;
+  text-align: center;
+  padding-bottom: 8px;
+}
+.spanDate {
+  font-size: 17px;
+}
+.textBlokMeditation {
+  line-height: 22px;
+  text-indent: 20px;
+  padding-top: 5px;
+  text-align: justify;
+  text-justify: inter-character;
+  text-shadow: 0 0 4px black;
+}
+.listBlokMeditation {
+  padding-bottom: 8px;
+  margin: 0;
+  padding-inline-start: 5px;
+}
+.numListBlokMeditation {
+  padding-bottom: 8px;
+  margin: 0;
+  padding-inline-start: 26px;
+}
+.itemListBlokMeditation {
+  padding: 3px;
+  line-height: 22px;
+  letter-spacing: 1px;
+}
+
+@media (min-width: 430px) and (max-width: 980px) {
+  .content {
+    font-size: 19px;
+  }
+  .headTitleMeditation {
+    font-size: 22px;
+  }
+  .spanDate {
+    font-size: 20px;
+  }
+  .titleBlokMeditation {
+    font-size: 20px;
+  }
+  .textBlokMeditation {
+    line-height: 24px;
+  }
+}
+
+@media (min-width: 724px) {
+}
+
+@media (min-width: 980px) {
+}
+
+@media (min-width: 1200px) {
+}

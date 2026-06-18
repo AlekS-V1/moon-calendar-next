@@ -8,6 +8,7 @@ import type {
   moonPhase,
   moonPhaseData,
   RitualFullData,
+  RitualMeditation,
 } from "@/type/type";
 import { HttpError } from "../HttpError";
 import { nextServer } from "./client";
@@ -269,6 +270,13 @@ export const getHaircutByDate = async (
 //--------------------------
 // --- RITUAL MEDITATION ---
 //--------------------------
+
+export const getSingleMeditationDay = async (id: string) => {
+  const resSingle = await nextServer.get<RitualMeditation>(
+    `/meditation-ritual/${id}`,
+  );
+  return resSingle.data;
+};
 
 export const getTodayMeditationRitualDay =
   async (): Promise<RitualFullData> => {
