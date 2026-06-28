@@ -7,8 +7,10 @@ import type {
   MoonDayData,
   moonPhase,
   moonPhaseData,
+  OccultFullData,
   RitualFullData,
   RitualMeditation,
+  RitualOccult,
 } from "@/type/type";
 import { HttpError } from "../HttpError";
 import { nextServer } from "./client";
@@ -299,6 +301,45 @@ export const getMeditationRitualByDate = async (
       },
     );
     console.log("API", res.data);
+
+    if (!res.data) {
+      console.warn("❌ API returned empty body");
+      return null;
+    }
+
+    return res.data;
+  } catch (err: any) {
+    console.error("❌ searchMoondayData ERROR:", err);
+    return null;
+  }
+};
+
+// --- OCCULT RITUAL ---
+
+export const getListOccultDays = async (): Promise<RitualOccult[]> => {
+  const resAll = await nextServer.get<RitualOccult[]>("/occult-ritual/days");
+  return resAll.data;
+};
+
+export const getSingleOccultDay = async (id: string) => {
+  const resSingle = await nextServer.get<RitualOccult>(
+    `/occult-ritual/days/${id}`,
+  );
+  return resSingle.data;
+};
+
+export const getTodayOccultDay = async (): Promise<OccultFullData> => {
+  const resToday = await nextServer.get<OccultFullData>("/occult-ritual/today");
+  return resToday.data;
+};
+
+export const getOccultByDate = async (
+  date: string,
+): Promise<OccultFullData | null> => {
+  try {
+    const res = await nextServer.get<OccultFullData>("/occult-ritual/bydate", {
+      params: { date },
+    });
 
     if (!res.data) {
       console.warn("❌ API returned empty body");

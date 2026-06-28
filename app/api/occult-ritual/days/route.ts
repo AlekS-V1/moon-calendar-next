@@ -1,11 +1,11 @@
-// app/api/okult-ritual/today/route.ts
+// app/api/occult-ritual/days/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
 import { ApiError, serverApi } from "@/lib/api/server";
 
 export async function GET() {
   try {
-    const { data } = await serverApi("");
+    const { data } = await serverApi("/magicdays");
 
     return NextResponse.json(data);
   } catch (error) {
