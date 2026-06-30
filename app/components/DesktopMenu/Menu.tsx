@@ -86,7 +86,7 @@ const Menu = () => {
           </li>
           <li className={css.menuItem}>
             <Link
-              href="/okultritual/today"
+              href="/occultritual/today"
               aria-label="Moon phases"
               className={css.linkMenu}
               onClick={toggleUnderMenu}

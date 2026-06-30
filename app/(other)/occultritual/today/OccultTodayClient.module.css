@@ -1,0 +1,21 @@
+.containerOccult {
+  /* background-color: #003c9149; */
+  color: azure;
+  padding: 14px 14px 0;
+  /* border: darkgray solid 2px; */
+  border-radius: 30px;
+  margin: 0 auto;
+  font-size: 17px;
+}
+.titleOccult {
+  font-size: 24px;
+  color: beige;
+  letter-spacing: 0.1rem;
+  text-shadow: 0 0 4px #000;
+  text-align: center;
+  /* border-bottom: 4px solid #28436c49;
+  border-radius: 10px;
+  padding-top: 12px;
+  padding-bottom: 8px;
+  margin-bottom: 12px; */
+}

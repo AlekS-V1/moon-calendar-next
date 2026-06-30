@@ -1,0 +1,61 @@
+.textOccult {
+  line-height: 22px;
+  text-indent: 20px;
+  padding-top: 5px;
+  text-align: justify;
+  text-justify: inter-character;
+  text-shadow: 0 0 4px black;
+}
+
+.sectionBloksOccult {
+  display: flex;
+  flex-wrap: wrap;
+}
+.blockOccult {
+  margin-top: 16px;
+  box-shadow: 1px 3px 8px 4px rgba(238, 239, 247, 0.459);
+  border-radius: 10px;
+  padding: 8px 14px;
+  margin: 25px 0;
+  max-width: 100%;
+}
+.titleBlockOccult {
+  font-size: 18px;
+  color: beige;
+  letter-spacing: 0.1rem;
+  text-shadow: 0 0 4px #000;
+  text-align: center;
+  border-bottom: 4px solid #28436c49;
+  border-radius: 10px;
+  padding-top: 12px;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
+}
+.containerListTextOccult {
+  padding-bottom: 8px;
+  margin: 0;
+  padding-inline-start: 5px;
+}
+.containerNumListTextOccult {
+  /* text-indent: 16px; */
+  /* padding-top: 16px; */
+  padding-bottom: 8px;
+  margin: 0;
+  padding-inline-start: 30px;
+}
+.listTextOccult {
+  padding: 3px;
+  line-height: 22px;
+  letter-spacing: 1px;
+}
+
+@media (min-width: 724px) {
+  .containerOccult {
+    padding: 36px 36px 0;
+  }
+  .sectionBloksOccult {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+  }
+}

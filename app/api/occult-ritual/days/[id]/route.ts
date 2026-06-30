@@ -8,7 +8,7 @@ type Props = {
 export async function GET(request: NextRequest, { params }: Props) {
   const { id } = await params;
   try {
-    const { data } = await serverApi(`/magicday/${id}`); // тут формуємо адресу запиту на бекенд /magicday/:id
+    const { data } = await serverApi(`/magic-day/${id}`); // тут формуємо адресу запиту на бекенд /magicday/:id
     return NextResponse.json(data);
   } catch (error) {
     return NextResponse.json(

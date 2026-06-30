@@ -1,0 +1,50 @@
+/* .sectionHaircut {
+  margin: 0 auto;
+  padding: 0 5px 16px;
+}
+.titleHaircut {
+  text-align: center;
+  color: beige;
+} */
+.containerOccult {
+  display: flex;
+  flex-direction: column-reverse;
+  gap: 10px;
+  border: 1px solid #fff;
+  border-radius: 19px;
+  font-size: 18px;
+  background-color: #003c9149;
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+}
+.asideBar {
+  padding: 1px;
+}
+.containerContent {
+  padding: 2px;
+}
+@media (min-width: 724px) {
+  .containerOccult {
+    display: flex;
+    align-items: center;
+    max-width: 979px;
+  }
+  .asideBar {
+    padding-bottom: 26px;
+  }
+  /* .containerContent {
+    padding-bottom: 24px;
+  } */
+}
+
+@media (min-width: 980px) {
+  .containerOccult {
+    max-width: 1084px;
+  }
+}
+@media (min-width: 1085px) {
+  .containerOccult {
+    max-width: 1200px;
+  }
+}

@@ -1,0 +1,45 @@
+.containerListOccultDays {
+  margin: 0 auto;
+}
+.titleList {
+  display: flex;
+  justify-content: center;
+  color: beige;
+}
+.daysList {
+  display: flex;
+  flex-wrap: wrap;
+  width: 250px;
+  gap: 10px;
+  margin: 0 auto;
+  padding-top: 40px;
+  flex-shrink: 0;
+}
+
+.itemList {
+  text-align: center;
+  font-size: 20px;
+  color: beige;
+}
+
+.itemList:hover {
+  color: #b8f9b8;
+  font-weight: 800;
+}
+
+.today {
+  text-shadow: 1px 0 2px #312c2c;
+  border: 1px solid #9fb19f;
+  border-radius: 50%;
+  font-weight: 800;
+  transform: scale(1.1);
+  box-shadow:
+    0 0 7px 2px #a77d7d,
+    inset 0 0 4px 1px #8d8383;
+}
+
+.link {
+  text-decoration: none;
+  width: calc(100% / 11);
+  padding: 2px;
+}
