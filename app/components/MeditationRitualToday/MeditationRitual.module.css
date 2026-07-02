@@ -9,7 +9,15 @@
 }
 .headTitleMeditation {
   font-size: 20px;
+  color: beige;
+  letter-spacing: 0.1rem;
+  text-shadow: 0 0 4px #000;
   text-align: center;
+  border-bottom: 4px solid #28436c49;
+  border-radius: 10px;
+  padding-top: 12px;
+  padding-bottom: 8px;
+  margin-bottom: 12px;
 }
 .blokMeditation {
   margin-top: 16px;
@@ -50,9 +58,10 @@
   letter-spacing: 1px;
 }
 
-@media (min-width: 430px) and (max-width: 980px) {
+@media (min-width: 430px) and (max-width: 979px) {
   .containerMeditation {
     font-size: 19px;
+    padding: 18px 25px;
   }
   .headTitleMeditation {
     font-size: 22px;
@@ -68,11 +77,14 @@
   }
 }
 
-@media (min-width: 724px) {
-}
-
 @media (min-width: 980px) {
+  .containerMeditation {
+    padding: 26px 40px;
+  }
 }
 
 @media (min-width: 1200px) {
+  .containerMeditation {
+    padding: 26px 60px;
+  }
 }

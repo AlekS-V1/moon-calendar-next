@@ -16,17 +16,29 @@
   font-size: 20px;
   text-align: center;
 } */
+
+.sectionBloksMeditation {
+  display: flex;
+  flex-wrap: wrap;
+}
 .blokMeditation {
   margin-top: 16px;
   box-shadow: 1px 3px 8px 4px rgba(238, 239, 247, 0.459);
   border-radius: 10px;
   padding: 8px 14px;
-  margin: 25px 0;
+  margin: 10px 0;
 }
 .titleBlokMeditation {
   font-size: 18px;
+  color: beige;
+  letter-spacing: 0.1rem;
+  text-shadow: 0 0 4px #000;
   text-align: center;
+  border-bottom: 4px solid #28436c49;
+  border-radius: 10px;
+  padding-top: 12px;
   padding-bottom: 8px;
+  margin-bottom: 12px;
 }
 .spanDate {
   font-size: 17px;
@@ -65,6 +77,9 @@
   .spanDate {
     font-size: 20px;
   }
+  .blokMeditation {
+    margin: 12px 0;
+  }
   .titleBlokMeditation {
     font-size: 20px;
   }
@@ -74,9 +89,17 @@
 }
 
 @media (min-width: 724px) {
+  .sectionBloksMeditation {
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 24px;
+  }
 }
 
 @media (min-width: 980px) {
+  .blokMeditation {
+    margin: 16px 0;
+  }
 }
 
 @media (min-width: 1200px) {
