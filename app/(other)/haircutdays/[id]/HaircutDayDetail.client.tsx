@@ -17,7 +17,7 @@ const HaircutDayDetailsClient = ({ id }: { id: string }) => {
   return (
     <>
       <h3 className={css.titleHaircut}>
-        Результат стрижки на {haircutDay?.dayNumber} місячний день
+        Результат стрижки на {haircutDay?.dayNumber} Місячний день
       </h3>
       <HaircutDayClient day={haircutDay} />
     </>

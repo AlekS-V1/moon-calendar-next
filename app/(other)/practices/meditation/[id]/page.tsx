@@ -7,7 +7,7 @@ import {
   QueryClient,
 } from "@tanstack/react-query";
 import css from "./PageMeditationDetails.module.css";
-import MeditationDayDetailsClient from "../../../components/MeditationDayDetail/MeditationDayDetail.client";
+import MeditationDayDetailsClient from "../../../../components/MeditationDayDetail/MeditationDayDetail.client";
 
 interface Props {
   params: Promise<{ id: string }>;

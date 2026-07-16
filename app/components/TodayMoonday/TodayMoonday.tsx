@@ -109,7 +109,7 @@ const TodayMoonday = () => {
         </div>
 
         <div className={css.containerMeditations}>
-          <Link href={"/meditation/today"}>
+          <Link href={"/practices/meditation/today"}>
             <h3 className={css.titleTodayMoonday}>Медитації</h3>
           </Link>
           <p className={css.textTodayMoonday}>{resDay.meditations.text}</p>

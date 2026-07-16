@@ -1,0 +1,78 @@
+.practicesContainer {
+  width: 100%;
+  max-width: 460px;
+  margin: 0 auto;
+}
+.navTitle {
+}
+.buttonTitle {
+  position: relative;
+  display: flex;
+  top: 1px;
+  gap: 1px;
+  margin-bottom: -1px;
+  z-index: 1;
+}
+.enableButtonTitle {
+  padding: 8px;
+  /* 2px solid #a9a9a9; */
+  border-top: 2px solid #a9a9a9;
+  border-right: 2px solid #a9a9a9;
+  border-left: 2px solid #a9a9a9;
+  font-size: 16px;
+  cursor: default;
+  border-bottom: 2px solid #001b44;
+}
+.disableButtonTitle {
+  background-color: #001b44;
+  border-top: 1px solid #a9a9a9;
+  /* border-left: 1px solid #a9a9a9; */
+  /* border-bottom: 1px solid #a9a9a9; */
+  padding: 7px;
+  opacity: 62%;
+  font-size: 15px;
+  margin-bottom: 2px;
+}
+.disableButtonTitle:hover {
+  /* font-size: 16px; */
+  opacity: 100%;
+  transform: scale(1.02);
+}
+.linkButtonTitle {
+  color: azure;
+  background-color: #001b44;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
+  transition: all 0.2s ease;
+  white-space: nowrap; /* Щоб текст не переносився на мобільних */
+}
+.linkButtonTitle:hover {
+}
+
+.practicesContent {
+}
+
+@media (min-width: 724px) {
+  .practicesContainer {
+    /* display: flex; */
+    /* align-items: center; */
+    max-width: 979px;
+  }
+  /* .asideBar {
+    padding-bottom: 26px;
+  } */
+  /* .containerContent {
+    padding-bottom: 24px;
+  } */
+}
+
+@media (min-width: 980px) {
+  .practicesContainer {
+    max-width: 1084px;
+  }
+}
+@media (min-width: 1085px) {
+  .practicesContainer {
+    max-width: 1200px;
+  }
+}

@@ -25,12 +25,12 @@ const OccultDaysListClient = () => {
 
   return (
     <div className={css.containerListOccultDays}>
-      <h3 className={css.titleList}>Дні за місяцем:</h3>
+      <h3 className={css.titleList}>Дні за Місяцем:</h3>
       <ul className={css.daysList}>
         {occultDays.map((day) => (
           <Link
             key={day._id}
-            href={`/occultritual/${day._id}`}
+            href={`/practices/occultritual/${day._id}`}
             className={`${css.link} ${day.day === today?.moonDay ? css.today : ""}`}
           >
             <li className={css.itemList}>{day.day}</li>

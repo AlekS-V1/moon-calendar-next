@@ -39,6 +39,7 @@
   padding-top: 12px;
   padding-bottom: 8px;
   margin-bottom: 12px;
+  cursor: default;
 }
 .spanDate {
   font-size: 17px;
@@ -50,21 +51,25 @@
   text-align: justify;
   text-justify: inter-character;
   text-shadow: 0 0 4px black;
+  cursor: default;
 }
 .listBlokMeditation {
   padding-bottom: 8px;
   margin: 0;
   padding-inline-start: 5px;
+  cursor: default;
 }
 .numListBlokMeditation {
   padding-bottom: 8px;
   margin: 0;
   padding-inline-start: 26px;
+  cursor: default;
 }
 .itemListBlokMeditation {
   padding: 3px;
   line-height: 22px;
   letter-spacing: 1px;
+  cursor: default;
 }
 
 @media (min-width: 430px) and (max-width: 980px) {

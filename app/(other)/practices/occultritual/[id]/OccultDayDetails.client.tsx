@@ -22,7 +22,7 @@ const OccultDayDetailsClient = ({ id }: { id: string }) => {
 
   return (
     <div className={css.containerOccult}>
-      <h2 className={css.titleOccult}>Ритуал на {day.day} місячний день</h2>
+      <h2 className={css.titleOccult}>Ритуал на {day.day} Місячний день</h2>
       <OccultRitualDayTemplateClient day={day} />
     </div>
   );

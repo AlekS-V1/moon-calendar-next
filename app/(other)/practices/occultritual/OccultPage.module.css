@@ -8,10 +8,12 @@
 } */
 .containerOccult {
   display: flex;
-  flex-direction: column-reverse;
+  flex-wrap: wrap;
   gap: 10px;
-  border: 1px solid #fff;
-  border-radius: 19px;
+  border: 2px solid darkgrey;
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 19px;
+  border-bottom-left-radius: 19px;
   font-size: 18px;
   background-color: #003c9149;
   width: 100%;
@@ -19,7 +21,8 @@
   margin: 0 auto;
 }
 .asideBar {
-  padding: 1px;
+  margin: 0 auto;
+  padding-bottom: 16px;
 }
 .containerContent {
   padding: 2px;

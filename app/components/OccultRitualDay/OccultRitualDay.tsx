@@ -18,21 +18,14 @@ const OccultRitualDayTemplateClient = ({ day }: Prop) => {
         відкриває доступ до прихованих сил природи, допомагаючи перетворити своє
         потаємне бажання на реальну життєву силу.
       </p>
-      {/* <div className={css.blockOccult}>
-        <h3 className={css.titleBlockOccult}>
-          Енергія дня на: {day.energy_goal}
-        </h3>
-        <p className={css.textOccult}>
-          Це фокусування усього обряду допомагає налаштувати свідомість і
-          виконати головне завдання цього дня, щоб осягнути те, що нам
-          заповідали пращури.
-        </p>
-      </div> */}
+
       <div className={css.blockOccult}>
         <h3 className={css.titleBlockOccult}>Езотерична логіка</h3>
         <p className={css.textOccult}>
           Вона пояснює приховані закони Всесвіту та сакральну мудрість предків,
-          за якими народжується сила цього дня.{" "}
+          за якими народжується сила цього дня. Допомагає налаштувати свідомість
+          і виконати головне завдання цього дня, щоб осягнути те, що нам
+          заповідали пращури.{" "}
         </p>
         <p className={css.textOccult}>{day.esoteric_logic}</p>
       </div>
@@ -65,7 +58,6 @@ const OccultRitualDayTemplateClient = ({ day }: Prop) => {
             {day.optimal_time.charAt(0).toLowerCase() +
               day.optimal_time.slice(1)}
           </p>
-          {/* <p className={css.textOccult}>{day.optimal_time}</p> */}
         </div>
       </div>
       <p className={css.textOccult}>

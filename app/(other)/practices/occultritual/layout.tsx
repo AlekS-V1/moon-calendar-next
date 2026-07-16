@@ -7,8 +7,8 @@ type Props = {
 const OccultLayout = ({ children, sidebar }: Props) => {
   return (
     <section className={css.containerOccult}>
-      <aside className={css.asideBar}>{sidebar}</aside>
       <div className={css.containerContent}>{children}</div>
+      <aside className={css.asideBar}>{sidebar}</aside>
     </section>
   );
 };

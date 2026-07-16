@@ -23,7 +23,7 @@ const HaircutDaysListClient = () => {
 
   return (
     <div className={css.containerListHaircutDays}>
-      <h3 className={css.titleList}>Дні за місяцем:</h3>
+      <h3 className={css.titleList}>Дні за Місяцем:</h3>
       <ul className={css.daysList}>
         {haircutDays.map((day) => (
           <Link

@@ -172,7 +172,7 @@ const SearchLuckyDayOld = () => {
   //                     // height={20}
   //                   />
   //                   <h4 className={css.titleMoonday}>
-  //                     {item.moonDay}-й місячний день
+  //                     {item.moonDay}-й Місячний день
   //                   </h4>
   //                 </div>
   //                 <div className={css.containerDescription}>

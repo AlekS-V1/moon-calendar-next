@@ -10,6 +10,7 @@
 .headTitleMeditation {
   font-size: 20px;
   text-align: center;
+  cursor: default;
 }
 
 .textBlokMeditation {
@@ -19,4 +20,5 @@
   text-align: justify;
   text-justify: inter-character;
   text-shadow: 0 0 4px black;
+  cursor: default;
 }

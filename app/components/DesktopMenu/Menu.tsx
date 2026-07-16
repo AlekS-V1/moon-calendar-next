@@ -76,7 +76,7 @@ const Menu = () => {
         <ul className={css.menuList}>
           <li className={css.menuItem}>
             <Link
-              href="/meditation/today"
+              href="/practices/meditation/today"
               aria-label="Moon days"
               className={css.linkMenu}
               onClick={toggleUnderMenu}
@@ -86,7 +86,7 @@ const Menu = () => {
           </li>
           <li className={css.menuItem}>
             <Link
-              href="/occultritual/today"
+              href="/practices/occultritual/today"
               aria-label="Moon phases"
               className={css.linkMenu}
               onClick={toggleUnderMenu}

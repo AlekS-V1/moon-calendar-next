@@ -175,7 +175,7 @@ const SearchLuckyDay = () => {
                       alt={`Moon phase day ${item.phaseName}`}
                     />
                     <h4 className={css.titleMoonday}>
-                      {item.moonDay}-й місячний день
+                      {item.moonDay}-й Місячний день
                     </h4>
                   </div>
                 </Link>

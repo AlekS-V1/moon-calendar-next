@@ -73,7 +73,7 @@ export default function Countdown({ target }: CountdownProps) {
   // }, [timeLeft.finished, hasRefreshed]);
 
   if (timeLeft.finished) {
-    return <div>Час вийшов</div>;
+    return <div>Оновіть сторінку...</div>;
   }
 
   return (

@@ -3,7 +3,9 @@
   color: azure;
   padding: 14px 16px 0;
   /* border: darkgray solid 2px; */
-  border-radius: 30px;
+  /* border-radius: 30px; */
+  border-bottom-right-radius: 30px;
+  border-bottom-left-radius: 30px;
   margin: 0 auto;
   font-size: 17px;
 }
@@ -18,6 +20,7 @@
   padding-top: 12px;
   padding-bottom: 8px;
   margin-bottom: 12px;
+  cursor: default;
 }
 
 @media (min-width: 724px) {

@@ -3,6 +3,7 @@
 import { useOccultRitualToday } from "@/lib/hooks/useOccultRitualToday";
 import css from "./OccultTodayClient.module.css";
 import OccultRitualDayTemplateClient from "@/app/components/OccultRitualDay/OccultRitualDay";
+import Link from "next/link";
 
 const OccultTodayClient = () => {
   const { data: today } = useOccultRitualToday();
