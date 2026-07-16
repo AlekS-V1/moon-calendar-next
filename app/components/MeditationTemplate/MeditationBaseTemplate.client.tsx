@@ -15,9 +15,8 @@ const MeditationBaseTemplateClient = ({ day }: Prop) => {
         <h3 className={css.titleBlokMeditation}>Енергетичний ефект</h3>
         <p className={css.textBlokMeditation}>
           Під час виконання будь-яких психоемоційних або енергетичних практик
-          необхідно враховувати специфіку поточного періоду. Все це визначає
-          специфіку внутрішнього стану людини під час завершення природних
-          циклів і проявляється через те, що:
+          необхідно враховувати специфіку поточного періоду. Все це проявляється
+          через те, що:
         </p>{" "}
         <ul className={css.listBlokMeditation}>
           {meditationDay?.energy_effect?.map((e) => (
@@ -68,9 +67,8 @@ const MeditationBaseTemplateClient = ({ day }: Prop) => {
         <div className={css.blokMeditation}>
           <h3 className={css.titleBlokMeditation}>Заборони та Рекомендації</h3>
           <p className={css.textBlokMeditation}>
-            Окремим пунктом інструкції є суворе дотримання правил екологічності
-            та внутрішньої безпеки. Ігнорування перелічених обмежень є
-            неприпустимим, оскільки це може призвести до деструктивних станів
+            Дуже важливо є суворе дотримання правил екологічності та внутрішньої
+            безпеки. Оскільки ігнорування може призвести до деструктивних станів
             або перевантаження психіки, тому під час практики неприпустимим є:
           </p>
           <ul className={css.listBlokMeditation}>
@@ -90,7 +88,7 @@ const MeditationBaseTemplateClient = ({ day }: Prop) => {
             {meditationDay.recommended.map((r) => (
               <li key={r} className={css.itemListBlokMeditation}>
                 {" "}
-                - {r}
+                + {r}
               </li>
             ))}
           </ul>
@@ -132,7 +130,7 @@ const MeditationBaseTemplateClient = ({ day }: Prop) => {
         </ol>
       </div>
       <p className={css.textBlokMeditation}>
-        Правильне застосування цієї інструкції дозволяє екологічно завершувати
+        Правильне застосування цієї практики дозволяє екологічно завершувати
         відпрацьовані етапи, своєчасно скидати ментальний баласт і підготувати
         надійний внутрішній фундамент для подальшого розвитку.
       </p>
