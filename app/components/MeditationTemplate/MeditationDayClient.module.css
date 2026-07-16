@@ -104,6 +104,8 @@
 @media (min-width: 980px) {
   .blokMeditation {
     margin: 16px 0;
+    padding-left: 24px;
+    padding-right: 24px;
   }
 }
 
